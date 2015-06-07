@@ -1,5 +1,4 @@
 # HXPHP Framework
-------------------------
 
 O HXPHP é um mini-framework PHP.
 
