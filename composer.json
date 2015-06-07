@@ -1,0 +1,20 @@
+{
+    "name": "Bruno/hxphp",
+    "require": {
+        "pfbc/pfbc": "dev-master",
+        "php-activerecord/php-activerecord": "dev-master"
+    },
+    "authors": [
+        {
+            "name": "Bruno Campos Santos",
+            "email": "bruno@hxphp.com.br"
+        },
+        {
+            "name": "Gilglécio Santos",
+            "email": "gilglecio@hxphp.com.br"
+        }
+    ],
+    "autoload": {
+        "classmap": ["system/"]
+    }
+}

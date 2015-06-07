@@ -1,0 +1,69 @@
+<!doctype html>
+<html lang="pt-br">
+<head>
+	<meta charset="utf-8">
+	<meta name="author" content="Bruno C. Santos">
+	<meta name="generator" content="HXPHP Framework v1.0">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title><?php echo $view_title; ?></title>
+	<link rel="shortcut icon" href="<?php echo IMG; ?>favicon.ico" type="image/x-icon">
+	<?php echo $add_css; ?>
+	<link rel="stylesheet" href="<?php echo CSS; ?>bootstrap.min.css" type="text/css">
+	<link rel="stylesheet" href="<?php echo CSS; ?>font-awesome.min.css" type="text/css">
+	<link rel="stylesheet" href="<?php echo CSS; ?>style.css" type="text/css">
+	<script type="text/javascript" src="http://code.jquery.com/jquery-1.10.2.min.js"></script>
+	<script type="text/javascript" src="<?php echo JS; ?>bootstrap.min.js"></script>
+	<?php echo $add_js; ?>
+	<script type="text/javascript" src="<?php echo JS; ?>main.js"></script>
+</head>
+<body>
+	<div class="full bg" id="header">
+		<div class="container">
+			<div class="col-md-12 col-md-offset-0 col-sm-4 col-sm-offset-4 col-xs-8 col-xs-offset-2">
+				<a href="<?php echo SITE; ?>" class="logo col-md-offset-4 col-md-4">
+					<div class="col-md-10 col-md-offset-1">
+						<img class="img-responsive" src="<?php echo IMG; ?>hxphp-logo.png" alt="">
+					</div>
+				</a>
+			</div>
+		</div>
+	</div>
+	<div class="container">
+		<div class="col-md-12">
+			<nav class="navbar navbar-default" role="navigation">
+				<div class="container-fluid">
+
+					<div class="navbar-header">
+					  <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+					    <span class="sr-only">Menu</span>
+					    <span class="icon-bar"></span>
+					    <span class="icon-bar"></span>
+					    <span class="icon-bar"></span>
+					  </button>
+					  
+					</div>
+
+					<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+					  <ul class="nav navbar-nav">
+					    <?php echo $this->menu->show(); ?>
+					  </ul>
+					  <ul class="nav navbar-nav navbar-right">
+					    <li class="dropdown">
+					      <a href="#" class="dropdown-toggle" data-toggle="dropdown"> <?php echo $view_user->full_name; ?> <b class="caret"></b></a>
+					      <ul class="dropdown-menu">
+					        <li><a href="<?php echo SITE; ?>usuarios/editar/<?php echo $view_user->id; ?>">Editar perfil</a></li>
+					        <li class="divider"></li>
+					        <li><a href="<?php echo SITE; ?>login/sair/">Sair</a></li>
+					      </ul>
+					    </li>
+					  </ul>
+					</div>
+				</div>
+			</nav>
+		</div>
+	</div>
+
+	<?php echo $this->alert->show(); ?>
+
+	<div class="container">
+			<div class="col-md-12">
