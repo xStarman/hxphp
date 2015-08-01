@@ -1,4 +1,6 @@
 <?php
+	use DI\ContainerBuilder;
+
 	ob_start();
 
 	ini_set('display_errors', 1); 
@@ -18,6 +20,12 @@
 	}
 
 	require_once($composer_autoload);
+
+	/**
+	 * Container de injeção de dependência
+	 */
+	$builder = new ContainerBuilder();
+	$container = $builder->build();
 
 	//Start da sessão
 	StartSession::sec_session_start();
