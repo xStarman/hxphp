@@ -2,7 +2,8 @@
     "name": "Bruno/hxphp",
     "require": {
         "pfbc/pfbc": "dev-master",
-        "php-activerecord/php-activerecord": "dev-master"
+        "php-activerecord/php-activerecord": "dev-master",
+        "mnapoli/php-di": "~4.0"
     },
     "authors": [
         {
