@@ -2,23 +2,8 @@
 
 namespace HXPHP\System;
 
-use HXPHP\System\Helpers as Helpers;
-
 class View
 {
-
-	/**
-	 * Injeção da Aplicação
-	 * @var object
-	 */
-	protected $app;
-
-	/**
-	 * Injeção do MenuHelper;
-	 * @var object
-	 */
-	protected $menu;
-
 	/**
 	 * Parâmetros globais da VIEW
 	 * @var array
@@ -30,10 +15,6 @@ class View
 	 */
 	public function __construct()
 	{
-		//Instância dos objetos injetados
-		$this->app = new App;
-		$this->menu = new Helpers\MenuHelper;
-
 		//Configuração básica
 		$this->config['title'] = TITLE;
 
@@ -48,15 +29,6 @@ class View
 	public function setTitle($title, $exclusive = false)
 	{
 		$this->config['title'] = $exclusive !== false ? $title : TITLE.' - '.$title;
-	}
-
-	/**
-	 * Define o nível de acesso do usuário para obter o menu
-	 * @param string $role Nível de acesso do usuário
-	 */
-	public function setMenu($role)
-	{
-		return $this->menu->render($role, $this->app->request->controller);
 	}
 
 	/**
