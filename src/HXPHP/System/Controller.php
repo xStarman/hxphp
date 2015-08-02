@@ -43,6 +43,15 @@ class Controller
 	}
 
 	/**
+	 * Default Action
+	 */
+	public function indexAction()
+    {
+    	$this->view->setTitle('Seja bem vindo');
+        $this->render('Index');
+    }
+
+	/**
 	 * Carrega serviços, módulos e helpers
 	 * @param  string $object Nome da classe
 	 * @param  array  $params Parâmetros do método construtor
