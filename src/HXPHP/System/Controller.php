@@ -15,34 +15,10 @@ class Controller
 	private $app;
 
 	/**
-	 * Injeção do Request
-	 * @var object
-	 */
-	public $request;
-
-	/**
 	 * Injeção da View
 	 * @var object
 	 */
 	public $view;
-
-	/**
-	 * Injeção do AlertHelper
-	 * @var object
-	 */
-	public $alert;
-
-	/**
-	 * Injeção do MenuHelper
-	 * @var object
-	 */
-	public $menu;
-
-	/**
-	 * Injeção do do serviço de E-mail
-	 * @var object
-	 */
-	public $email;
 
 	/**
 	 * Configurações genéricas para todas as actions
@@ -59,9 +35,6 @@ class Controller
 		//Instância dos objetos injetados
 		$this->app     = new App;
 		$this->view    = new View;
-		$this->email   = new Services\Email;
-		$this->alert   = new Helpers\AlertHelper;
-		$this->menu   = new Helpers\MenuHelper;
 
 		//Atalhos para objetos
 		$this->request = $this->app->request;
