@@ -1,6 +1,6 @@
 <?php
-	use HXPHP\System as System;
-	use HXPHP\System\Services as Services;
+	use HXPHP\System\App;
+	use HXPHP\System\Services\StartSession;
 	ob_start();
 
 	ini_set('display_errors', 1); 
@@ -22,8 +22,8 @@
 	require_once($composer_autoload);
 
 	//Start da sessão
-	Services\StartSession::sec_session_start();
+	StartSession::sec_session_start();
 
-	$app = new System\App();
+	$app = new App();
 	$app->ActiveRecord();
 	$app->run();
