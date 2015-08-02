@@ -2,6 +2,8 @@
 
 namespace HXPHP\System\Modules\Messages;
 
+use HXPHP\System\Services\Email;
+
 class Messages{
 
 	/**

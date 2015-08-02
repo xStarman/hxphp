@@ -2,6 +2,11 @@
 
 namespace HXPHP\System\Services;
 
+use HXPHP\System\Storage\Session;
+use HXPHP\System\Http\Response;
+use HXPHP\System\Modules\Message;
+
+
 class Auth
 {
 

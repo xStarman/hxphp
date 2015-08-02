@@ -2,6 +2,8 @@
 
 namespace HXPHP\System\Services;
 
+use HXPHP\System\Modules\Message;
+
 class PasswordRecovery
 {
 
