@@ -21,36 +21,13 @@ class AlertHelper
 
 	/**
 	 * Método construtor
+	 * @param array $alert ['Classe CSS', 'Título do alerta', 'Mensagem do alerta']
 	 */
-	public function __construct()
+	public function __construct(array $alert)
 	{
 		//Instância dos objetos injetados
 		$this->storage = new Storage\Session;
-		return $this;
-	}
 
-	/**
-	 * Método resposnável pela obtenção do conteúdo do template
-	 * @return html
-	 */
-	private function getTemplate()
-	{
-		$file = $this->list_messages ? '-list' : '';
-		$template = dirname(__FILE__) . DS . 'templates' . DS . 'Alert' . DS . 'alert' . $file . '.html';
-
-		if ( ! file_exists($template)) {
-			throw new \Exception("O template para a mensagem nao foi localizado: $template", 1);
-		}
-
-		return file_get_contents($template);
-	}
-
-	/**
-	 * Define um alerta
-	 * @param array $alert ['Classe CSS', 'Título do alerta', 'Mensagem do alerta']
-	 */
-	public function setAlert(array $alert)
-	{
 		if (count($alert) == 1)
 			return null;
 
@@ -77,6 +54,22 @@ class AlertHelper
 		$content = sprintf($template, $style, $title, $render);
 
 		$this->storage->set('message', $content);
+	}
+
+	/**
+	 * Método resposnável pela obtenção do conteúdo do template
+	 * @return html
+	 */
+	private function getTemplate()
+	{
+		$file = $this->list_messages ? '-list' : '';
+		$template = dirname(__FILE__) . DS . 'templates' . DS . 'Alert' . DS . 'alert' . $file . '.html';
+
+		if ( ! file_exists($template)) {
+			throw new \Exception("O template para a mensagem nao foi localizado: $template", 1);
+		}
+
+		return file_get_contents($template);
 	}
 
 	/**
@@ -111,5 +104,14 @@ class AlertHelper
 		$this->storage->clear('message');
 
 		return $message; 
+	}
+
+	/**
+	 * Retorna os alertas da aplicação
+	 * @return html
+	 */
+	public function __toString()
+	{
+		return $this->getAlert();
 	}
 }

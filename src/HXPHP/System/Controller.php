@@ -2,9 +2,6 @@
 
 namespace HXPHP\System;
 
-use HXPHP\System\Helpers as Helpers;
-use HXPHP\System\Services as Services;
-
 class Controller
 {
 
@@ -83,7 +80,7 @@ class Controller
 				);
 			}
 			if ( ! empty($params)) {
-				$ref = new ReflectionClass($object);
+				$ref = new \ReflectionClass($object);
   				$this->$name = $ref->newInstanceArgs($params);
 			}
 			else{
