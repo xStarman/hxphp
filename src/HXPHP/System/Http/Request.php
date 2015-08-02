@@ -1,6 +1,7 @@
 <?php
 
 namespace HXPHP\System\Http;
+use HXPHP\System\Tools;
 
 class Request
 {
