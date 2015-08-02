@@ -1,6 +1,7 @@
 <?php
 
 namespace HXPHP\System;
+use HXPHP\System\Helpers as Helpers;
 
 class View
 {
@@ -30,7 +31,7 @@ class View
 	{
 		//Instância dos objetos injetados
 		$this->app = new App;
-		$this->menu = new MenuHelper;
+		$this->menu = new Helpers\MenuHelper;
 
 		//Configuração básica
 		$this->config['title'] = TITLE;

@@ -1,12 +1,14 @@
 <?php
+	use HXPHP\System as System;
+	use HXPHP\System\Services as Services;
 	ob_start();
 
 	ini_set('display_errors', 1); 
 	date_default_timezone_set('America/Sao_Paulo');
 
 	//Inclusão dos arquivos de configuração
-	require_once("system/Bootstrap/config.php");
-	require_once("system/Bootstrap/database.php");
+	require_once("src/HXPHP/System/Bootstrap/config.php");
+	require_once("src/HXPHP/System/Bootstrap/database.php");
 
 	/**
 	 * Verifica se o autoload do Composer está configurado
@@ -20,8 +22,8 @@
 	require_once($composer_autoload);
 
 	//Start da sessão
-	StartSession::sec_session_start();
+	Services\StartSession::sec_session_start();
 
-	$app = new App();
+	$app = new System\App();
 	$app->ActiveRecord();
 	$app->run();

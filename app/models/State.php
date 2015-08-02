@@ -1,6 +1,6 @@
 <?php
 
-class State extends Model
+class State extends \HXPHP\System\Model
 {
 
 	/**

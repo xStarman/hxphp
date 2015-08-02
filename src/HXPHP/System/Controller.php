@@ -2,6 +2,9 @@
 
 namespace HXPHP\System;
 
+use HXPHP\System\Helpers as Helpers;
+use HXPHP\System\Services as Services;
+
 class Controller
 {
 
@@ -56,9 +59,9 @@ class Controller
 		//Instância dos objetos injetados
 		$this->app     = new App;
 		$this->view    = new View;
-		$this->email   = new Email;
-		$this->alert   = new AlertHelper;
-		$this->menu   = new MenuHelper;
+		$this->email   = new Services\Email;
+		$this->alert   = new Helpers\AlertHelper;
+		$this->menu   = new Helpers\MenuHelper;
 
 		//Atalhos para objetos
 		$this->request = $this->app->request;

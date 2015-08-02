@@ -1,6 +1,6 @@
 <?php
 
-class LostPassword extends Model
+class LostPassword extends \HXPHP\System\Model
 {
 	
 	/**

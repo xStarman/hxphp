@@ -1,5 +1,9 @@
 <?php
 
+namespace HXPHP\System\Helpers;
+
+use HXPHP\System\Storage as Storage;
+
 class AlertHelper
 {
 	
@@ -21,7 +25,7 @@ class AlertHelper
 	public function __construct()
 	{
 		//Instância dos objetos injetados
-		$this->storage = new Session;
+		$this->storage = new Storage\Session;
 		return $this;
 	}
 

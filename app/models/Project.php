@@ -1,6 +1,6 @@
 <?php
 
-class Project extends Model
+class Project extends \HXPHP\System\Model
 {
 
 	/**

@@ -1,6 +1,6 @@
 <?php
 
-class LoginAttempt extends Model
+class LoginAttempt extends \HXPHP\System\Model
 {
 	
 	/**

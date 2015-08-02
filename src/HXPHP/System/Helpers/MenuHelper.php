@@ -1,5 +1,8 @@
 <?php
 
+namespace HXPHP\System\Helpers;
+use HXPHP\System\Storage as Storage;
+
 class MenuHelper
 {
 
@@ -12,7 +15,7 @@ class MenuHelper
 	public function __construct()
 	{
 		//Instância dos objetos injetados
-		$this->storage = new Session;
+		$this->storage = new Storage\Session;
 
 		return $this;
 	}

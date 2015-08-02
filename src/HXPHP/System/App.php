@@ -1,6 +1,7 @@
 <?php
 
 namespace HXPHP\System;
+use HXPHP\System\Http as Http;
 
 class App
 {
@@ -22,8 +23,8 @@ class App
 	 */
 	public function __construct()
 	{
-		$this->request  = new Request;
-		$this->response = new Response;
+		$this->request  = new Http\Request;
+		$this->response = new Http\Response;
 		
 		return $this;
 	}
@@ -33,7 +34,7 @@ class App
 	 */
 	public function ActiveRecord()
 	{
-		$cfg = ActiveRecord\Config::instance();
+		$cfg = \ActiveRecord\Config::instance();
 		$cfg->set_model_directory(MODELS);
 		$cfg->set_connections(
 			array(
