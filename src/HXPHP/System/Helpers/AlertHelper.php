@@ -105,7 +105,7 @@ class AlertHelper
 	 * Retorna os alertas da aplicação
 	 * @return html
 	 */
-	public function show()
+	public function getAlert()
 	{
 		$message = $this->storage->get('message');
 		$this->storage->clear('message');

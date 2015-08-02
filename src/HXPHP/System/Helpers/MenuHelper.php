@@ -61,7 +61,7 @@ class MenuHelper
 	 * @param  string $controller Controller atual
 	 * @return html
 	 */
-	public function render($role, $controller)
+	public function setAlert($role, $controller)
 	{
 		if (is_null($role) || is_null($controller))
 			return;
@@ -98,7 +98,7 @@ class MenuHelper
 		return $this->storage->set('menu', $html);
 	}
 
-	public function show()
+	public function getMenu()
 	{
 		$menu = $this->storage->get('menu');
 		$this->storage->clear('menu');
