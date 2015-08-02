@@ -1,5 +1,7 @@
 <?php
 
+namespace HXPHP\System\Modules\Messages;
+
 class Messages{
 
 	/**

@@ -1,5 +1,7 @@
 <?php
 
+namespace HXPHP\System;
+
 class Model extends ActiveRecord\Model
 {
 	/**
