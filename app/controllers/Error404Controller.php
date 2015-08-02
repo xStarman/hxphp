@@ -9,14 +9,7 @@ class Error404Controller extends \HXPHP\System\Controller
 	}
 	public function indexAction()
 	{
-		//Define o título da página
 		$this->view->setTitle('Oops! Nada encontrado!');
-		
-		if ($this->auth->login_check()) {
-			$this->view->setMenu(User::userActive()->role);
-			$this->render('404');
-		}
-
-		$this->render('404', '', true, 'Generic');
+		$this->render('404');
 	}
 }

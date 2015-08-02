@@ -14,7 +14,7 @@
 <body>
 	<div class="full bg" id="header">
 		<div class="container">
-			<div class="col-md-12 col-md-offset-0 col-sm-4 col-sm-offset-4 col-xs-8 col-xs-offset-2">
+			<div class="col-md-12">
 				<a href="<?php echo SITE; ?>" class="logo col-md-offset-4 col-md-4">
 					<div class="col-md-10 col-md-offset-1">
 						<img class="img-responsive" src="<?php echo IMG; ?>hxphp-logo.png" alt="">
@@ -23,42 +23,8 @@
 			</div>
 		</div>
 	</div>
-	<div class="container">
-		<div class="col-md-12">
-			<nav class="navbar navbar-default" role="navigation">
-				<div class="container-fluid">
-
-					<div class="navbar-header">
-					  <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
-					    <span class="sr-only">Menu</span>
-					    <span class="icon-bar"></span>
-					    <span class="icon-bar"></span>
-					    <span class="icon-bar"></span>
-					  </button>
-					  
-					</div>
-
-					<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-					  <ul class="nav navbar-nav">
-					    <?php echo $this->menu->show(); ?>
-					  </ul>
-					  <ul class="nav navbar-nav navbar-right">
-					    <li class="dropdown">
-					      <a href="#" class="dropdown-toggle" data-toggle="dropdown"> <?php echo $view_user->full_name; ?> <b class="caret"></b></a>
-					      <ul class="dropdown-menu">
-					        <li><a href="<?php echo SITE; ?>usuarios/editar/<?php echo $view_user->id; ?>">Editar perfil</a></li>
-					        <li class="divider"></li>
-					        <li><a href="<?php echo SITE; ?>login/sair/">Sair</a></li>
-					      </ul>
-					    </li>
-					  </ul>
-					</div>
-				</div>
-			</nav>
-		</div>
-	</div>
-
-	<?php echo $this->alert->show(); ?>
+	<br>
+	<br>
 
 	<div class="container">
 			<div class="col-md-12">
