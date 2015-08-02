@@ -2,9 +2,9 @@
 
 namespace HXPHP\System\Services;
 
-use HXPHP\System\Storage\Session;
-use HXPHP\System\Http\Response;
-use HXPHP\System\Modules\Message;
+use HXPHP\System\Storage as Storage;
+use HXPHP\System\Http as Http;
+use HXPHP\System\Modules as Modules;
 
 
 class Auth
@@ -34,9 +34,9 @@ class Auth
 	public function __construct()
 	{
 		//Instância dos objetos injetados
-		$this->response = new Response;
-		$this->storage  = new Session;
-		$this->messages = new Messages('auth');
+		$this->response = new Http\Response;
+		$this->storage  = new Storage\Session;
+		$this->messages = new Modules\Messages('auth');
 
 		return $this;
 	}

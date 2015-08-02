@@ -2,7 +2,7 @@
 
 namespace HXPHP\System\Modules\Messages;
 
-use HXPHP\System\Services\Email;
+use HXPHP\System\Services as Services;
 
 class Messages{
 
@@ -43,7 +43,7 @@ class Messages{
 	public function __construct($template)
 	{
 		//Instância dos objetos injetados
-		$this->email = new Email;
+		$this->email = new Services\Email;
 
 		//Configuração do serviço de E-mail
 		$this->prefix = REMETENTE.' - ';

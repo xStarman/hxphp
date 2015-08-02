@@ -1,6 +1,7 @@
 <?php
 
 namespace HXPHP\System;
+
 use HXPHP\System\Helpers as Helpers;
 
 class View

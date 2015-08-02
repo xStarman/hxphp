@@ -1,7 +1,8 @@
 <?php
 
 namespace HXPHP\System\Http;
-use HXPHP\System\Tools;
+
+use HXPHP\System as System;
 
 class Request
 {
@@ -51,14 +52,14 @@ class Request
 		}
 
 		if (count($explode) == 1) {
-			$this->controller = Tools::filteredName($explode[0]).'Controller';
+			$this->controller = System\Tools::filteredName($explode[0]).'Controller';
 			$this->action = 'indexAction';
 
 			return $this;
 		}
 
-		$this->controller = Tools::filteredName($explode[0]).'Controller';
-		$this->action = lcfirst(Tools::filteredName($explode[1])).'Action';
+		$this->controller = System\Tools::filteredName($explode[0]).'Controller';
+		$this->action = lcfirst(System\Tools::filteredName($explode[1])).'Action';
 		
 		unset($explode[0], $explode[1]);
 

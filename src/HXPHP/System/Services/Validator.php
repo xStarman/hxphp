@@ -2,7 +2,7 @@
 
 namespace HXPHP\System\Services;
 
-use HXPHP\System\Modules\Message;
+use HXPHP\System\Modules as Modules;
 
 class Validator
 {
@@ -56,7 +56,7 @@ class Validator
 	public function __construct(array $requestArray)
 	{
 		//Instância dos objetos injetados
-		$this->messages = new Messages('validator');
+		$this->messages = new Modules\Messages('validator');
 
 		$this->request = $requestArray;
 		if (empty($this->request))

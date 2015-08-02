@@ -2,7 +2,7 @@
 
 namespace HXPHP\System\Services;
 
-use HXPHP\System\Modules\Message;
+use HXPHP\System\Modules as Modules;
 
 class PasswordRecovery
 {
@@ -36,7 +36,7 @@ class PasswordRecovery
 	 */
 	public function __construct()
 	{
-		$this->messages = new Messages('password-recovery');
+		$this->messages = new Modules\Messages('password-recovery');
 
 		return $this;
 	}
