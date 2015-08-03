@@ -5,32 +5,22 @@ namespace HXPHP\System\Configs;
 class Config
 {
 	public $global;
-	public $defineEnvironment;
-	public $currentEnviroment;
+	public $env;
+	public $define;
 
 	public function __construct()
 	{
 		$this->global = new GlobalConfig;
-		$this->defineEnvironment = new DefineEnvironment;
-		$this->currentEnviroment = $this->defineEnvironment->environment;
-		$this->addEnv($this->currentEnviroment);
-	}
-
-	public function addEnv($environment)
-	{
-		return $this->defineEnvironment->setEnv($this, $environment);
-	}
-
-	public function setDefaultEnv($environment)
-	{
-		return $this->currentEnviroment = $environment;
+		$this->env = new Environment;
+		$this->define = new DefineEnvironment;
+		$this->env->add();
 	}
 
 	public function __get($param) {
-		$current = $this->currentEnviroment;
+		$current = $this->define->getDefault();
 
-		if (isset($this->$current->$param)) {
-			return $this->$current->$param;
+		if (isset($this->env->$current->$param)) {
+			return $this->env->$current->$param;
 		}
 		else if(isset($this->global->$param)) {
 			return $this->global->$param;

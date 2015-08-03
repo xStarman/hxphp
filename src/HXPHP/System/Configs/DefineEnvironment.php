@@ -2,11 +2,10 @@
 
 namespace HXPHP\System\Configs;
 
-use HXPHP\System\Tools;
-
 class DefineEnvironment
 {
 	public $environment;
+	private $currentEnviroment;
 
 	public function __construct()
 	{
@@ -19,22 +18,20 @@ class DefineEnvironment
 		else {
 			$this->environment = 'production';
 		}
+		$this->currentEnviroment = $this->environment;
 
-		return $this;
+		return $this->environment;
 	}
 
-	public function setEnv($config, $environment)
+	public function setDefaultEnv($environment)
 	{
-		$name = strtolower(Tools::filteredName($environment));
-		$object = 'HXPHP\System\Configs\Environment' . ucfirst(Tools::filteredName($environment));
+		$env = new Environment;
+		if ( is_object($env->add($environment)) )
+			$this->currentEnviroment = $environment;
+	}
 
-		if ( ! class_exists($object)) {
-			throw new \Exception('O ambiente informado nao esta definido nas configuracoes do sistema.');
-		}
-		else {
-			$config->$name = new $object();
-
-			return $config->$name;
-		}
+	public function getDefault()
+	{
+		return $this->currentEnviroment;
 	}
 }

@@ -25,12 +25,12 @@
 	//Configurações
 	$configs = new HXPHP\System\Configs\Config;
 	
-	$configs->addEnv('tests');
-	$configs->tests->mail->setFrom(array(
+	$configs->env->add('tests');
+	$configs->env->tests->mail->setFrom(array(
 		'from' => 'Definição do ambiente padrão através de método',
 		'from_mail' => 'teste@teste.com.br'
 	));
-	$configs->setDefaultEnv('tests');
+	//$configs->define->setDefaultEnv('tests');
 
 	var_dump($configs);
 	var_dump($configs->mail);
