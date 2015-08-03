@@ -24,18 +24,18 @@
 
 	//Configurações
 	$configs = new HXPHP\System\Configs\Config;
-	
-	$configs->env->add('tests');
-	$configs->env->tests->mail->setFrom(array(
-		'from' => 'Definição do ambiente padrão através de método',
-		'from_mail' => 'teste@teste.com.br'
+
+	$configs->env->add('production');
+	$configs->env->production->database->setConnectionData(array(
+		'host' => 'localhost',
+		'user' => 'root',
+		'password' => '',
+		'dbname' => 'teste'
 	));
-	//$configs->define->setDefaultEnv('tests');
 
-	var_dump($configs);
-	var_dump($configs->mail);
+	$configs->define->setDefaultEnv('production');
 
-	
+	var_dump($configs->database);
 
 	$app = new HXPHP\System\App($configs);
 	$app->ActiveRecord();

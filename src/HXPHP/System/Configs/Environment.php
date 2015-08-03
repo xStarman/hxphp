@@ -19,7 +19,7 @@ class Environment
 	{
 		if ($environment == null)
 			$environment = $this->defaultEnvironment;
-		var_dump($environment);
+		
 		$name = strtolower(Tools::filteredName($environment));
 		$object = 'HXPHP\System\Configs\Environment' . ucfirst(Tools::filteredName($environment));
 
