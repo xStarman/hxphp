@@ -17,7 +17,7 @@ class Config
 
 	public function addEnv($environment)
 	{
-		$this->defineEnvironment->setEnv($environment);
+		return $this->defineEnvironment->setEnv($environment);
 	}
 
 	public function __get($param) {
