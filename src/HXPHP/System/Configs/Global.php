@@ -7,6 +7,7 @@ class Global
 	public $models;
 	public $views;
 	public $controllers;
+	public $title;
 
 	public function __construct()
 	{
@@ -24,6 +25,9 @@ class Global
 		//Controller
 		$this->controllers->directory = APP_PATH . DS . 'controllers' . DS;
 		$this->controllers->notFound = 'Error404';
+
+		//General
+		$this->title = 'HXPHP Framework';
 
 		return $this;
 	}
