@@ -13,6 +13,7 @@ class Config
 		$this->global = new GlobalConfig;
 		$this->defineEnvironment = new DefineEnvironment;
 		$this->currentEnviroment = $this->defineEnvironment->environment;
+		$this->addEnv($this->currentEnviroment);
 	}
 
 	public function addEnv($environment)
