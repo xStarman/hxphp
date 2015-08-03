@@ -1,6 +1,7 @@
 <?php
 	use HXPHP\System\App;
 	use HXPHP\System\Services\StartSession;
+
 	ob_start();
 
 	ini_set('display_errors', 1); 

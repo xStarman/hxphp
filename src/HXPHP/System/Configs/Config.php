@@ -8,7 +8,7 @@ class Config
 
 	public function __construct()
 	{
-		$this->global = new Global;
+		$this->global = new GlobalConfig;
 	}
 
 	public function setEnv($environment)
