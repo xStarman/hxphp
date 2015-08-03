@@ -11,7 +11,12 @@ class Database
 
 	public function __construct()
 	{
-		$this->setConnectionData('localhost', 'root', '', 'hxphp');
+		$this->setConnectionData(array(
+			'host' => 'localhost',
+			'user' => 'root',
+			'passoword' => '',
+			'dbname' => 'hxphp'
+		));
 		return $this;
 	}
 	public function setConnectionData(array $data)
