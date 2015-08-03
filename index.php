@@ -31,6 +31,9 @@
 	));
 
 	var_dump($configs);
+	var_dump($configs->mail);
+
+	
 
 	$app = new HXPHP\System\App($configs);
 	$app->ActiveRecord();

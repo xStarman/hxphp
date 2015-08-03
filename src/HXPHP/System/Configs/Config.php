@@ -24,8 +24,8 @@ class Config
 	public function __get($param) {
 		$current = $this->currentEnviroment;
 
-		if (isset($this->defineEnvironment->$current->$param)) {
-			return $this->defineEnvironment->$current->$param;
+		if (isset($this->$current->$param)) {
+			return $this->$current->$param;
 		}
 		else if(isset($this->global->$param)) {
 			return $this->global->$param;
