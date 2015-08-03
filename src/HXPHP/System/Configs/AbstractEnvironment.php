@@ -13,5 +13,7 @@ abstract class AbstractEnvironment
 		$this->database = new Database;
 		$this->mail = new Mail;
 		$this->baseURI = '/hxphp/';
+
+		return $this;
 	}
 }
