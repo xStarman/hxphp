@@ -1,15 +1,22 @@
 <?php 
 
 namespace HXPHP\System;
+use HXPHP\System\Http as Http;
 
 class Controller
 {
 
 	/**
-	 * Injeção da Aplicação
+	 * Injeção do Http Request
 	 * @var object
 	 */
-	private $app;
+	private $request;
+
+	/**
+	 * Injeção do Http Response
+	 * @var object
+	 */
+	private $response;
 
 	/**
 	 * Injeção da View
@@ -30,11 +37,8 @@ class Controller
 	public function __construct()
 	{
 		//Instância dos objetos injetados
-		$this->app     = new App;
+		$this->request = new Http\Request;
 		$this->view    = new View;
-
-		//Atalhos para objetos
-		$this->request = $this->app->request;
 
 		return $this;
 	}
@@ -149,6 +153,7 @@ class Controller
 	 */
 	public function redirectTo($url)
 	{
-		$this->app->response->redirectTo($url);
+		$this->response = new Http\Response;
+		return $this->response->redirectTo($url);
 	}
 }
