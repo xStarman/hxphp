@@ -16,14 +16,14 @@ class GlobalConfig
 		$this->controllers = new \stdClass;
 
 		//Models
-		$this->models->directory = APP_PATH . DS . 'models' . DS;
+		$this->models->directory = APP_PATH . 'models' . DS;
 
 		//Views
-		$this->views->directory = APP_PATH . DS . 'views' . DS;
+		$this->views->directory = APP_PATH . 'views' . DS;
 		$this->views->extension = '.phtml';
 
 		//Controller
-		$this->controllers->directory = APP_PATH . DS . 'controllers' . DS;
+		$this->controllers->directory = APP_PATH . 'controllers' . DS;
 		$this->controllers->notFound = 'Error404';
 
 		//General
