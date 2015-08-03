@@ -21,6 +21,11 @@ class Config
 		return $this->defineEnvironment->setEnv($this, $environment);
 	}
 
+	public function setDefaultEnv($environment)
+	{
+		return $this->currentEnviroment = $environment;
+	}
+
 	public function __get($param) {
 		$current = $this->currentEnviroment;
 
