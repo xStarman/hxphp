@@ -6,7 +6,6 @@
 
 	//Inclusão dos arquivos de configuração
 	require_once("src/HXPHP/System/Bootstrap/config.php");
-	require_once("src/HXPHP/System/Bootstrap/database.php");
 
 	/**
 	 * Verifica se o autoload do Composer está configurado
