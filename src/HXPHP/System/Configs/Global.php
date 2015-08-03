@@ -24,5 +24,7 @@ class Global
 		//Controller
 		$this->controllers->directory = APP_PATH . DS . 'controllers' . DS;
 		$this->controllers->notFound = 'Error404';
+
+		return $this;
 	}
 }
