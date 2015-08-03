@@ -11,24 +11,13 @@ class View
 	public $config = array();
 
 	/**
-	 * Método Construtor
-	 */
-	public function __construct()
-	{
-		//Configuração básica
-		$this->config['title'] = TITLE;
-
-		return $this;
-	}
-
-	/**
 	 * Define o título da página
 	 * @param string  $title     Título da página
 	 * @param boolean $exclusive Define se o título será concatenado ou exclusivo
 	 */
-	public function setTitle($title, $exclusive = false)
+	public function setTitle($title)
 	{
-		$this->config['title'] = $exclusive !== false ? $title : TITLE.' - '.$title;
+		$this->config['title'] = $title;
 	}
 
 	/**

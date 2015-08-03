@@ -5,6 +5,11 @@ use HXPHP\System\Http as Http;
 
 class Controller
 {
+	/**
+	 * Injeção das Configurações
+	 * @var object
+	 */
+	private $configs;
 
 	/**
 	 * Injeção do Http Request
@@ -41,6 +46,11 @@ class Controller
 		$this->view    = new View;
 
 		return $this;
+	}
+
+	public function setConfigs(Configs\Config $configs)
+	{
+		$this->configs = $configs;
 	}
 
 	/**
@@ -109,6 +119,7 @@ class Controller
 	{
 		//Configuração dos parâmetros que serão passados para a VIEW
 		$data = ! is_array($data) ? array() : $data;
+		$this->view->setTitle($this->configs->title);
 		$data = array_merge($this->data, $this->view->config, $data);
 
 		//Extract que transforma os parâmetros em variáveis disponíveis para a VIEW
@@ -120,7 +131,7 @@ class Controller
 		$add_js  = $this->view->assets('js', $custom_js);
 
 		//Verifica a existência da VIEW
-		$view = VIEWS.$view.VIEW_EXTENSION;
+		$view = $this->configs->views->directory . $view . $this->configs->views->extension;
 
 		if ( ! file_exists($view))
 			die("Erro fatal: A view <$view> não foi encontrada. Por favor, crie a view e tente novamente.");
@@ -133,8 +144,8 @@ class Controller
 		}
 
 		//Verifica a existência do Header e Footer customizado
-		$header = VIEWS.'Header'.$custom_header.VIEW_EXTENSION;
-		$footer = VIEWS.'Footer'.$custom_footer.VIEW_EXTENSION;
+		$header = $this->configs->views->directory . 'Header' . $custom_header . $this->configs->views->extension;
+		$footer = $this->configs->views->directory . 'Footer' . $custom_footer . $this->configs->views->extension;
 
 		if ( ! file_exists($header) || ! file_exists($footer))
 			die("Erro fatal: O header <$header> ou o footer <$footer> não existe. Por favor, verifique e tente novamente.");
