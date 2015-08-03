@@ -14,10 +14,10 @@ class DefineEnvironment
 		$development = new EnvironmentDevelopment;
 	
 		if (in_array($server_name, $development->servers)) {
-			$this->environment = $development;
+			$this->environment = 'development';
 		}
 		else {
-			$this->environment = new EnvironmentProduction;
+			$this->environment = 'production';
 		}
 
 		return $this;
