@@ -11,9 +11,9 @@ class Global
 
 	public function __construct()
 	{
-		$this->models = new stdClass;
-		$this->views = new stdClass;
-		$this->controllers = new stdClass;
+		$this->models = new \stdClass;
+		$this->views = new \stdClass;
+		$this->controllers = new \stdClass;
 
 		//Models
 		$this->models->directory = APP_PATH . DS . 'models' . DS;
