@@ -21,7 +21,7 @@ class App
 	/**
 	 * Método Construtor
 	 */
-	public function __construct()
+	public function __construct(Configs\Config $configs)
 	{
 		$this->request  = new Http\Request;
 		$this->response = new Http\Response;
