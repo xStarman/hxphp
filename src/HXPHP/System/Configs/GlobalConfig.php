@@ -2,7 +2,7 @@
 
 namespace HXPHP\System\Configs;
 
-class Global
+class GlobalConfig
 {
 	public $models;
 	public $views;

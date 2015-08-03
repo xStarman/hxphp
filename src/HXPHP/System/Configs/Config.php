@@ -1,6 +1,7 @@
 <?php
 
 namespace HXPHP\System\Configs;
+use HXPHP\System\Tools;
 
 class Config
 {

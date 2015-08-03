@@ -14,7 +14,7 @@ class Database
 		$this->setConnectionData(array(
 			'host' => 'localhost',
 			'user' => 'root',
-			'passoword' => '',
+			'password' => '',
 			'dbname' => 'hxphp'
 		));
 		return $this;
