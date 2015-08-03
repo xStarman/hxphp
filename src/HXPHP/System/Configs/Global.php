@@ -7,5 +7,13 @@ class Global
 	public $models;
 	public $views;
 	public $controllers;
-	public $static;
+	public $static = array();
+
+	public function __construct()
+	{
+		$this->models = new stdClass;
+		$this->views = new stdClass;
+		$this->controllers = new stdClass;
+
+	}
 }
