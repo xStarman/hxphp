@@ -23,7 +23,7 @@ class DefineEnvironment
 		return $this;
 	}
 
-	public function setEnv($environment)
+	public function setEnv($config, $environment)
 	{
 		$name = strtolower(Tools::filteredName($environment));
 		$object = 'HXPHP\System\Configs\Environment' . ucfirst(Tools::filteredName($environment));
@@ -32,9 +32,9 @@ class DefineEnvironment
 			throw new \Exception('O ambiente informado nao esta definido nas configuracoes do sistema.');
 		}
 		else {
-			$this->$name = new $object();
+			$config->$name = new $object();
 
-			return $this->$name;
+			return $config->$name;
 		}
 	}
 }

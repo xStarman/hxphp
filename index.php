@@ -24,6 +24,13 @@
 
 	//Configurações
 	$configs = new HXPHP\System\Configs\Config;
+	$configs->addEnv('production');
+	$configs->production->mail->setFrom(array(
+		'from' => 'oi',
+		'from_mail' => 'teste@teste.com.br'
+	));
+
+	var_dump($configs);
 
 	$app = new HXPHP\System\App($configs);
 	$app->ActiveRecord();
