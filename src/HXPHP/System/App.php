@@ -5,6 +5,11 @@ use HXPHP\System\Http as Http;
 
 class App
 {
+	/**
+	 * Injeção das configurações
+	 * @var object
+	 */
+	public $configs;
 
 	/**
 	 * Injeção do Request
@@ -23,7 +28,7 @@ class App
 	 */
 	public function __construct(Configs\Config $configs)
 	{
-		var_dump($configs);
+		$this->configs  = $configs;
 		$this->request  = new Http\Request;
 		$this->response = new Http\Response;
 		
