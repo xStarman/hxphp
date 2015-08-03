@@ -41,10 +41,13 @@ class App
 	public function ActiveRecord()
 	{
 		$cfg = \ActiveRecord\Config::instance();
-		$cfg->set_model_directory(MODELS);
+		$cfg->set_model_directory($this->configs->models->directory);
 		$cfg->set_connections(
 			array(
-				'development' => 'mysql://'.USER.':'.PASS.'@'.HOST.'/'.DBNAME
+				'development' => 'mysql://'.$this->configs->database->user
+									.':'.$this->configs->database->password
+									.'@'.$this->configs->database->host
+									.'/'.$this->configs->database->dbname
 			)
 		);
 	}
@@ -59,17 +62,17 @@ class App
 		 * Caminho do controller
 		 * @var string
 		 */
-		$controller = CONTROLLERS.$this->request->controller.'.php';
+		$controller = $this->configs->controllers->directory . $this->request->controller.'.php';
 
 		if ( ! file_exists($controller))
-			$controller = CONTROLLERS.CONTROLLER_NOT_FOUND.'.php';
+			$controller = $this->configs->controllers->directory . $this->configs->controllers->notFound . '.php';
 		
 		//Inclusão do Controller
 		require_once($controller);
 
 		//Verifica se a classe correspondente ao Controller existe
 		if ( ! class_exists($this->request->controller)) {
-			$this->request->controller = CONTROLLER_NOT_FOUND;
+			$this->request->controller = $this->configs->controllers->notFound;
 		}
 
 		//Instância do Controller

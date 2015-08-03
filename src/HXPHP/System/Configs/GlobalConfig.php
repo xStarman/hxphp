@@ -24,7 +24,7 @@ class GlobalConfig
 
 		//Controller
 		$this->controllers->directory = APP_PATH . 'controllers' . DS;
-		$this->controllers->notFound = 'Error404';
+		$this->controllers->notFound = 'Error404Controller';
 
 		//General
 		$this->title = 'HXPHP Framework';

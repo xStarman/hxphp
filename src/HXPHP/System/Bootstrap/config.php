@@ -16,7 +16,7 @@
 	define('SITE', 'http://' . $_SERVER['SERVER_NAME'] . BASE);
 	define('DS', DIRECTORY_SEPARATOR);
 	define('ROOT_PATH', str_replace('/', DS, BASE));
-	define('APP_PATH', ROOT_PATH . 'app' . DS);
+	define('APP_PATH', 'app' . DS);
 	define('PUBLIC_PATH', ROOT_PATH . 'public');
 
 	//Constantes que definem as configurações para a aplicação
