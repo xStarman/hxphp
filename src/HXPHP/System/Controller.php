@@ -130,6 +130,13 @@ class Controller
 		$add_css = $this->view->assets('css', $custom_css);
 		$add_js  = $this->view->assets('js', $custom_js);
 
+		//Atribuição das constantes
+		define('BASE',   $this->configs->baseURI);
+		define('ASSETS', $this->configs->baseURI . DS . 'public' . DS . 'assets' . DS);
+		define('IMG',    $this->configs->baseURI . DS . 'public' . DS . 'img' . DS);
+		define('CSS',    $this->configs->baseURI . DS . 'public' . DS . 'css' . DS);
+		define('JS',     $this->configs->baseURI . DS . 'public' . DS . 'js' . DS);
+
 		//Verifica a existência da VIEW
 		$view = $this->configs->views->directory . $view . $this->configs->views->extension;
 

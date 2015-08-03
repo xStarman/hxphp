@@ -4,8 +4,9 @@
 	ini_set('display_errors', 1); 
 	date_default_timezone_set('America/Sao_Paulo');
 
-	//Inclusão dos arquivos de configuração
-	require_once("src/HXPHP/System/Bootstrap/constants.php");
+	define('DS', DIRECTORY_SEPARATOR);
+	define('ROOT_PATH', dirname(__FILE__) . DS);
+	define('APP_PATH', 'app' . DS);
 
 	/**
 	 * Verifica se o autoload do Composer está configurado
