@@ -9,8 +9,14 @@ class Mail
 
 	public function __construct()
 	{
-		$this->from = 'HXPHP Framework';
-		$this->from_mail = 'no-reply@hxphp.com.br';
+		$this->setFrom('HXPHP Framework', 'no-reply@hxphp.com.br');
+		return $this;
+	}
+
+	public function setFrom($from, $from_mail)
+	{
+		$this->from = $from;
+		$this->from_mail = $from_mail;
 
 		return $this;
 	}

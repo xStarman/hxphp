@@ -11,11 +11,16 @@ class Database
 
 	public function __construct()
 	{
-		$this->host = 'localhost';
-		$this->user = 'root';
-		$this->password = '';
-		$this->dbname = 'hxphp';
-
+		$this->setConnectionData('localhost', 'root', '', 'hxphp');
+		return $this;
+	}
+	public function setConnectionData($host, $user, $password, $dbname)
+	{
+		$this->host = $host;
+		$this->user = $user;
+		$this->password = $password;
+		$this->dbname = $dbname;
+		
 		return $this;
 	}
 }
