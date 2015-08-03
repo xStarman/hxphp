@@ -14,13 +14,17 @@ class Database
 		$this->setConnectionData('localhost', 'root', '', 'hxphp');
 		return $this;
 	}
-	public function setConnectionData($host, $user, $password, $dbname)
+	public function setConnectionData(array $data)
 	{
-		$this->host = $host;
-		$this->user = $user;
-		$this->password = $password;
-		$this->dbname = $dbname;
-		
+		if (count($data) != 4) {
+			throw new \Exception('Preencha todas os dados para estabelecer uma conexao com banco de dados. E necessario informar: host, user, password e dbname.');
+		}
+
+		$this->host = $data['host'];
+		$this->user = $data['user'];
+		$this->password = $data['password'];
+		$this->dbname = $data['dbname'];
+
 		return $this;
 	}
 }
