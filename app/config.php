@@ -1,5 +1,5 @@
 <?php
-	
+	//Constantes
 	$configs = new HXPHP\System\Configs\Config;
 
 	$configs->env->add('production');

@@ -21,22 +21,12 @@
 
 	//Constantes que definem as configurações para a aplicação
 	$app_config = array(
-		'VERSION' => '1.2.1',
 		'VIEW_EXTENSION' => '.phtml',
 		'CONTROLLER_NOT_FOUND' => 'Error404Controller'
 	);
 
-	//Constantes que definem as configurações da autenticação
-	$auth_config = array(
-		'URL_REDIRECT_AFTER_LOGIN' => SITE . 'home',
-		'URL_REDIRECT_AFTER_LOGOUT' => SITE . 'login',
-		'USER_STATUS_LOCKED' => 2
-	);
-
 	//Constantes que definem os diretórios principais do HXPHP
 	$main_directories = array(
-		'CONTROLLERS' => 'app' . DS . 'controllers' . DS,
-		'MODELS' => 'app' . DS . 'models' . DS,
 		'VIEWS' => 'app' . DS . 'views' . DS
 	);
 
@@ -53,13 +43,7 @@
 		'TITLE' => 'HXPHP Framework - O seu primeiro framework'
 	);
 
-	//Constantes que configuram os headers do sistema de envio de e-mails
-	$email_config = array(
-		'REMETENTE' => 'HXPHP Framework',
-		'EMAIL_REMETENTE' => 'no-reply@hxphp.com.br'
-	);
-
 	//Declaração das constantes
-	$constants = array_merge($app_config, $auth_config, $main_directories, $secondary_directories, $title_config, $email_config);
+	$constants = array_merge($app_config, $main_directories, $secondary_directories, $title_config);
 	foreach($constants as $key => $value)
 		define($key,$value);
