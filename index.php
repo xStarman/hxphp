@@ -1,7 +1,4 @@
 <?php
-	use HXPHP\System\App;
-	use HXPHP\System\Services\StartSession;
-
 	ob_start();
 
 	ini_set('display_errors', 1); 
@@ -23,8 +20,11 @@
 	require_once($composer_autoload);
 
 	//Start da sessão
-	StartSession::sec_session_start();
+	HXPHP\System\Services\StartSession::sec_session_start();
 
-	$app = new App();
+	//Configurações
+	$configs = new HXPHP\System\Configs\Config;
+
+	$app = new HXPHP\System\App($configs);
 	$app->ActiveRecord();
 	$app->run();
