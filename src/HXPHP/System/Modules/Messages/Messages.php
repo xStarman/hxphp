@@ -5,25 +5,6 @@ namespace HXPHP\System\Modules\Messages;
 use HXPHP\System\Services as Services;
 
 class Messages{
-
-	/**
-	 * Injeção do serviço de E-mail
-	 * @var object
-	 */
-	protected $email;
-
-	/**
-	 * Prefixo dos assuntos das mensagens que serão enviadas
-	 * @var string
-	 */
-	private $prefix;
-
-	/**
-	 * Configuração do serviço de E-mail
-	 * @var array
-	 */
-	private $config_email;
-
 	/**
 	 * Objeto com as mensagens do template selecionado
 	 * @var object
@@ -42,16 +23,6 @@ class Messages{
 	 */
 	public function __construct($template)
 	{
-		//Instância dos objetos injetados
-		$this->email = new Services\Email;
-
-		//Configuração do serviço de E-mail
-		$this->prefix = REMETENTE.' - ';
-		$this->config_email = array(
-			'remetente' => REMETENTE,
-			'email' => EMAIL_REMETENTE
-		);
-
 		//Decodifica o template
 		$template = dirname(__FILE__) . DS . 'templates' . DS . $template . '.json';
 
@@ -107,22 +78,5 @@ class Messages{
 			return $message;
 		}
 		return null;
-	}
-
-	/**
-	 * Envia uma mensagem do template por e-mail
-	 * @param  string $email   Endereço de e-mail do destinatário
-	 * @param  string $message Mensagem que será enviada
-	 * @return boolean         Status do processo
-	 */
-	public function sendEmail($email, $message)
-	{
-		if (isset($message['subject']) && isset($message['content']))
-			return false;
-
-		$subject = $message['subject'];
-		$message = $message['message'];
-
-		return $this->email->send($email, $this->prefix.$subject, $message, $this->config_email);
 	}
 }
