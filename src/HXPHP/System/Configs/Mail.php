@@ -13,10 +13,14 @@ class Mail
 		return $this;
 	}
 
-	public function setFrom($from, $from_mail)
+	public function setFrom(array $data)
 	{
-		$this->from = $from;
-		$this->from_mail = $from_mail;
+		if (count($data) != 2) {
+			throw new \Exception('Preencha todas os dados para configurar o disparo de e-mails. E necessario informar: from e from_mail.');
+		}
+
+		$this->from = $data['from'];
+		$this->from_mail = $data['from_mail'];
 
 		return $this;
 	}
