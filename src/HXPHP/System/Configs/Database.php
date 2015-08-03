@@ -16,10 +16,6 @@ class Database
 	}
 	public function setConnectionData(array $data)
 	{
-		if (count($data) != 4) {
-			throw new \Exception('Preencha todas os dados para estabelecer uma conexao com banco de dados. E necessario informar: host, user, password e dbname.');
-		}
-
 		$this->host = $data['host'];
 		$this->user = $data['user'];
 		$this->password = $data['password'];

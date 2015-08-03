@@ -15,10 +15,6 @@ class Mail
 
 	public function setFrom(array $data)
 	{
-		if (count($data) != 2) {
-			throw new \Exception('Preencha todas os dados para configurar o disparo de e-mails. E necessario informar: from e from_mail.');
-		}
-
 		$this->from = $data['from'];
 		$this->from_mail = $data['from_mail'];
 
