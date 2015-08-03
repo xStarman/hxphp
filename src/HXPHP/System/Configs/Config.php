@@ -11,7 +11,7 @@ class Config
 	public function __construct()
 	{
 		$this->global = new GlobalConfig;
-		$this->env = new Environment;
+		$this->env    = new Environment;
 		$this->define = new DefineEnvironment;
 		$this->env->add();
 	}

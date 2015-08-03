@@ -2,7 +2,7 @@
 
 namespace HXPHP\System\Http;
 
-use HXPHP\System as System;
+use HXPHP\System\Tools;
 
 class Request
 {
@@ -24,9 +24,9 @@ class Request
 	/**
 	 * Método construtor
 	 */
-	public function __construct()
+	public function __construct($baseURI = '')
 	{
-		$this->initialize();
+		$this->initialize($baseURI);
 		return $this;
 	}
 
@@ -34,36 +34,37 @@ class Request
 	 * Define os parâmetros do mecanismo MVC
 	 * @return object Retorna o objeto com as propriedades definidas
 	 */
-	public function initialize()
+	public function initialize($baseURI)
 	{
+		if ( ! empty($baseURI)) {
+			$explode = array_values(array_filter(explode('/', $_SERVER['REQUEST_URI'])));
 
-		$explode = array_values(array_filter(explode('/', $_SERVER['REQUEST_URI'])));
+			if (isset($explode[0]) && $explode[0] == str_replace('/', '', $baseURI)) {
+				unset($explode[0]);
+				$explode = array_values($explode);
+			}
 
-		if (isset($explode[0]) && $explode[0] == str_replace('/','',BASE)) {
-			unset($explode[0]);
-			$explode = array_values($explode);
+			if (count($explode) == 0) {
+				$this->controller = 'IndexController';
+				$this->action = 'indexAction';
+
+				return $this;
+			}
+
+			if (count($explode) == 1) {
+				$this->controller = Tools::filteredName($explode[0]).'Controller';
+				$this->action = 'indexAction';
+
+				return $this;
+			}
+
+			$this->controller = Tools::filteredName($explode[0]).'Controller';
+			$this->action = lcfirst(Tools::filteredName($explode[1])).'Action';
+			
+			unset($explode[0], $explode[1]);
+
+			$this->params = array_values($explode);
 		}
-
-		if (count($explode) == 0) {
-			$this->controller = 'IndexController';
-			$this->action = 'indexAction';
-
-			return $this;
-		}
-
-		if (count($explode) == 1) {
-			$this->controller = System\Tools::filteredName($explode[0]).'Controller';
-			$this->action = 'indexAction';
-
-			return $this;
-		}
-
-		$this->controller = System\Tools::filteredName($explode[0]).'Controller';
-		$this->action = lcfirst(System\Tools::filteredName($explode[1])).'Action';
-		
-		unset($explode[0], $explode[1]);
-
-		$this->params = array_values($explode);
 	}
 
 	/**
