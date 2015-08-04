@@ -10,11 +10,10 @@ abstract class AbstractEnvironment
 
 	public function __construct()
 	{
-
+		//Configurações variáveis por ambiente
 		$this->baseURI = '/hxphp/';
 
 		$load = new LoadModules;
-
 		return $load->loadModules($this);
 	}
 }
