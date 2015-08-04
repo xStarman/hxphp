@@ -4,7 +4,6 @@ namespace HXPHP\System\Configs;
 
 class DefineEnvironment
 {
-	public $environment;
 	private $currentEnviroment;
 
 	public function __construct()
@@ -13,14 +12,13 @@ class DefineEnvironment
 		$development = new Environments\EnvironmentDevelopment;
 	
 		if (in_array($server_name, $development->servers)) {
-			$this->environment = 'development';
+			$this->currentEnviroment = 'development';
 		}
 		else {
-			$this->environment = 'production';
+			$this->currentEnviroment = 'production';
 		}
-		$this->currentEnviroment = $this->environment;
 
-		return $this->environment;
+		return $this->currentEnviroment;
 	}
 
 	public function setDefaultEnv($environment)

@@ -132,10 +132,10 @@ class Controller
 
 		//Atribuição das constantes
 		define('BASE',   $this->configs->baseURI);
-		define('ASSETS', $this->configs->baseURI . DS . 'public' . DS . 'assets' . DS);
-		define('IMG',    $this->configs->baseURI . DS . 'public' . DS . 'img' . DS);
-		define('CSS',    $this->configs->baseURI . DS . 'public' . DS . 'css' . DS);
-		define('JS',     $this->configs->baseURI . DS . 'public' . DS . 'js' . DS);
+		define('ASSETS', $this->configs->baseURI . 'public/assets/');
+		define('IMG',    $this->configs->baseURI . 'public/img/');
+		define('CSS',    $this->configs->baseURI . 'public/css/');
+		define('JS',     $this->configs->baseURI . 'public/js/');
 
 		//Verifica a existência da VIEW
 		$view = $this->configs->views->directory . $view . $this->configs->views->extension;
