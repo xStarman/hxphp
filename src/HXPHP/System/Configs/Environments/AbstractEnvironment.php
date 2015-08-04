@@ -1,6 +1,8 @@
 <?php
 
-namespace HXPHP\System\Configs;
+namespace HXPHP\System\Configs\Environments;
+
+use HXPHP\System\Configs\Modules as Modules;
 
 abstract class AbstractEnvironment
 {
@@ -10,8 +12,8 @@ abstract class AbstractEnvironment
 
 	public function __construct()
 	{
-		$this->database = new Database;
-		$this->mail = new Mail;
+		$this->database = new Modules\Database;
+		$this->mail = new Modules\Mail;
 		$this->baseURI = '/hxphp/';
 
 		return $this;

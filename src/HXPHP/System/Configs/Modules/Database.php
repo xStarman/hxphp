@@ -1,6 +1,6 @@
 <?php
 
-namespace HXPHP\System\Configs;
+namespace HXPHP\System\Configs\Modules;
 
 class Database
 {

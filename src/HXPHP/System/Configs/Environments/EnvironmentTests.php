@@ -1,6 +1,6 @@
 <?php
 
-namespace HXPHP\System\Configs;
+namespace HXPHP\System\Configs\Environments;
 
 class EnvironmentTests extends AbstractEnvironment
 {
