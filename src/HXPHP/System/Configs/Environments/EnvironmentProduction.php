@@ -2,7 +2,9 @@
 
 namespace HXPHP\System\Configs\Environments;
 
-class EnvironmentProduction extends AbstractEnvironment
+use HXPHP\System\Configs as Configs;
+
+class EnvironmentProduction extends Configs\AbstractEnvironment
 {
 	
 }

@@ -1,6 +1,6 @@
 <?php
 
-namespace HXPHP\System\Configs\Environments;
+namespace HXPHP\System\Configs;
 
 use HXPHP\System\Configs\Modules as Modules;
 

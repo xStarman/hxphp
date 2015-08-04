@@ -1,8 +1,10 @@
 <?php
 
-namespace HXPHP\System\Configs\Environments;
+namespace HXPHP\System\Configs\Environments;;
 
-class EnvironmentTests extends AbstractEnvironment
+use HXPHP\System\Configs as Configs;
+
+class EnvironmentTests extends Configs\AbstractEnvironment
 {
 	
 }
