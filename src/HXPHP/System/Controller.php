@@ -43,7 +43,7 @@ class Controller
 	{
 		//Instância dos objetos injetados
 		$this->request = new Http\Request;
-		$this->view    = new View;
+		$this->view    = new View(new Configs\Config, $this->request->controller, $this->request->action);
 
 		return $this;
 	}
