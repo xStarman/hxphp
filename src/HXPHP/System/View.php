@@ -26,6 +26,7 @@ class View
 	protected $file;
 	protected $footer;
 	protected $vars = array();
+	protected $assets = array();
 
 	public function __construct(Configs\Config $configs, $controller, $action)
 	{
@@ -137,6 +138,23 @@ class View
 	public function setVar($name, $value)
 	{
 		$this->vars[$name] = $value;
+		return $this;
+	}
+
+	/**
+	 * Define os arquivos customizáveis que serão utilizados
+	 * @param string  $type  Tipo do arquivo
+	 * @param string|array  $assets  Arquivo Único | Array com os arquivos
+	 */
+	public function setAssets($type, $assets)
+	{
+		if (is_array($assets)) {
+			$this->assets[$type] = array_merge($this->assets[$type], $assets);
+		} 
+		else {
+			$this->assets[$type] = array_push($this->assets[$type], $assets);
+		}
+		 
 		return $this;
 	}
 
