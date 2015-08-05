@@ -55,6 +55,7 @@ class View
 	public function setTitle($title)
 	{
 		$this->title = $title;
+		return $this;
 	}
 
 	/**
@@ -64,6 +65,7 @@ class View
 	public function setPath($path)
 	{
 		$this->path = $path;
+		return $this;
 	}
 
 	/**
@@ -73,6 +75,7 @@ class View
 	public function setTemplate($template)
 	{
 		$this->template = $template;
+		return $this;
 	}
 
 
@@ -83,6 +86,7 @@ class View
 	public function setHeader($header)
 	{
 		$this->header = $header;
+		return $this;
 	}
 
 	/**
@@ -92,6 +96,7 @@ class View
 	public function setFile($file)
 	{
 		$this->file = $file;
+		return $this;
 	}
 
 	/**
@@ -101,6 +106,7 @@ class View
 	public function setFooter($footer)
 	{
 		$this->footer = $footer;
+		return $this;
 	}
 
 	/**
