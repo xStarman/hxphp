@@ -24,12 +24,6 @@ class Controller
 	private $response;
 
 	/**
-	 * Injeção da View
-	 * @var object
-	 */
-	public $view;
-
-	/**
 	 * Configurações genéricas para todas as actions
 	 * @var array
 	 */
@@ -43,7 +37,6 @@ class Controller
 	{
 		//Instância dos objetos injetados
 		$this->request = new Http\Request;
-		$this->view    = new View(new Configs\Config, $this->request->controller, $this->request->action);
 
 		return $this;
 	}

@@ -77,7 +77,6 @@ class App
 
 		//Instância do Controller
 		$app = new $this->request->controller($this->configs);
-		$app->setConfigs($this->configs);
 		
 		//Verifica se a Action requisitada não existe
 		if ( ! method_exists($app, $this->request->action))
@@ -85,5 +84,10 @@ class App
 
 		//Atribuição de parâmetros
 		call_user_func_array(array(&$app, $this->request->action), $this->request->params);
+
+		$app->view = new View( $this->configs,
+							   $this->request->controller,
+							   $this->request->action );
+
 	}
 }
