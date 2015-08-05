@@ -4,18 +4,28 @@ namespace HXPHP\System;
 
 class View
 {
+	/**
+	 * Título da página
+	 * @var string
+	 */
 	public $title;
 
+	/**
+	 * Injeção das Configurações
+	 * @var object
+	 */
 	private $configs;
 
+	/**
+	 * Parâmetros de configuração da VIEW
+	 * @var string
+	 */
 	protected $path;
 	protected $template;
 	protected $header;
 	protected $file;
 	protected $footer;
 	protected $vars = array();
-	
-	
 
 	public function __construct(Configs\Config $configs, $controller, $action)
 	{
