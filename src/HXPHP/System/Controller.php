@@ -24,6 +24,12 @@ class Controller
 	private $response;
 
 	/**
+	 * Injeção da View
+	 * @var object
+	 */
+	public $view;
+
+	/**
 	 * Configurações genéricas para todas as actions
 	 * @var array
 	 */
@@ -41,9 +47,10 @@ class Controller
 		return $this;
 	}
 
-	public function setConfigs(Configs\Config $configs)
+	public function setView(View $view)
 	{
-		$this->configs = $configs;
+		$this->view = $view;
+		return $this;
 	}
 
 	/**
@@ -52,7 +59,6 @@ class Controller
 	public function indexAction()
     {
     	$this->view->setTitle('Seja bem vindo');
-        $this->view->flush('Index');
     }
 
 	/**

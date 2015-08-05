@@ -76,18 +76,20 @@ class App
 		}
 
 		//Instância do Controller
-		$app = new $this->request->controller($this->configs);
+		$app = new $this->request->controller();
 		
 		//Verifica se a Action requisitada não existe
 		if ( ! method_exists($app, $this->request->action))
 			$this->request->action = 'indexAction';
 
+		$app->setView(new View( $this->configs,
+							   $this->request->controller,
+							   $this->request->action ));
+
 		//Atribuição de parâmetros
 		call_user_func_array(array(&$app, $this->request->action), $this->request->params);
 
-		$app->view = new View( $this->configs,
-							   $this->request->controller,
-							   $this->request->action );
+		$app->view->flush();
 
 	}
 }
