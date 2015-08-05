@@ -10,9 +10,10 @@ class View
 
 	protected $path;
 	protected $header;
+	protected $file;
 	protected $footer;
 	protected $vars = array();
-	protected $file;
+	
 	
 
 	public function __construct(Configs\Config $configs, $controller, $action)
@@ -22,11 +23,33 @@ class View
 
 		$action = ($controller == $configs->controllers->notFound
 					 ? 'indexAction' : $action);
+		$action = str_replace('Action', '', $action);
 
-		$this->path = $controller;
-		$this->header = 'Header';
-		$this->footer = 'Footer';
-		$this->file = str_replace('Action', '', $action);
+		$this->setPath($controller);
+		$this->setHeader('Header');
+		$this->setFile($action);
+		$this->setFooter('Footer');
+		
+	}
+
+	public function setPath($path)
+	{
+		$this->path = $path;
+	}
+
+	public function setHeader($header)
+	{
+		$this->header = $header;
+	}
+
+	public function setFile($file)
+	{
+		$this->file = $file;
+	}
+
+	public function setFooter($footer)
+	{
+		$this->footer = $footer;
 	}
 
 
