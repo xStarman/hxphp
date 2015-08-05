@@ -4,11 +4,21 @@ namespace HXPHP\System;
 
 class View
 {
-	/**
-	 * Parâmetros globais da VIEW
-	 * @var array
-	 */
-	public $config = array();
+	private $title;
+	private $controller;
+	private $action;
+	protected $path;
+	protected $file;
+	protected $vars;
+	protected $header;
+	protected $footer;
+
+	public function __construct()
+	{
+		$this->title = 'HXPHP Framework';
+
+	}
+
 
 	/**
 	 * Define o título da página
@@ -17,7 +27,7 @@ class View
 	 */
 	public function setTitle($title)
 	{
-		$this->config['title'] = $title;
+		$this->title = $title;
 	}
 
 	/**
