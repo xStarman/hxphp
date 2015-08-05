@@ -120,7 +120,7 @@ class Controller
 		//Configuração dos parâmetros que serão passados para a VIEW
 		$data = ! is_array($data) ? array() : $data;
 		$this->view->setTitle($this->configs->title);
-		$data = array_merge($this->data, $this->view->config, $data);
+		$data = array_merge($this->data, $data);
 
 		//Extract que transforma os parâmetros em variáveis disponíveis para a VIEW
 		if (count($data) > 0)
