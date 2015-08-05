@@ -18,49 +18,77 @@ class View
 
 	public function __construct(Configs\Config $configs, $controller, $action)
 	{
-		$this->title = 'HXPHP Framework';
+		/**
+		 * Injeção das Configurações
+		 * @var object
+		 */
 		$this->configs = $configs;
 
+		/**
+		 * Tratamento das variáveis
+		 */
+		$controller = strtolower(str_replace('Controller', '', $controller));
 		$action = ($controller == $configs->controllers->notFound
 					 ? 'indexAction' : $action);
 		$action = str_replace('Action', '', $action);
 
+		/**
+		 * Definindo estrutura padrão
+		 */
 		$this->setPath($controller);
 		$this->setHeader('Header');
 		$this->setFile($action);
 		$this->setFooter('Footer');
-		
+
+		/**
+		 * Definindo dados 
+		 */
+		$this->setTitle('HXPHP Framework');
 	}
 
+	/**
+	 * Define o título da página
+	 * @param string  $title  Título da página
+	 */
+	public function setTitle($title)
+	{
+		$this->title = $title;
+	}
+
+	/**
+	 * Define a pasta da view
+	 * @param string  $path  Caminho da View
+	 */
 	public function setPath($path)
 	{
 		$this->path = $path;
 	}
 
+	/**
+	 * Define o cabeçalho da view
+	 * @param string  $header  Cabeçalho da View
+	 */
 	public function setHeader($header)
 	{
 		$this->header = $header;
 	}
 
+	/**
+	 * Define o arquivo da view
+	 * @param string  $file  Arquivo da View
+	 */
 	public function setFile($file)
 	{
 		$this->file = $file;
 	}
 
+	/**
+	 * Define o rodapé da view
+	 * @param string  $footer  Rodapé da View
+	 */
 	public function setFooter($footer)
 	{
 		$this->footer = $footer;
-	}
-
-
-	/**
-	 * Define o título da página
-	 * @param string  $title     Título da página
-	 * @param boolean $exclusive Define se o título será concatenado ou exclusivo
-	 */
-	public function setTitle($title)
-	{
-		$this->title = $title;
 	}
 
 	/**
