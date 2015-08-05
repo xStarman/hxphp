@@ -26,7 +26,10 @@ class View
 	protected $file;
 	protected $footer;
 	protected $vars = array();
-	protected $assets = array();
+	protected $assets = array(
+		'css' => array(),
+		'js' => array()
+	);
 
 	public function __construct(Configs\Config $configs, $controller, $action)
 	{
@@ -56,7 +59,7 @@ class View
 		/**
 		 * Definindo dados 
 		 */
-		$this->setTitle('HXPHP Framework');
+		$this->setTitle($this->configs->title);
 	}
 
 	/**
@@ -164,7 +167,7 @@ class View
 	 * @param  array  $custom_assets Links dos arquivos que serão incluídos
 	 * @return string                HTML formatado de acordo com o tipo de arquivo
 	 */
-	public function assets($type, array $custom_assets = array())
+	private function assets($type, array $custom_assets = array())
 	{
 		$add_assets = '';
 
@@ -183,5 +186,66 @@ class View
 				$add_assets .= sprintf($tag,$file);
 
 		return $add_assets;
+	}
+
+	/**
+	 * Renderiza a VIEW
+	 * @param  string  $view  Nome do arquivo, sem extensão, a ser utilizado como VIEW
+	 */
+	public function flush()
+	{
+
+		$default_data = array(
+			'title' => $this->title
+		);
+
+		$data = array_merge($default_data, $this->vars);
+
+		
+		//Extract que transforma os parâmetros em variáveis disponíveis para a VIEW
+		extract($data, EXTR_PREFIX_ALL, 'view');
+
+		//Inclusão de ASSETS
+		$add_css = $this->assets('css', $this->assets['css']);
+		$add_js  = $this->assets('js', $this->assets['js']);
+
+		//Variáveis
+		$baseURI  = $this->configs->baseURI;
+		$viewsDir = $this->configs->views->directory;
+		$viewsExt = $this->configs->views->extension;
+
+		//Atribuição das constantes
+		define('BASE',   $baseURI);
+		define('ASSETS', $baseURI . 'public/assets/');
+		define('IMG',    $baseURI . 'public/img/');
+		define('CSS',    $baseURI . 'public/css/');
+		define('JS',     $baseURI . 'public/js/');
+
+		//Verifica a existência da VIEW
+		$view = $viewsDir . $this->path . DS . $this->file . $viewsExt;
+
+		if ( ! file_exists($view))
+			throw new \Exception("Erro fatal: A view <'$view'> não foi encontrada. Por favor, crie a view e tente novamente.", 1);
+
+		//Mecanismo de template
+		if ($this->template === false) {
+			//Inclusão da view
+			require_once($view);
+			exit();
+		}
+
+		//Verifica a existência do Header e Footer customizado
+		$header = $viewsDir . $this->header . $viewsExt;
+		$footer = $viewsDir . $this->footer . $viewsExt;
+
+		if ( ! file_exists($header) || ! file_exists($footer))
+			throw new \Exception("Erro fatal: O header <$header> ou o footer <$footer> não existe. Por favor, verifique e tente novamente.");
+
+		//Inclusão dos arquivos
+		require_once($header);
+		require_once($view);
+		require_once($footer);
+
+		exit();
 	}
 }
