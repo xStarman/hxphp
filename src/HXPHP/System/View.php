@@ -37,7 +37,7 @@ class View
 		 * Definindo estrutura padrão
 		 */
 		$this->setPath($controller);
-		$this->setTemplate(false);
+		$this->setTemplate(true);
 		$this->setHeader('Header');
 		$this->setFile($action);
 		$this->setFooter('Footer');
@@ -106,6 +106,27 @@ class View
 	public function setFooter($footer)
 	{
 		$this->footer = $footer;
+		return $this;
+	}
+
+	/**
+	 * Define um conjunto de variáveis para a VIEW
+	 * @param array  $vars  Array com variáveis
+	 */
+	public function setVars(array $vars)
+	{
+		$this->vars = array_push($this->vars, $vars);
+		return $this;
+	}
+
+	/**
+	 * Define uma variável única para a VIEW
+	 * @param string  $name  Nome do índice
+	 * @param string  $value  Valor
+	 */
+	public function setVar($name, $value)
+	{
+		$this->vars[$name] = $value;
 		return $this;
 	}
 
