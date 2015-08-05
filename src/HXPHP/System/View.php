@@ -129,7 +129,7 @@ class View
 	 */
 	public function setVars(array $vars)
 	{
-		$this->vars = array_push($this->vars, $vars);
+		array_push($this->vars, $vars);
 		return $this;
 	}
 
@@ -155,7 +155,7 @@ class View
 			$this->assets[$type] = array_merge($this->assets[$type], $assets);
 		} 
 		else {
-			$this->assets[$type] = array_push($this->assets[$type], $assets);
+			array_push($this->assets[$type], $assets);
 		}
 		 
 		return $this;
@@ -167,6 +167,7 @@ class View
 	 * @param  array  $custom_assets Links dos arquivos que serão incluídos
 	 * @return string                HTML formatado de acordo com o tipo de arquivo
 	 */
+
 	private function assets($type, array $custom_assets = array())
 	{
 		$add_assets = '';
@@ -206,6 +207,7 @@ class View
 		extract($data, EXTR_PREFIX_ALL, 'view');
 
 		//Inclusão de ASSETS
+
 		$add_css = $this->assets('css', $this->assets['css']);
 		$add_js  = $this->assets('js', $this->assets['js']);
 

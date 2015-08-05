@@ -82,13 +82,21 @@ class App
 		if ( ! method_exists($app, $this->request->action))
 			$this->request->action = 'indexAction';
 
+		/**
+		 * Adiciona a View ao Controller
+		 */
 		$app->setView(new View( $this->configs,
 							   $this->request->controller,
 							   $this->request->action ));
 
-		//Atribuição de parâmetros
+		/**
+		 * Atribuição de parâmetros
+		 */
 		call_user_func_array(array(&$app, $this->request->action), $this->request->params);
 
+		/**
+		 * Renderização da VIEW
+		 */
 		$app->view->flush();
 
 	}
