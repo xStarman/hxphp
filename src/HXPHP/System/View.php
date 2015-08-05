@@ -9,6 +9,7 @@ class View
 	private $configs;
 
 	protected $path;
+	protected $template;
 	protected $header;
 	protected $file;
 	protected $footer;
@@ -36,6 +37,7 @@ class View
 		 * Definindo estrutura padrão
 		 */
 		$this->setPath($controller);
+		$this->setTemplate(false);
 		$this->setHeader('Header');
 		$this->setFile($action);
 		$this->setFooter('Footer');
@@ -63,6 +65,16 @@ class View
 	{
 		$this->path = $path;
 	}
+
+	/**
+	 * Define se o arquivo é miolo (Inclusão de Cabeçalho e Rodapé) ou único
+	 * @param bool  $template  Template ON/OFF
+	 */
+	public function setTemplate($template)
+	{
+		$this->template = $template;
+	}
+
 
 	/**
 	 * Define o cabeçalho da view
