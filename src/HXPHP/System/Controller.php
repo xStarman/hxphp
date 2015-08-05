@@ -117,6 +117,9 @@ class Controller
 	 */
 	protected function render($view, $data = array(),$template = true, $custom_header = '', $custom_footer = '', array $custom_css = array(), array $custom_js = array())
 	{
+
+		$data['title'] = $this->view->title;
+		
 		//Configuração dos parâmetros que serão passados para a VIEW
 		$data = ! is_array($data) ? array() : $data;
 		$this->view->setTitle($this->configs->title);

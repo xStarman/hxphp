@@ -4,7 +4,7 @@ namespace HXPHP\System;
 
 class View
 {
-	private $title;
+	public $title;
 
 	private $configs;
 	private $controller;
