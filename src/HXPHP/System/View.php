@@ -7,8 +7,6 @@ class View
 	public $title;
 
 	private $configs;
-	private $controller;
-	private $action;
 
 	protected $path;
 	protected $header;
@@ -20,13 +18,10 @@ class View
 	public function __construct(Configs\Config $configs, $controller, $action)
 	{
 		$this->title = 'HXPHP Framework';
-
 		$this->configs = $configs;
-		$this->controller = $controller;
 
 		$action = ($controller == $configs->controllers->notFound
 					 ? 'indexAction' : $action);
-		$this->action = $action;
 
 		$this->path = $controller;
 		$this->header = 'Header';
