@@ -5,18 +5,33 @@ namespace HXPHP\System;
 class View
 {
 	private $title;
+
+	private $configs;
 	private $controller;
 	private $action;
+
 	protected $path;
-	protected $file;
-	protected $vars;
 	protected $header;
 	protected $footer;
+	protected $vars = array();
+	protected $file;
+	
 
-	public function __construct()
+	public function __construct(Configs\Config $configs, $controller, $action)
 	{
 		$this->title = 'HXPHP Framework';
 
+		$this->configs = $configs;
+		$this->controller = $controller;
+
+		$action = ($controller == $configs->controllers->notFound
+					 ? 'indexAction' : $action);
+		$this->action = $action;
+
+		$this->path = $controller;
+		$this->header = 'Header';
+		$this->footer = 'Footer';
+		$this->file = str_replace('Action', '', $action);
 	}
 
 
