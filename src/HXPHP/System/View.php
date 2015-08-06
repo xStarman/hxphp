@@ -201,8 +201,6 @@ class View
 		);
 
 		$data = array_merge($default_data, $this->vars);
-
-		var_dump($data);
 		
 		//Extract que transforma os parâmetros em variáveis disponíveis para a VIEW
 		extract($data, EXTR_PREFIX_ALL, 'view');
