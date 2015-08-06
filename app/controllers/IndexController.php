@@ -27,4 +27,15 @@ class IndexController extends \HXPHP\System\Controller
 					   ->setTitle('Oops! Nada encontrado!');
 		*/
 	}
+	public function testeAction()
+	{
+		$this->view->setFile('index');
+
+		/**
+		 * Carrega o módulo de mensagens com o template auth.json
+		 */
+		$this->load('Modules\Messages', array(
+			'auth'
+		));
+	}
 }

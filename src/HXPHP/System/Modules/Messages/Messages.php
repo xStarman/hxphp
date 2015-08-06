@@ -28,13 +28,14 @@ class Messages
 		 * Recebe o conteúdo JSON do template definido
 		 * @var LoadTemplate
 		 */
-		$json = new LoadTemplate($template);
+		$load = new LoadTemplate($template);
 
 		/**
 		 * JSON => ARRAY
 		 * @var array
 		 */
-		$content = json_decode($json,true);
+		if($load->getJson() !== false)
+			$content = json_decode($load->getJson(), true);
 
 		$this->messages = isset($content['messages']) ? $content['messages'] : null;
 		$this->alerts   = isset($content['alerts']) ? $content['alerts'] : null;

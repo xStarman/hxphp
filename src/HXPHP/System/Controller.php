@@ -68,6 +68,11 @@ class Controller
 	 */
 	public function load($object, array $params = array(), $suffix = false)
 	{
+		/**
+		 * Tratamento que adiciona a pasta do módulo
+		 */
+		$explode = explode('\\', $object);
+		$object = ($explode[0] === 'Modules' ? $object . '\\' . end($explode) : $object);
 		$object = 'HXPHP\System\\' . $object;
 
 		if (class_exists($object)) {
@@ -90,6 +95,7 @@ class Controller
 					$name
 				);
 			}
+
 			if ( ! empty($params)) {
 				$ref = new \ReflectionClass($object);
   				$this->$name = $ref->newInstanceArgs($params);
