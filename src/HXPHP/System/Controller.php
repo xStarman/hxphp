@@ -29,12 +29,6 @@ class Controller
 	 */
 	public $view;
 
-	/**
-	 * Configurações genéricas para todas as actions
-	 * @var array
-	 */
-	public $data = array();
-
 
 	/**
 	 * Método Construtor
@@ -47,6 +41,10 @@ class Controller
 		return $this;
 	}
 
+	/**
+	 * Injeção da VIEW
+	 * @param View $view View atual
+	 */
 	public function setView(View $view)
 	{
 		$this->view = $view;
@@ -58,7 +56,7 @@ class Controller
 	 */
 	public function indexAction()
     {
-    	$this->view->setTitle('Seja bem vindo');
+    	
     }
 
 	/**
