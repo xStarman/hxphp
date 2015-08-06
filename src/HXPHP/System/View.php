@@ -129,7 +129,7 @@ class View
 	 */
 	public function setVars(array $vars)
 	{
-		array_push($this->vars, $vars);
+		$this->vars = array_merge($this->vars, $vars);
 		return $this;
 	}
 
@@ -202,6 +202,7 @@ class View
 
 		$data = array_merge($default_data, $this->vars);
 
+		var_dump($data);
 		
 		//Extract que transforma os parâmetros em variáveis disponíveis para a VIEW
 		extract($data, EXTR_PREFIX_ALL, 'view');
