@@ -2,8 +2,6 @@
 
 namespace HXPHP\System\Modules\Messages;
 
-use HXPHP\System\Services as Services;
-
 class Messages
 {
 	/**
@@ -22,20 +20,20 @@ class Messages
 	 * Método construtor
 	 * @param string $template Nome do arquivo que encontra-se na sub-pasta 'templates'
 	 */
-	public function __construct($template)
+	public function __construct($file)
 	{
 		/**
 		 * Recebe o conteúdo JSON do template definido
 		 * @var LoadTemplate
 		 */
-		$load = new LoadTemplate($template);
+		$template = new LoadTemplate($file);
 
 		/**
 		 * JSON => ARRAY
 		 * @var array
 		 */
-		if($load->getJson() !== false)
-			$content = json_decode($load->getJson(), true);
+		if($template->getJson() !== false)
+			$content = json_decode($template->getJson(), true);
 
 		$this->messages = isset($content['messages']) ? $content['messages'] : null;
 		$this->alerts   = isset($content['alerts']) ? $content['alerts'] : null;

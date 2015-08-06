@@ -76,7 +76,6 @@ class Controller
 		$object = 'HXPHP\System\\' . $object;
 
 		if (class_exists($object)) {
-			$explode = explode('\\', $object);
 			$name = end($explode);
 			$name = strtolower(Tools::filteredName($name));
 

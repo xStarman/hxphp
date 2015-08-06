@@ -1,6 +1,7 @@
 <?php
 
 namespace HXPHP\System;
+
 use HXPHP\System\Http as Http;
 
 class App

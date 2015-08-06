@@ -37,5 +37,7 @@ class IndexController extends \HXPHP\System\Controller
 		$this->load('Modules\Messages', array(
 			'auth'
 		));
+		
+		var_dump($this->messages->getAlert('conta-em-uso'));
 	}
 }
