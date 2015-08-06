@@ -24,17 +24,16 @@ class Messages
 	 */
 	public function __construct($template)
 	{
-		//Decodifica o template
-		$template = dirname(__FILE__) . DS . 'templates' . DS . $template . '.json';
+		/**
+		 * Recebe o conteúdo JSON do template definido
+		 * @var LoadTemplate
+		 */
+		$json = new LoadTemplate($template);
 
-		if ( ! file_exists($template))
-			throw new \Exception("O template para a mensagem nao foi localizado: $template", 1);
-
-		$json  = file_get_contents($template);
-
-		if(empty($json))
-			return false;
-
+		/**
+		 * JSON => ARRAY
+		 * @var array
+		 */
 		$content = json_decode($json,true);
 
 		$this->messages = isset($content['messages']) ? $content['messages'] : null;
