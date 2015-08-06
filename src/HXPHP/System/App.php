@@ -59,40 +59,48 @@ class App
 	{
 
 		/**
+		 * Variáveis
+		 */
+		$controller = $this->request->controller;
+		$action = $this->request->action;
+		$controllersDir = $this->configs->controllers->directory;
+		$notFoundController = $this->configs->controllers->notFound;
+
+		/**
 		 * Caminho do controller
 		 * @var string
 		 */
-		$controller = $this->configs->controllers->directory . $this->request->controller.'.php';
+		$controllerFile = $controllersDir . $controller . '.php';
 
-		if ( ! file_exists($controller))
-			$controller = $this->configs->controllers->directory . $this->configs->controllers->notFound . '.php';
+		if ( ! file_exists($controllerFile))
+			$controllerFile = $controllersDir . $notFoundController . '.php';
 		
 		//Inclusão do Controller
-		require_once($controller);
+		require_once($controllerFile);
 
 		//Verifica se a classe correspondente ao Controller existe
-		if ( ! class_exists($this->request->controller)) {
-			$this->request->controller = $this->configs->controllers->notFound;
+		if ( ! class_exists($controller)) {
+			$controller = $notFoundController;
 		}
 
 		//Instância do Controller
-		$app = new $this->request->controller();
+		$app = new $controller();
 		
 		//Verifica se a Action requisitada não existe
-		if ( ! method_exists($app, $this->request->action))
-			$this->request->action = 'indexAction';
+		if ( ! method_exists($app, $action))
+			$action = 'indexAction';
 
 		/**
 		 * Adiciona a View ao Controller
 		 */
 		$app->setView(new View( $this->configs,
-							   $this->request->controller,
-							   $this->request->action ));
+							    $controller,
+							    $action ));
 
 		/**
 		 * Atribuição de parâmetros
 		 */
-		call_user_func_array(array(&$app, $this->request->action), $this->request->params);
+		call_user_func_array(array(&$app, $action), $this->request->params);
 
 		/**
 		 * Renderização da VIEW
