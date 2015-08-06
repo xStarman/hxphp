@@ -4,7 +4,8 @@ namespace HXPHP\System\Modules\Messages;
 
 use HXPHP\System\Services as Services;
 
-class Messages{
+class Messages
+{
 	/**
 	 * Objeto com as mensagens do template selecionado
 	 * @var object
