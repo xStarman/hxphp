@@ -32,6 +32,11 @@ class Messages
 		return $this;
 	}
 
+	/**
+	 * Retorna o ARRAY com o grupo de mensagens de acordo com o bloco
+	 * @param  string $param Nome do bloco
+	 * @return array         Conteúdo do bloco
+	 */
 	public function __get($param)
 	{
 		return isset($this->content[$param]) ? $this->content[$param] : false;
