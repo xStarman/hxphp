@@ -4,7 +4,17 @@ namespace HXPHP\System\Modules\Messages;
 
 class LoadTemplate
 {
-	public $json;
+	/**
+	 * JSON do template
+	 * @var json
+	 */
+	private $json;
+
+	/**
+	 * Caminho do template
+	 * @var string
+	 */
+	public $file = null;
 
 	/**
 	 * Método responsável pela leitura do arquivo JSON
@@ -21,6 +31,7 @@ class LoadTemplate
 		if ( ! file_exists($template))
 			throw new \Exception("O template nao foi localizado: <'$template'>", 1);
 
+		$this->file  = $template;
 		$this->json  = file_get_contents($template);
 	}
 
@@ -31,5 +42,14 @@ class LoadTemplate
 	public function getJson()
 	{
 		return empty($this->json) ? false : $this->json;
+	}
+
+	/**
+	 * Retorna o caminho do template
+	 * @return string
+	 */
+	public function getTemplatePath()
+	{
+		return $this->file;
 	}
 }

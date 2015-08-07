@@ -9,6 +9,12 @@ class Messages
 	 * @var array
 	 */
 	private $content;
+
+	/**
+	 * Caminho do arquivo
+	 * @var string
+	 */
+	private $file;
 	
 	/**
 	 * Método construtor
@@ -21,6 +27,7 @@ class Messages
 		 * @var LoadTemplate
 		 */
 		$template = new LoadTemplate($file);
+		$this->file = $template->getTemplatePath();
 
 		/**
 		 * JSON => ARRAY
@@ -39,7 +46,13 @@ class Messages
 	 */
 	public function __get($param)
 	{
-		return isset($this->content[$param]) ? $this->content[$param] : false;
+		if(isset($this->content[$param])) {
+			$this->$param = new Template($this->content[$param]);
+
+			return $this->$param;
+		}
+
+		throw new \Exception("O bloco <'$param'> nao foi encontrado no template <'$this->file'>.", 1);
 	}
 
 	/**
