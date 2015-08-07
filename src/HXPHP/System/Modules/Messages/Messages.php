@@ -5,16 +5,10 @@ namespace HXPHP\System\Modules\Messages;
 class Messages
 {
 	/**
-	 * Objeto com as mensagens do template selecionado
-	 * @var object
+	 * Contém o conteúdo do template JSON
+	 * @var array
 	 */
-	public $messages;
-
-	/**
-	 * Objeto com os alertas do template selecionado
-	 * @var object
-	 */
-	public $alerts;
+	private $content;
 	
 	/**
 	 * Método construtor
@@ -33,12 +27,14 @@ class Messages
 		 * @var array
 		 */
 		if($template->getJson() !== false)
-			$content = json_decode($template->getJson(), true);
-
-		$this->messages = isset($content['messages']) ? $content['messages'] : null;
-		$this->alerts   = isset($content['alerts']) ? $content['alerts'] : null;
+			$this->content = json_decode($template->getJson(), true);
 
 		return $this;
+	}
+
+	public function __get($param)
+	{
+		return isset($this->content[$param]) ? $this->content[$param] : false;
 	}
 
 	/**
@@ -55,7 +51,7 @@ class Messages
 			if ( ! empty($params) )
 				$alert['message'] = vsprintf($alert['message'], $params);
 
-			return array_values($alert);
+			return array_values($alert); //RETORNO DIFERENTE
 		}
 		return null;
 	}
@@ -74,7 +70,7 @@ class Messages
 			if ( ! empty($params) )
 				$message['message'] = vsprintf($message['message'], $params);
 
-			return $message;
+			return $message; //RETORNO DIFERENTE
 		}
 		return null;
 	}

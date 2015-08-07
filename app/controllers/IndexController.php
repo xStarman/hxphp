@@ -38,6 +38,6 @@ class IndexController extends \HXPHP\System\Controller
 			'auth'
 		));
 		
-		var_dump($this->messages->getAlert('conta-em-uso'));
+		var_dump($this->messages->alerts);
 	}
 }
