@@ -39,8 +39,7 @@ class IndexController extends \HXPHP\System\Controller
 
 		$alert = $this->messages->alerts->getByCode('conta-em-uso');
 		$message = $this->messages->messages->getByCode('usuario-bloqueado');
-
-		var_dump($alert);
-		var_dump($message);
+		
+		$this->load('Helpers\AlertHelper', array($alert));
 	}
 }

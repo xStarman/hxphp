@@ -68,8 +68,8 @@ class Controller
 	 */
 	public function load($object, $params = array(), $suffix = false)
 	{
-		$params = !is_array($params) ? array($params) : '';
-		
+		$params = array($params);
+
 		/**
 		 * Tratamento que adiciona a pasta do módulo
 		 */
