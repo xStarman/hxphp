@@ -25,7 +25,10 @@ class AlertHelper
 	 */
 	public function __construct(array $alert)
 	{
-		//Instância dos objetos injetados
+		//Remoção dos índices associativos
+		$alert = array_values($alert);
+
+		//Injeção da Sessão
 		$this->storage = new Storage\Session;
 
 		if (count($alert) == 1)
