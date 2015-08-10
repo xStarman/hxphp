@@ -62,12 +62,14 @@ class Controller
 	/**
 	 * Carrega serviços, módulos e helpers
 	 * @param  string $object Nome da classe
-	 * @param  array  $params Parâmetros do método construtor
+	 * @param  string|array  $params Parâmetros do método construtor
 	 * @param  bool   $suffix Define se o sufixo será incluso na injeção
 	 * @return object         Objeto injetado
 	 */
-	public function load($object, array $params = array(), $suffix = false)
+	public function load($object, $params = array(), $suffix = false)
 	{
+		$params = !is_array($params) ? array($params) : '';
+		
 		/**
 		 * Tratamento que adiciona a pasta do módulo
 		 */

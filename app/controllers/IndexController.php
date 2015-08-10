@@ -34,9 +34,7 @@ class IndexController extends \HXPHP\System\Controller
 		/**
 		 * Carrega o módulo de mensagens com o template auth.json
 		 */
-		$this->load('Modules\Messages', array(
-			'auth'
-		));
+		$this->load('Modules\Messages', 'auth');
 		
 
 		$alert = $this->messages->alerts->getByCode('conta-em-uso', array(
