@@ -14,14 +14,26 @@ class Template
 	{
 		$this->content = $content;
 	}
-
-	public function getByCode($code, $params = array(), $field = 'messages')
+	
+	/**
+	 * Retorna o conteúdo do template mediante o código informado com os parâmetros substituído 
+	 * @param  string $code   Código do template
+	 * @param  array  $fields Fields e seus parâmetros para substituição
+	 * @return array
+	 */
+	public function getByCode($code, array $fields = array())
 	{
 		if (isset($this->content[$code])){
 			$output = $this->content[$code];
 
-			if ( ! empty($params) )
-				$output[$field] = vsprintf($output[$field], $params);
+			if ( ! empty($fields) ) {
+				foreach ($fields as $field => $params) {
+					if ( ! isset($output[$field]) || empty($params))
+						continue;
+
+					$output[$field] = vsprintf($output[$field], $params);
+				}
+			}
 
 			return $output;
 		}

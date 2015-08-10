@@ -38,8 +38,13 @@ class IndexController extends \HXPHP\System\Controller
 			'auth'
 		));
 		
-		var_dump($this->messages->messages);
 
-		// $this->messages->alerts->getByCode($code, $params);
+		$alert = $this->messages->alerts->getByCode('conta-em-uso', array(
+			'title' => array(
+				
+			)
+		));
+
+		var_dump($alert);
 	}
 }
