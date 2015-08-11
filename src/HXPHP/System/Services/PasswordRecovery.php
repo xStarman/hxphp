@@ -2,7 +2,7 @@
 
 namespace HXPHP\System\Services;
 
-use HXPHP\System\Modules as Modules;
+use HXPHP\System\Modules\Messages\Messages;
 
 class PasswordRecovery
 {
@@ -36,7 +36,7 @@ class PasswordRecovery
 	 */
 	public function __construct()
 	{
-		$this->messages = new Modules\Messages('password-recovery');
+		$this->messages = new Messages('password-recovery');
 
 		return $this;
 	}
@@ -82,24 +82,5 @@ class PasswordRecovery
 		}
 
 		return $this->getMessage('email-nao-enviado');
-	}
-
-	/**
-	 * Retorna mensagens
-	 */
-	public function getMessage()
-	{
-		$total_args = func_num_args();
-
-		if ($total_args == 0)
-			return false;
-
-		$args = func_get_args();
-		$code = $args[0];
-
-		unset($args[0]);
-		$params = empty($args) ? array() : array_values($args);
-
-		return $this->messages->getAlert($code, $params);
 	}
 }

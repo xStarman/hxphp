@@ -4,7 +4,7 @@ namespace HXPHP\System\Services;
 
 use HXPHP\System\Storage as Storage;
 use HXPHP\System\Http as Http;
-use HXPHP\System\Modules as Modules;
+use HXPHP\System\Modules\Messages\Messages;
 
 
 class Auth
@@ -26,7 +26,7 @@ class Auth
 	 * Injeção do módulo de Mensagens
 	 * @var object
 	 */
-	private $messages;
+	public $messages;
 
 	/**
 	 * Método construtor
@@ -36,7 +36,7 @@ class Auth
 		//Instância dos objetos injetados
 		$this->response = new Http\Response;
 		$this->storage  = new Storage\Session;
-		$this->messages = new Modules\Messages('auth');
+		$this->messages = new Messages('auth');
 
 		return $this;
 	}
@@ -101,24 +101,5 @@ class Auth
 	public function getUserId()
 	{
 		return $this->storage->get('user_id');
-	}
-
-	/**
-	 * Retorna mensagens
-	 */
-	public function getMessage()
-	{
-		$total_args = func_num_args();
-
-		if ($total_args == 0)
-			return false;
-
-		$args = func_get_args();
-		$code = $args[0];
-
-		unset($args[0]);
-		$params = empty($args) ? array() : array_values($args);
-
-		return $this->messages->getAlert($code, $params);
 	}
 }

@@ -31,15 +31,7 @@ class IndexController extends \HXPHP\System\Controller
 	{
 		$this->view->setFile('index');
 
-		/**
-		 * Carrega o módulo de mensagens com o template auth.json
-		 */
-		$this->load('Modules\Messages', 'auth');
-		
-		$alert = $this->messages->alerts->getByCode('conta-em-uso');
-		$message = $this->messages->messages->getByCode('usuario-bloqueado');
-
-		$this->load('Helpers\AlertHelper', $alert);
-		var_dump($this->alert);
+		$this->load('Services\Auth');
+		var_dump($this->auth->messages->alerts->getByCode('conta-em-uso'));
 	}
 }
