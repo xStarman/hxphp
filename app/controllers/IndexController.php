@@ -32,7 +32,6 @@ class IndexController extends \HXPHP\System\Controller
 		$this->view->setFile('index');
 
 		$this->load('Services\Auth');
-		$this->auth->messages->setBlock('alerts');
 
 		var_dump($this->auth->messages->getByCode('conta-em-uso', array(
 			'message' => array(

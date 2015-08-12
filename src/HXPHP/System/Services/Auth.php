@@ -37,6 +37,7 @@ class Auth
 		$this->response = new Http\Response;
 		$this->storage  = new Storage\Session;
 		$this->messages = new Messages('auth');
+		$this->messages->setBlock('alerts');
 
 		return $this;
 	}

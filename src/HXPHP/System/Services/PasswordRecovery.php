@@ -37,7 +37,8 @@ class PasswordRecovery
 	public function __construct()
 	{
 		$this->messages = new Messages('password-recovery');
-
+		$this->messages->setBlock('alerts');
+		
 		return $this;
 	}
 
