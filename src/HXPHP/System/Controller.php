@@ -65,9 +65,27 @@ class Controller
 	 * @param  string|array  $params Parâmetros do método construtor
 	 * @return object         Objeto injetado
 	 */
-	public function load($object, $params = array())
+	public function load()
 	{
-		$params = array($params);
+		$total_args = func_num_args();
+
+		if ($total_args == 0)
+			return false;
+
+		/**
+		 * Retorna todos os argumentos e define o primeiro como
+		 * o objeto que será injetado
+		 * @var array
+		 */
+		$args = func_get_args();
+		$object = $args[0];
+
+		/**
+		 * Define os demais argumentos passados como
+		 * parâmetros para o construtor do objeto injetado
+		 */
+		unset($args[0]);
+		$params = empty($args) ? array() : array_values($args);
 
 		/**
 		 * Tratamento que adiciona a pasta do módulo
