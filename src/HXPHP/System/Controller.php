@@ -70,7 +70,8 @@ class Controller
 		$total_args = func_num_args();
 
 		if ($total_args == 0)
-			return false;
+			throw new \Exception("Nenhum objeto foi definido para ser carregado.", 1);
+			
 
 		/**
 		 * Retorna todos os argumentos e define o primeiro como
