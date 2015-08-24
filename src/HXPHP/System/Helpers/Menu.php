@@ -4,7 +4,7 @@ namespace HXPHP\System\Helpers;
 
 use HXPHP\System\Storage as Storage;
 
-class MenuHelper
+class Menu
 {
 
 	/**

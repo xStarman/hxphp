@@ -63,10 +63,9 @@ class Controller
 	 * Carrega serviços, módulos e helpers
 	 * @param  string $object Nome da classe
 	 * @param  string|array  $params Parâmetros do método construtor
-	 * @param  bool   $suffix Define se o sufixo será incluso na injeção
 	 * @return object         Objeto injetado
 	 */
-	public function load($object, $params = array(), $suffix = false)
+	public function load($object, $params = array())
 	{
 		$params = array($params);
 
@@ -80,22 +79,6 @@ class Controller
 		if (class_exists($object)) {
 			$name = end($explode);
 			$name = strtolower(Tools::filteredName($name));
-
-			if ($suffix === false) {
-				$name = str_replace(
-					array(
-						'helper',
-						'module',
-						'service'
-					),
-					array(
-						'',
-						'',
-						''
-					),
-					$name
-				);
-			}
 
 			if ( ! empty($params)) {
 				$ref = new \ReflectionClass($object);
