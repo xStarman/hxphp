@@ -92,16 +92,17 @@ class App
 			$action = 'indexAction';
 
 		/**
+		 * Injeta as dependências no Controller
+		 */
+		$app->start($this->configs);
+
+		/**
 		 * Adiciona a View ao Controller
 		 */
 		$app->setView(new View( $this->configs,
 							    $controller,
 							    $action ));
 
-		/**
-		 * Injeta as dependências no Controller
-		 */
-		$app->start($this->configs);
 
 		/**
 		 * Atribuição de parâmetros

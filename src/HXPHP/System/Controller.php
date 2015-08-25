@@ -30,16 +30,6 @@ class Controller
 	public $view;
 
 	/**
-	 * Injeção da VIEW
-	 * @param View $view View atual
-	 */
-	public function setView(View $view)
-	{
-		$this->view = $view;
-		return $this;
-	}
-
-	/**
 	 * Injeta as dependências fundamentais
 	 * @param  Config $configs Objeto com as configurações da aplicação
 	 * @return object
@@ -51,6 +41,16 @@ class Controller
 		$this->response = new Http\Response;
 		$this->request  = new Http\Request($configs->baseURI);
 
+		return $this;
+	}
+
+	/**
+	 * Injeção da VIEW
+	 * @param View $view View atual
+	 */
+	public function setView(View $view)
+	{
+		$this->view = $view;
 		return $this;
 	}
 
