@@ -82,12 +82,17 @@ class Menu
 			
 		$controller = strtolower(str_replace('Controller', '', $controller));
 
+		$this->html .= '<ul>';
+
 		foreach ($this->menu as $key => $value) {
 			$explode = explode('/', $key);
 
 			$title = $explode[0];
 			$icon =  isset($explode[1]) ? $explode[1] : '';
 
+			/**
+			 * Menu com submenus
+			 */
 			if (is_array($value)) {
 				$values = array_values($value);
 				$check = explode('/', $values[0]);
@@ -99,14 +104,27 @@ class Menu
 				';
 
 				foreach($value as $titulo => $link){
-					$this->html .= '<li><a href="'.BASE.$link.'">'.$titulo.'</a></li>';
+					$this->html .= '
+						<li><a href="'.BASE.$link.'">'.$titulo.'</a></li>';
 				}
 
-				$this->html .= '</ul></li>';
-			}else{
-				$this->html .= '<li '.((strpos($value, $controller) !== false) ? 'class="active"' : '').'><a href="'.BASE.$value.'"><i class="fa fa-'.$icon.'"></i> <span>'.$title.'</span></a></li>';
+				$this->html .= '
+					  </ul>
+					</li>';
+			}
+			/**
+			 * Apenas Menu
+			 */
+			else {
+				$this->html .= '<li '.((strpos($value, $controller) !== false) ? 'class="active"' : '').'>
+									<a href="'.BASE.$value.'">
+										<i class="fa fa-'.$icon.'"></i> <span>'.$title.'</span>
+									</a>
+								</li>';
 			}
 		}
+
+		$this->html .= '</ul>';
 
 		return $this;
 	}
