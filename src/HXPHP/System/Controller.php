@@ -29,18 +29,6 @@ class Controller
 	 */
 	public $view;
 
-
-	/**
-	 * Método Construtor
-	 */
-	public function __construct()
-	{
-		//Instância dos objetos injetados
-		$this->request = new Http\Request;
-
-		return $this;
-	}
-
 	/**
 	 * Injeção da VIEW
 	 * @param View $view View atual
@@ -48,6 +36,21 @@ class Controller
 	public function setView(View $view)
 	{
 		$this->view = $view;
+		return $this;
+	}
+
+	/**
+	 * Injeta as dependências fundamentais
+	 * @param  Config $configs Objeto com as configurações da aplicação
+	 * @return object
+	 */
+	public function start(Configs\Config $configs)
+	{
+		//Injeção das dependências
+		$this->configs  = $configs;
+		$this->response = new Http\Response;
+		$this->request  = new Http\Request($configs->baseURI);
+
 		return $this;
 	}
 
@@ -136,7 +139,6 @@ class Controller
 	 */
 	public function redirectTo($url)
 	{
-		$this->response = new Http\Response;
 		return $this->response->redirectTo($url);
 	}
 }

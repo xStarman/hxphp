@@ -8,29 +8,48 @@ class Menu
 {
 
 	/**
-	 * Injeção do Storage
-	 * @var object
+	 * Menus e submenus
+	 * @var array
 	 */
-	private $storage;
+	private $menu = array();
 
-	public function __construct()
+	/**
+	 * Conteúdo HTML do menu renderizado
+	 * @var string
+	 */
+	private $html;
+
+	/**
+	 * Define o ARRAY com menus e o CONTROLLER
+	 * @param string $role Nível do usuário
+	 * @param string $controller Controller
+	 */
+	public function __construct($role, $controller)
 	{
-		//Instância dos objetos injetados
-		$this->storage = new Storage\Session;
-
-		return $this;
+		$this->setMenu($role)
+			 ->setController($controller);
+		
 	}
 
 	/**
+	 * Define o CONTROLLER
+	 * @param string $controller Controller
+	 */
+	private function setController($controller)
+	{
+		$this->controller = $controller;
+		return $this;
+	}
+	
+	/**
 	 * Define o Array com menus e submenus
 	 * @param  string $role Role do usuário
-	 * @return array  $menu Array com os menus
 	 */
-	private function menus($role)
-	{
+	private function setMenu($role)
+	{	
 		switch ($role) {
 			case 'administrator':
-				$menus = array(
+				$this->menu = array(
 					'Home/home' => 'home',
 					'Projetos/briefcase' => 'projetos/listar/',
 					'Clientes/users' => array(
@@ -42,67 +61,72 @@ class Menu
 				break;
 
 			case 'user':
-				$menus = array(
+				$this->menu = array(
 					'Home/home' => 'home',
 					'Projetos/briefcase' => 'projetos/listar/'
 				);
 				break;
-
-			default:
-				$menus = array();
-				break;
 		}
-		return $menus;
+
+		return $this;
 	}
 
 	/**
-	 * Renderiza o menu em HTML
-	 * @param  object $user       Usuário logado
-	 * @param  string $controller Controller atual
-	 * @return html
+	 * Modela o menu em HTML
+	 * @param  string $controller Controller
 	 */
-	public function setAlert($role, $controller)
+	private function setHTML($controller)
 	{
-		if (is_null($role) || is_null($controller))
-			return;
-
-		$menus = self::menus($role);
+		if (is_null($controller))
+			throw new \Exception("Informe o controller para gerar o menu.", 1);
+			
 		$controller = strtolower(str_replace('Controller', '', $controller));
-		$html = '';
 
-		foreach ($menus as $key => $value) {
-			$explode = explode('/',$key);
+		foreach ($this->menu as $key => $value) {
+			$explode = explode('/', $key);
 
 			$title = $explode[0];
-			$icon = $explode[1];
+			$icon =  isset($explode[1]) ? $explode[1] : '';
 
 			if (is_array($value)) {
 				$values = array_values($value);
-				$check = explode('/',$values[0]);
+				$check = explode('/', $values[0]);
 
-				$html .= '
+				$this->html .= '
 				    <li class="dropdown '.(($check[0] == $controller) ? 'active' : '').'">
 				      <a href="javascript:void(0);" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-'.$icon.'"></i> <span>'.$title.'</span> <i class="arrow fa fa-angle-down pull-right"></i></a>
 				      <ul class="dropdown-menu">
 				';
 
 				foreach($value as $titulo => $link){
-					$html .= '<li><a href="'.SITE.$link.'">'.$titulo.'</a></li>';
+					$this->html .= '<li><a href="'.BASE.$link.'">'.$titulo.'</a></li>';
 				}
 
-				$html .= '</ul></li>';
+				$this->html .= '</ul></li>';
 			}else{
-				$html .= '<li '.((strpos($value, $controller) !== false) ? 'class="active"' : '').'><a href="'.SITE.$value.'"><i class="fa fa-'.$icon.'"></i> <span>'.$title.'</span></a></li>';
+				$this->html .= '<li '.((strpos($value, $controller) !== false) ? 'class="active"' : '').'><a href="'.BASE.$value.'"><i class="fa fa-'.$icon.'"></i> <span>'.$title.'</span></a></li>';
 			}
 		}
-		return $this->storage->set('menu', $html);
+
+		return $this;
 	}
 
+	/**
+	 * Exibe o HTML com o menu renderizado
+	 * @return string
+	 */
 	public function getMenu()
 	{
-		$menu = $this->storage->get('menu');
-		$this->storage->clear('menu');
+		$this->setHTML($this->controller);
+		return $this->html;
+	}
 
-		return $menu;
+	/**
+	 * Exibe o HTML com o menu renderizado
+	 * @return string
+	 */
+	public function __toString()
+	{
+		return $this->getMenu();
 	}
 }

@@ -99,6 +99,11 @@ class App
 							    $action ));
 
 		/**
+		 * Injeta as dependências no Controller
+		 */
+		$app->start($this->configs);
+
+		/**
 		 * Atribuição de parâmetros
 		 */
 		call_user_func_array(array(&$app, $action), $this->request->params);

@@ -27,8 +27,4 @@ class IndexController extends \HXPHP\System\Controller
 					   ->setTitle('Oops! Nada encontrado!');
 		*/
 	}
-	public function testeAction()
-	{
-		$this->load();
-	}
 }
