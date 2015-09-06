@@ -52,9 +52,9 @@ class View
 		 */
 		$this->setPath($controller);
 		$this->setTemplate(true);
-		$this->setHeader('Header');
+		$this->setHeader('header');
 		$this->setFile($action);
-		$this->setFooter('Footer');
+		$this->setFooter('footer');
 
 		/**
 		 * Definindo dados 
