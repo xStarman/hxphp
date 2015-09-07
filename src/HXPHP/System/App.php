@@ -84,25 +84,14 @@ class App
 			$controller = $notFoundController;
 		}
 
-		//Instância do Controller
-		$app = new $controller();
-		
 		//Verifica se a Action requisitada não existe
-		if ( ! method_exists($app, $action))
+		if ( ! method_exists(new $controller(), $action))
 			$action = 'indexAction';
 
-		/**
-		 * Injeta as dependências no Controller
-		 */
-		$app->start($this->configs);
-
-		/**
-		 * Adiciona a View ao Controller
-		 */
-		$app->setView(new View( $this->configs,
-							    $controller,
-							    $action ));
-
+		//Instância do Controller
+		$app = new $controller();
+		$app->setConfigs($this->configs);
+		$app->view->setConfigs($this->configs, $controller, $action);
 
 		/**
 		 * Atribuição de parâmetros

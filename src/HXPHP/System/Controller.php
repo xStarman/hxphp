@@ -29,28 +29,24 @@ class Controller
 	 */
 	public $view;
 
+	public function __construct()
+	{
+		//Injeção da VIEW
+		$this->view = new View;
+	}
+
 	/**
-	 * Injeta as dependências fundamentais
+	 * Injeta as configurações
 	 * @param  Config $configs Objeto com as configurações da aplicação
 	 * @return object
 	 */
-	public function start(Configs\Config $configs)
+	public function setConfigs(Configs\Config $configs)
 	{
 		//Injeção das dependências
 		$this->configs  = $configs;
 		$this->response = new Http\Response;
 		$this->request  = new Http\Request($configs->baseURI);
 
-		return $this;
-	}
-
-	/**
-	 * Injeção da VIEW
-	 * @param View $view View atual
-	 */
-	public function setView(View $view)
-	{
-		$this->view = $view;
 		return $this;
 	}
 
