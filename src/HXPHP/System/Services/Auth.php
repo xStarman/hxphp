@@ -28,16 +28,25 @@ class Auth
 	 */
 	public $messages;
 
+	private $url_redirect_after_login;
+	private $url_redirect_after_logout;
+	private $redirect;
+
 	/**
 	 * Método construtor
 	 */
-	public function __construct()
+	public function __construct($url_redirect_after_login, $url_redirect_after_logout, $redirect = false)
 	{
 		//Instância dos objetos injetados
 		$this->response = new Http\Response;
 		$this->storage  = new Storage\Session;
 		$this->messages = new Messages('auth');
 		$this->messages->setBlock('alerts');
+
+		//Configuração
+		$this->url_redirect_after_login = $url_redirect_after_login;
+		$this->url_redirect_after_logout = $url_redirect_after_logout;
+		$this->redirect = $redirect;
 
 		return $this;
 	}
@@ -53,7 +62,8 @@ class Auth
 		$this->storage->set('username', preg_replace("/[^a-zA-Z0-9_\-]+/", "", $username));
 		$this->storage->set('login_string', hash('sha512', $username.$_SERVER['REMOTE_ADDR'].$_SERVER['HTTP_USER_AGENT']));
 
-		return $this->response->redirectTo(URL_REDIRECT_AFTER_LOGIN);
+		if ($this->redirect === true)
+			return $this->response->redirectTo($this->url_redirect_after_login);
 	}
 
 	/**
@@ -69,7 +79,7 @@ class Auth
 		setcookie(session_name(), '', time() - 42000, $params["path"], $params["domain"], $params["secure"], $params["httponly"]);
 		session_destroy();
 
-		$this->response->redirectTo(URL_REDIRECT_AFTER_LOGOUT);
+		$this->response->redirectTo($this->url_redirect_after_logout);
 	}
 
 	/**
@@ -79,7 +89,7 @@ class Auth
 	public function redirectCheck($redirect = false)
 	{
 		if ($redirect && $this->login_check())
-			$this->response->redirectTo(URL_REDIRECT_AFTER_LOGIN);
+			$this->response->redirectTo($this->url_redirect_after_login);
 		elseif (!$this->login_check())
 			if (!$redirect)
 				$this->logout();
