@@ -2,7 +2,7 @@
 
 namespace HXPHP\System;
 
-class Model extends ActiveRecord\Model
+class Model extends \ActiveRecord\Model
 {
 	/**
 	 * Método construtor
