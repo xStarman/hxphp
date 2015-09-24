@@ -9,7 +9,7 @@ class Controller
 	 * Injeção das Configurações
 	 * @var object
 	 */
-	private $configs;
+	public $configs = null;
 
 	/**
 	 * Injeção do Http Request
@@ -29,10 +29,14 @@ class Controller
 	 */
 	public $view;
 
-	public function __construct()
+	public function __construct($configs = null)
 	{
 		//Injeção da VIEW
 		$this->view = new View;
+		$this->response = new Http\Response;
+		
+		if (!is_null($configs) && $configs instanceof Configs\Config)
+			$this->setConfigs($configs);
 	}
 
 	/**
@@ -44,7 +48,6 @@ class Controller
 	{
 		//Injeção das dependências
 		$this->configs  = $configs;
-		$this->response = new Http\Response;
 		$this->request  = new Http\Request($configs->baseURI);
 
 		return $this;
