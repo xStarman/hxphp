@@ -85,11 +85,11 @@ class App
 		}
 
 		//Verifica se a Action requisitada não existe
-		if ( ! method_exists(new $controller(), $action))
+		if ( ! method_exists(new $controller($this->configs), $action))
 			$action = 'indexAction';
 
 		//Instância do Controller
-		$app = new $controller();
+		$app = new $controller($this->configs);
 		$app->setConfigs($this->configs);
 		$app->view->setConfigs($this->configs, $controller, $action);
 
