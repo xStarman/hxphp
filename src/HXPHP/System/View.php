@@ -8,7 +8,7 @@ class View
 	 * Título da página
 	 * @var string
 	 */
-	public $title;
+	public $title = null;
 
 	/**
 	 * Injeção das Configurações
@@ -20,11 +20,11 @@ class View
 	 * Parâmetros de configuração da VIEW
 	 * @var string
 	 */
-	protected $path;
-	protected $template;
-	protected $header;
-	protected $file;
-	protected $footer;
+	protected $path = null;
+	protected $template = null;
+	protected $header = null;
+	protected $file = null;
+	protected $footer = null;
 	protected $vars = array();
 	protected $assets = array(
 		'css' => array(),
@@ -48,18 +48,34 @@ class View
 		$action = str_replace('Action', '', $action);
 
 		/**
-		 * Definindo estrutura padrão
+		 * Verifica se os valores padrão foram alterados no construtor do Controller.
 		 */
-		$this->setPath($controller);
-		$this->setTemplate(true);
-		$this->setHeader('header');
-		$this->setFile($action);
-		$this->setFooter('footer');
+		$view_settings = new \stdClass;
 
-		/**
-		 * Definindo dados 
-		 */
-		$this->setTitle($this->configs->title);
+		$default_values = array(
+			'path' => $controller,
+			'template' => true,
+			'header' => 'header',
+			'file' => $action,
+			'footer' => 'footer',
+			'title' => $this->configs->title
+		);
+
+		foreach ($default_values as $setting => $value) {
+			if(is_null($this->$setting)) {
+				$view_settings->$setting = $value;
+				continue;
+			}
+
+			$view_settings->$setting = $this->$setting;
+		}
+
+		$this->setPath($view_settings->path)
+				->setTemplate($view_settings->template)
+				->setHeader($view_settings->header)
+				->setFile($view_settings->file)
+				->setFooter($view_settings->footer)
+				->setTitle($view_settings->title);	
 	}
 
 	/**
