@@ -8,8 +8,8 @@ class IndexController extends \HXPHP\System\Controller
 		 	//Opções disponíveis
 			$this->view->setPath('index')
 					   ->setFile('index')
-					   ->setHeader('Header')
-					   ->setFooter('Footer')
+					   ->setHeader('header')
+					   ->setFooter('footer')
 					   ->setTemplate(true)
 					   ->setVar('ola', 'Mundo')
 					   ->setVars(array(

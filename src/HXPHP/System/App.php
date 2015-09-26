@@ -84,12 +84,13 @@ class App
 			$controller = $notFoundController;
 		}
 
+		$app = new $controller($this->configs);
+
 		//Verifica se a Action requisitada não existe
-		if ( ! method_exists(new $controller($this->configs), $action))
+		if ( ! method_exists($app, $action))
 			$action = 'indexAction';
 
-		//Instância do Controller
-		$app = new $controller($this->configs);
+		//Injeção das configurações
 		$app->setConfigs($this->configs);
 		$app->view->setConfigs($this->configs, $controller, $action);
 
