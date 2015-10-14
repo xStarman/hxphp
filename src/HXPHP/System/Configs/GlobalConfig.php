@@ -1,6 +1,6 @@
 <?php
 
-namespace HXPHP\System\Configs\Modules;
+namespace HXPHP\System\Configs;
 
 class GlobalConfig
 {
