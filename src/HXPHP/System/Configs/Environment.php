@@ -7,7 +7,6 @@ use HXPHP\System\Tools;
 class Environment
 {
 	public $defaultEnvironment;
-	private $currentEnviroment;
 
 	public function __construct()
 	{

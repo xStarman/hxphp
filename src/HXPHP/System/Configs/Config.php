@@ -25,8 +25,7 @@ class Config
 		else if(isset($this->global->$param)) {
 			return $this->global->$param;
 		}
-		else {
-			throw new \Exception("Parametro/Modulo '$param' nao encontrado. Verifique se o ambiente definido esta configurado e os modulo utilizados registrados.", 1);
-		}
+
+		throw new \Exception("Parametro/Modulo '$param' nao encontrado. Verifique se o ambiente definido esta configurado e os modulo utilizados registrados.", 1);
 	}
 }

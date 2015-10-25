@@ -19,13 +19,17 @@ class Menu
 	 */
 	private $html;
 
+	private $baseURI;
+
 	/**
 	 * Define o ARRAY com menus e o CONTROLLER
 	 * @param string $role Nível do usuário
 	 * @param string $controller Controller
 	 */
-	public function __construct($role, $controller)
+	public function __construct($role, $controller, $baseURI)
 	{
+		$this->baseURI = $baseURI;
+
 		$this->setMenu($role)
 			 ->setController($controller);
 		
@@ -105,7 +109,7 @@ class Menu
 
 				foreach($value as $titulo => $link){
 					$this->html .= '
-						<li><a href="'.BASE.$link.'">'.$titulo.'</a></li>';
+						<li><a href="'.$this->baseURI.$link.'">'.$titulo.'</a></li>';
 				}
 
 				$this->html .= '
@@ -117,7 +121,7 @@ class Menu
 			 */
 			else {
 				$this->html .= '<li '.((strpos($value, $controller) !== false) ? 'class="active"' : '').'>
-									<a href="'.BASE.$value.'">
+									<a href="'.$this->baseURI.$value.'">
 										<i class="fa fa-'.$icon.'"></i> <span>'.$title.'</span>
 									</a>
 								</li>';
