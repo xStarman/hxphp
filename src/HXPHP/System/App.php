@@ -45,10 +45,11 @@ class App
 		$cfg->set_model_directory($this->configs->models->directory);
 		$cfg->set_connections(
 			array(
-				'development' => 'mysql://'.$this->configs->database->user
-									.':'.$this->configs->database->password
-									.'@'.$this->configs->database->host
-									.'/'.$this->configs->database->dbname
+				'development' => $this->configs->database->driver.'://'
+								.$this->configs->database->user
+								.':'.$this->configs->database->password
+								.'@'.$this->configs->database->host
+								.'/'.$this->configs->database->dbname
 			)
 		);
 	}

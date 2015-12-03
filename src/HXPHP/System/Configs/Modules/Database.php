@@ -4,6 +4,7 @@ namespace HXPHP\System\Configs\Modules;
 
 class Database
 {
+	public $driver;
 	public $host;
 	public $user;
 	public $password;
@@ -12,6 +13,7 @@ class Database
 	public function __construct()
 	{
 		$this->setConnectionData(array(
+			'driver' => 'mysql',
 			'host' => 'localhost',
 			'user' => 'root',
 			'password' => '',
@@ -21,6 +23,7 @@ class Database
 	}
 	public function setConnectionData(array $data)
 	{
+		$this->driver = $data['driver'];
 		$this->host = $data['host'];
 		$this->user = $data['user'];
 		$this->password = $data['password'];

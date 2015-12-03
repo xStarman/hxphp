@@ -20,6 +20,7 @@
 		$configs->env->development->baseURI = '/hxphp/';
 
 		$configs->env->development->database->setConnectionData(array(
+			'driver' => 'mysql',
 			'host' => 'localhost',
 			'user' => 'root',
 			'password' => '',
@@ -37,6 +38,7 @@
 		$configs->env->production->baseURI = '/';
 
 		$configs->env->production->database->setConnectionData(array(
+			'driver' => 'mysql',
 			'host' => 'localhost',
 			'user' => 'usuariodobanco',
 			'password' => 'senhadobanco',
