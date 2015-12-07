@@ -9,6 +9,7 @@ class Database
 	public $user;
 	public $password;
 	public $dbname;
+	public $charset;
 
 	public function __construct()
 	{
@@ -17,7 +18,8 @@ class Database
 			'host' => 'localhost',
 			'user' => 'root',
 			'password' => '',
-			'dbname' => 'hxphp'
+			'dbname' => 'hxphp',
+			'charset' => 'utf8'
 		));
 		return $this;
 	}
@@ -28,6 +30,7 @@ class Database
 		$this->user = $data['user'];
 		$this->password = $data['password'];
 		$this->dbname = $data['dbname'];
+		$this->charset = $data['charset'];
 
 		return $this;
 	}
