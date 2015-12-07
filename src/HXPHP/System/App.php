@@ -50,6 +50,7 @@ class App
 								.':'.$this->configs->database->password
 								.'@'.$this->configs->database->host
 								.'/'.$this->configs->database->dbname
+								.'?charset='.$this->configs->database->charset
 			)
 		);
 	}
