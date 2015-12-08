@@ -25,12 +25,16 @@ class Database
 	}
 	public function setConnectionData(array $data)
 	{
-		$this->driver = $data['driver'];
+		(array_key_exists('driver', $data)) ?
+                    $this->driver = $data['driver'] :
+                    $this->driver = 'mysql';
 		$this->host = $data['host'];
 		$this->user = $data['user'];
 		$this->password = $data['password'];
 		$this->dbname = $data['dbname'];
-		$this->charset = $data['charset'];
+		(array_key_exists('charset', $data)) ?
+                    $this->charset = $data['charset'] :
+                    $this->charset = 'utf8';
 
 		return $this;
 	}
