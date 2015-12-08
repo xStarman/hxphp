@@ -24,7 +24,8 @@
 			'host' => 'localhost',
 			'user' => 'root',
 			'password' => '',
-			'dbname' => 'hxphp'
+			'dbname' => 'hxphp',
+			'charset' => 'utf8'
 		));
 
 		$configs->env->development->mail->setFrom(array(
@@ -42,7 +43,8 @@
 			'host' => 'localhost',
 			'user' => 'usuariodobanco',
 			'password' => 'senhadobanco',
-			'dbname' => 'hxphp'
+			'dbname' => 'hxphp',
+			'charset' => 'utf8'
 		));
 
 		$configs->env->production->mail->setFrom(array(
