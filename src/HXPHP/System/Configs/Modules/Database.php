@@ -25,16 +25,13 @@ class Database
 	}
 	public function setConnectionData(array $data)
 	{
-		(array_key_exists('driver', $data)) ?
-                    $this->driver = $data['driver'] :
-                    $this->driver = 'mysql';
-		$this->host = $data['host'];
-		$this->user = $data['user'];
-		$this->password = $data['password'];
-		$this->dbname = $data['dbname'];
-		(array_key_exists('charset', $data)) ?
-                    $this->charset = $data['charset'] :
-                    $this->charset = 'utf8';
+		foreach ($data as $param => $value) {
+
+			if ( ! property_exists($this, $param))
+				throw new \Exception("O parametro <$param> nao existe. Verifique a sintaxe e tente novamente", true);
+
+			$this->$param = $value;
+		}
 
 		return $this;
 	}
