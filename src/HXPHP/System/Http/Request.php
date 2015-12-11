@@ -138,6 +138,25 @@ class Request
 
 		return $post[$name];
 	}
+        
+        /**
+	 * Obtém os dados da superglobal $_SERVER
+	 * @param  string $name Nome do parâmetro
+	 * @return null         Retorna o array $_SERVER geral ou em um índice específico
+	 */
+        
+        public function server($name = null)
+        {
+            $server = $this->filter($_SERVER, INPUT_SERVER, $this->custom_filters);
+            
+            if(!$name)
+                return $server;
+            
+            if(!isset($server[$name]))
+                return NULL;
+            
+            return $server[$name];
+        }
 
 	/**
 	 * Retorna o método da requisição
