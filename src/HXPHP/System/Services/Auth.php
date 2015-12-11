@@ -58,9 +58,13 @@ class Auth
 	 */
 	public function login($user_id, $username)
 	{
-		$this->storage->set('user_id', preg_replace("/[^0-9]+/", "", $user_id));
-		$this->storage->set('username', preg_replace("/[^a-zA-Z0-9_\-]+/", "", $username));
-		$this->storage->set('login_string', hash('sha512', $username.$_SERVER['REMOTE_ADDR'].$_SERVER['HTTP_USER_AGENT']));
+		$user_id = intval(preg_replace("/[^0-9]+/", "", $user_id));
+		$username = preg_replace("/[^a-zA-Z0-9_\-]+/", "", $username);
+		$login_string = hash('sha512', $username.$_SERVER['REMOTE_ADDR'].$_SERVER['HTTP_USER_AGENT']);
+
+		$this->storage->set('user_id', $user_id);
+		$this->storage->set('username', $username);
+		$this->storage->set('login_string', $login_string);
 
 		if ($this->redirect === true)
 			return $this->response->redirectTo($this->url_redirect_after_login);
@@ -101,8 +105,11 @@ class Auth
 	 */
 	public function login_check()
 	{
-		if ($this->storage->exists('user_id') && $this->storage->exists('username') && $this->storage->exists('login_string'))
-			return((hash('sha512', $this->storage->get('username').$_SERVER['REMOTE_ADDR'].$_SERVER['HTTP_USER_AGENT']) == $this->storage->get('login_string')) ? true : false);
+		if ( $this->storage->exists('user_id') &&
+			 $this->storage->exists('username') &&
+			 $this->storage->exists('login_string') ) {
+			return ((hash('sha512', $this->storage->get('username').$_SERVER['REMOTE_ADDR'].$_SERVER['HTTP_USER_AGENT']) == $this->storage->get('login_string')) ? true : false);
+		}
 	}	
 
 	/**
