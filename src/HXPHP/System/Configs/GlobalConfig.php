@@ -2,8 +2,11 @@
 
 namespace HXPHP\System\Configs;
 
+use HXPHP\System\Http\Request as Request;
+
 class GlobalConfig
 {
+	public $site;
 	public $models;
 	public $views;
 	public $controllers;
@@ -11,9 +14,19 @@ class GlobalConfig
 
 	public function __construct()
 	{
+		$this->site = new \stdClass;
+
 		$this->models = new \stdClass;
 		$this->views = new \stdClass;
 		$this->controllers = new \stdClass;
+
+		//Site
+		$request = new Request();
+		$https = $request->server('HTTPS');
+
+		$this->site->protocol = ($https && $https != 'off') ? 'https' : 'http';
+		$this->site->host = $request->server('HTTP_HOST');
+		$this->site->url = $this->site->protocol . '://' . $this->site->host;
 
 		//Models
 		$this->models->directory = APP_PATH . 'models' . DS;
