@@ -13,7 +13,7 @@ Lembre-se também que antes de estudar um framework é mais do que recomendado, 
 
 > Te desejo muito sucesso e espero que você nunca pare de estudar, pois a tecnologia não para e nós, por mais difícil que seja, devemos acompanhar esta evolução.
 
-###### Um forte abraço do seu amigo [https://www.facebook.com/brunocsantos2012](Bruno Campos Santos).
+###### Um forte abraço do seu amigo [Bruno Campos Santos](https://www.facebook.com/brunocsantos2012 "Bruno Campos Santos").
 
 ####Link para documentação:
 ---------------------------------------------------------------------
