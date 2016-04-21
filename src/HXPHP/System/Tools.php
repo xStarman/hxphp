@@ -47,6 +47,9 @@ class Tools
 	 */
 	static function filteredName($input)
 	{
+		$input = explode('?', $input);
+		$input = $input[0];
+		
 		$find    = array(
 			'-',
 			'_'
