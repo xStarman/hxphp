@@ -60,7 +60,7 @@ class Auth
 
 	/**
 	 * Autentica o usuário
-	 * @param  integet $user_id  ID do usuário
+	 * @param  integer $user_id  ID do usuário
 	 * @param  string $username  Nome de usuário
 	 */
 	public function login($user_id, $username)
@@ -119,10 +119,10 @@ class Auth
 			 $this->storage->exists('login_string') ) {
 
 			$login_string = hash('sha512', $this->storage->get('username') . $this->request->server('REMOTE_ADDR') . $this->request->server('HTTP_USER_AGENT'));
-			
+
 			return ($login_string == $this->storage->get('login_string') ? true : false);
 		}
-	}	
+	}
 
 	/**
 	 * Retorna a ID do usuário autenticado
