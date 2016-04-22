@@ -210,18 +210,18 @@ class Request
 	}
 
 
-        /*
-         * Verifica se os inputs no método requisitado estão no formato correto conforme o array informado $custom_filters
-         *
-         * @return boolean Inputs estão corretos ou não
-         */
-        public function isValid()
-        {
-            $method = $this->getMethod();
+    /*
+     * Verifica se os inputs no método requisitado estão no formato correto conforme o array informado $custom_filters
+     *
+     * @return boolean Inputs estão corretos ou não
+     */
+    public function isValid()
+    {
+        $method = $this->getMethod();
 
-            if(!array_search(FALSE, $this->$method()))
-                return TRUE;
-            else
-                return FALSE;
-        }
+        if(!array_search(FALSE, $this->$method()))
+            return TRUE;
+        else
+            return FALSE;
+    }
 }
