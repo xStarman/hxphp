@@ -37,7 +37,7 @@ class View
 		'js' => array()
 	);
 
-	public function setConfigs(Configs\Config $configs, $controller, $action)
+	public function setConfigs(Configs\Config $configs, $subfolder, $controller, $action)
 	{
 		/**
 		 * Injeção das Configurações
