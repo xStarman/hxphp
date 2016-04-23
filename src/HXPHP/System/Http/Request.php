@@ -11,8 +11,9 @@ class Request
 	 * Atributos
 	 * @var null
 	 */
-	public  $controller;
-	public  $action;
+	public  $subfolder = '';
+	public  $controller = 'IndexController';
+	public  $action = 'indexAction';
 	public  $params = array();
 
 	/**
