@@ -95,7 +95,7 @@ class App
 
 		//Injeção das configurações
 		$app->setConfigs($this->configs);
-		$app->view->setConfigs($this->configs, $controller, $action);
+		$app->view->setConfigs($this->configs, $subfolder, $controller, $action);
 
 		/**
 		 * Atribuição de parâmetros
