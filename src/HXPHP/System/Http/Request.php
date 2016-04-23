@@ -25,9 +25,9 @@ class Request
 	/**
 	 * Método construtor
 	 */
-	public function __construct($baseURI = '')
+	public function __construct($baseURI = '', $controller_directory = '')
 	{
-		$this->initialize($baseURI);
+		$this->initialize($baseURI, $controller_directory);
 		return $this;
 	}
 
