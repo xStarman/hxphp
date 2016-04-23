@@ -35,9 +35,9 @@ class Request
 	 * Define os parâmetros do mecanismo MVC
 	 * @return object Retorna o objeto com as propriedades definidas
 	 */
-	public function initialize($baseURI)
+	public function initialize($baseURI, $controller_directory)
 	{
-		if ( ! empty($baseURI)) {
+		if ( ! empty($baseURI) && ! empty($controller_directory)) {
 			$explode = array_values(array_filter(explode('/', $_SERVER['REQUEST_URI'])));
 
 			if (isset($explode[0]) && $explode[0] == str_replace('/', '', $baseURI)) {
@@ -45,22 +45,28 @@ class Request
 				$explode = array_values($explode);
 			}
 
-			if (count($explode) == 0) {
-				$this->controller = 'IndexController';
-				$this->action = 'indexAction';
-
+			if (count($explode) == 0)
 				return $this;
-			}
 
 			if (count($explode) == 1) {
 				$this->controller = Tools::filteredName($explode[0]).'Controller';
-				$this->action = 'indexAction';
 
 				return $this;
 			}
+			elseif (file_exists($controller_directory . $explode[0])) {
+				$this->subfolder = $explode[0] . '/';
+				$this->controller = Tools::filteredName($explode[1]).'Controller';
 
-			$this->controller = Tools::filteredName($explode[0]).'Controller';
-			$this->action = lcfirst(Tools::filteredName($explode[1])).'Action';
+				if (isset($explode[2])) {
+					$this->action = lcfirst(Tools::filteredName($explode[2])).'Action';
+
+					unset($explode[2]);
+				}
+			}
+			else {
+				$this->controller = Tools::filteredName($explode[0]).'Controller';
+				$this->action = lcfirst(Tools::filteredName($explode[1])).'Action';
+			}
 
 			unset($explode[0], $explode[1]);
 
