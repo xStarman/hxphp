@@ -30,7 +30,7 @@ class App
 	public function __construct(Configs\Config $configs)
 	{
 		$this->configs  = $configs;
-		$this->request  = new Http\Request($configs->baseURI);
+		$this->request  = new Http\Request($configs->baseURI, $configs->global->controllers->directory);
 		$this->response = new Http\Response;
 		
 		return $this;
