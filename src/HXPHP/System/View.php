@@ -60,11 +60,11 @@ class View
 		$view_settings = new \stdClass;
 
 		$default_values = array(
-			'path' => $controller,
+			'path' => $subfolder . $controller,
 			'template' => true,
-			'header' => 'header',
+			'header' => $subfolder . 'header',
 			'file' => $action,
-			'footer' => 'footer',
+			'footer' => $subfolder . 'footer',
 			'title' => $this->configs->title
 		);
 
