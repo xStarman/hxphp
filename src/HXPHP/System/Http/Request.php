@@ -48,20 +48,23 @@ class Request
 			if (count($explode) == 0)
 				return $this;
 
-			if (count($explode) == 1) {
-				$this->controller = Tools::filteredName($explode[0]).'Controller';
-
-				return $this;
-			}
-			elseif (file_exists($controller_directory . $explode[0])) {
-				$this->subfolder = $explode[0] . '/';
-				$this->controller = Tools::filteredName($explode[1]).'Controller';
+			
+			if (file_exists($controller_directory . $explode[0])) {
+				$this->subfolder = $explode[0] . DS;
+				
+				if (isset($explode[1]))
+					$this->controller = Tools::filteredName($explode[1]).'Controller';
 
 				if (isset($explode[2])) {
 					$this->action = lcfirst(Tools::filteredName($explode[2])).'Action';
 
 					unset($explode[2]);
 				}
+			}
+			elseif (count($explode) == 1) {
+				$this->controller = Tools::filteredName($explode[0]).'Controller';
+
+				return $this;
 			}
 			else {
 				$this->controller = Tools::filteredName($explode[0]).'Controller';
