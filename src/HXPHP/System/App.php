@@ -30,7 +30,7 @@ class App
 	public function __construct(Configs\Config $configs)
 	{
 		$this->configs  = $configs;
-		$this->request  = new Http\Request($configs->baseURI);
+		$this->request  = new Http\Request($configs->baseURI, $configs->global->controllers->directory);
 		$this->response = new Http\Response;
 		
 		return $this;
@@ -64,6 +64,7 @@ class App
 		/**
 		 * Variáveis
 		 */
+		$subfolder = $this->request->subfolder;
 		$controller = $this->request->controller;
 		$action = $this->request->action;
 		$controllersDir = $this->configs->controllers->directory;
@@ -73,10 +74,10 @@ class App
 		 * Caminho do controller
 		 * @var string
 		 */
-		$controllerFile = $controllersDir . $controller . '.php';
+		$controllerFile = $controllersDir . $subfolder . $controller . '.php';
 
 		if ( ! file_exists($controllerFile))
-			$controllerFile = $controllersDir . $notFoundController . '.php';
+			$controllerFile = $controllersDir . $subfolder . $notFoundController . '.php';
 		
 		//Inclusão do Controller
 		require_once($controllerFile);
@@ -94,7 +95,7 @@ class App
 
 		//Injeção das configurações
 		$app->setConfigs($this->configs);
-		$app->view->setConfigs($this->configs, $controller, $action);
+		$app->view->setConfigs($this->configs, $subfolder, $controller, $action);
 
 		/**
 		 * Atribuição de parâmetros

@@ -17,4 +17,4 @@ Lembre-se também que antes de estudar um framework é mais do que recomendado, 
 
 ####Link para documentação:
 ---------------------------------------------------------------------
-[http://www.hxphp.com.br/documentacao/](https://www.hxphp.com.br/documentacao/).
+[http://www.hxphp.com.br/documentacao/](http://www.hxphp.com.br/documentacao/).

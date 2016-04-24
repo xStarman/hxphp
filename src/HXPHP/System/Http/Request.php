@@ -11,8 +11,9 @@ class Request
 	 * Atributos
 	 * @var null
 	 */
-	public  $controller;
-	public  $action;
+	public  $subfolder = '';
+	public  $controller = 'IndexController';
+	public  $action = 'indexAction';
 	public  $params = array();
 
 	/**
@@ -24,9 +25,9 @@ class Request
 	/**
 	 * Método construtor
 	 */
-	public function __construct($baseURI = '')
+	public function __construct($baseURI = '', $controller_directory = '')
 	{
-		$this->initialize($baseURI);
+		$this->initialize($baseURI, $controller_directory);
 		return $this;
 	}
 
@@ -34,9 +35,9 @@ class Request
 	 * Define os parâmetros do mecanismo MVC
 	 * @return object Retorna o objeto com as propriedades definidas
 	 */
-	public function initialize($baseURI)
+	public function initialize($baseURI, $controller_directory)
 	{
-		if ( ! empty($baseURI)) {
+		if ( ! empty($baseURI) && ! empty($controller_directory)) {
 			$explode = array_values(array_filter(explode('/', $_SERVER['REQUEST_URI'])));
 
 			if (isset($explode[0]) && $explode[0] == str_replace('/', '', $baseURI)) {
@@ -44,22 +45,31 @@ class Request
 				$explode = array_values($explode);
 			}
 
-			if (count($explode) == 0) {
-				$this->controller = 'IndexController';
-				$this->action = 'indexAction';
-
+			if (count($explode) == 0)
 				return $this;
-			}
 
-			if (count($explode) == 1) {
+			
+			if (file_exists($controller_directory . $explode[0])) {
+				$this->subfolder = $explode[0] . DS;
+				
+				if (isset($explode[1]))
+					$this->controller = Tools::filteredName($explode[1]).'Controller';
+
+				if (isset($explode[2])) {
+					$this->action = lcfirst(Tools::filteredName($explode[2])).'Action';
+
+					unset($explode[2]);
+				}
+			}
+			elseif (count($explode) == 1) {
 				$this->controller = Tools::filteredName($explode[0]).'Controller';
-				$this->action = 'indexAction';
 
 				return $this;
 			}
-
-			$this->controller = Tools::filteredName($explode[0]).'Controller';
-			$this->action = lcfirst(Tools::filteredName($explode[1])).'Action';
+			else {
+				$this->controller = Tools::filteredName($explode[0]).'Controller';
+				$this->action = lcfirst(Tools::filteredName($explode[1])).'Action';
+			}
 
 			unset($explode[0], $explode[1]);
 
@@ -210,18 +220,18 @@ class Request
 	}
 
 
-        /*
-         * Verifica se os inputs no método requisitado estão no formato correto conforme o array informado $custom_filters
-         *
-         * @return boolean Inputs estão corretos ou não
-         */
-        public function isValid()
-        {
-            $method = $this->getMethod();
+    /*
+     * Verifica se os inputs no método requisitado estão no formato correto conforme o array informado $custom_filters
+     *
+     * @return boolean Inputs estão corretos ou não
+     */
+    public function isValid()
+    {
+        $method = $this->getMethod();
 
-            if(!array_search(FALSE, $this->$method()))
-                return TRUE;
-            else
-                return FALSE;
-        }
+        if(!array_search(FALSE, $this->$method()))
+            return TRUE;
+        else
+            return FALSE;
+    }
 }
