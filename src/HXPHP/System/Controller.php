@@ -48,7 +48,7 @@ class Controller
 	{
 		//Injeção das dependências
 		$this->configs  = $configs;
-		$this->request  = new Http\Request($configs->baseURI);
+		$this->request  = new Http\Request($configs->baseURI, $configs->controllers->directory);
 
 		return $this;
 	}
