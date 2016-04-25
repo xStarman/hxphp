@@ -19,4 +19,9 @@ class Menu
 		'dropdown_class' => 'dropdown-menu',
 		'dropdown_active_class' => 'active'
 	);
+
+	public function setConfigs(array $configs)
+	{
+		return $this->configs = array_merge($this->configs, $configs);
+	}
 }
