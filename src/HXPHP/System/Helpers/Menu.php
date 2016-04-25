@@ -85,7 +85,7 @@ class Menu
 	 * URL ATUAL
 	 * @var string
 	 */
-	private $current_url = null;
+	private $current_URL = null;
 
 	/**
 	 * Conteúdo HTML do menu renderizado
@@ -102,7 +102,7 @@ class Menu
 	{
 		$this->setCurrentURL($request, $configs);
 		var_dump($request);
-		var_dump($this->current_url);
+		var_dump($this->current_URL);
 	}
 
 	/**
@@ -120,7 +120,7 @@ class Menu
 		$controller = $controller === 'index' ? '' : $controller . '/';
 		$action = $action === 'index' ? '' : $action;
 
-		$this->current_url = $site_url . $subfolder . $controller . $action;
+		$this->current_URL = $site_url . $subfolder . $controller . $action;
 
 		return $this;
 	}
