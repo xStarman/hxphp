@@ -101,8 +101,6 @@ class Menu
 	)
 	{
 		$this->setCurrentURL($request, $configs);
-		var_dump($request);
-		var_dump($this->current_URL);
 	}
 
 	/**
