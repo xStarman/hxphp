@@ -3,10 +3,15 @@
 namespace HXPHP\System\Helpers;
 
 use HXPHP\System\Storage as Storage;
+use \HXPHP\System\Tools as Tools;
 
 class Menu
 {
 
+	/**
+	 * Elementos HTML utilizados na renderização do menu
+	 * @var array
+	 */
 	private $elements = array(
 
 		/**
@@ -76,11 +81,7 @@ class Menu
 		'dropdown_item' => '<li class="%s %s">%s</li>'
 	);
 
-	/**
-	 * Menus e submenus
-	 * @var array
-	 */
-	private $menu = array();
+	private $current_url = null;
 
 	/**
 	 * Conteúdo HTML do menu renderizado
@@ -88,29 +89,29 @@ class Menu
 	 */
 	private $html;
 
-	private $baseURI;
 
-	/**
-	 * Define o ARRAY com menus e o CONTROLLER
-	 * @param string $role Nível do usuário
-	 * @param string $controller Controller
-	 */
-	public function __construct($role, $controller, $baseURI)
+	public function __construct(
+		\HXPHP\System\Http\Request $request,
+		\HXPHP\System\Configs\Config $configs,
+		$role = null
+	)
 	{
-		$this->baseURI = $baseURI;
 
-		$this->setMenu($role)
-			 ->setController($controller);
-		
+		$this->setCurrentURL($request, $configs);
 	}
 
 	/**
 	 * Define o CONTROLLER
 	 * @param string $controller Controller
 	 */
-	private function setController($controller)
+	private function setCurrentURL($request, $configs)
 	{
-		$this->controller = $controller;
+		$site_url = $configs->site->url . $configs->baseURI;
+		$controller = Tools::decamelize(str_replace('Controller', '', $request->controller));
+		$action = Tools::decamelize(str_replace('Action', '', ucfirst($request->action)));
+
+		$this->current_url = $site_url . $controller . '/' . $action;
+
 		return $this;
 	}
 	
