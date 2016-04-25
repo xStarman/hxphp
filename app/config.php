@@ -2,14 +2,6 @@
 	//Constantes
 	$configs = new HXPHP\System\Configs\Config;
 
-	$configs->env->add('development');
-
-	$configs->env->development->menu->setConfigs(array(
-		'container' => 'nav'
-	));
-
-	var_dump($configs->env->development->menu->configs);
-
 	/*
 		//Globais
 		$configs->global->models->directory = APP_PATH . 'models' . DS;
