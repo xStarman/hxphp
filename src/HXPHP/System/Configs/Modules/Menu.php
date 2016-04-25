@@ -4,7 +4,7 @@ namespace HXPHP\System\Configs\Modules;
 
 class Menu
 {
-	private $configs = array(
+	public $configs = array(
 		'container' => false,
 		'container_id' => '',
 		'container_class' => '',
