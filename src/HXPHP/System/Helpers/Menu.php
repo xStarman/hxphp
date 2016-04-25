@@ -81,6 +81,10 @@ class Menu
 		'dropdown_item' => '<li class="%s %s">%s</li>'
 	);
 
+	/**
+	 * URL ATUAL
+	 * @var string
+	 */
 	private $current_url = null;
 
 	/**
@@ -96,8 +100,9 @@ class Menu
 		$role = null
 	)
 	{
-
 		$this->setCurrentURL($request, $configs);
+		var_dump($request);
+		var_dump($this->current_url);
 	}
 
 	/**
