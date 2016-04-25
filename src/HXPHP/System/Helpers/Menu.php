@@ -8,26 +8,71 @@ class Menu
 {
 
 	private $elements = array(
+
+		/**
+		 * Tag inicio container
+		 * Conteúdo do container
+		 * Tag final container
+		 */
 		'container' => '
 			<%s>
 				%s
 			</%s>
 		',
 
+		/**
+		 * Classe do menu
+		 * ID do menu
+		 * Conteúdo do menu
+		 */
 		'menu' => '<ul class="%s" id="%s">%s</ul>',
 
+		/**
+		 * Classe
+		 * Classe ativa
+		 * Conteúdo
+		 */
 		'menu_item' => '<li class="%s %s">%s</li>',
 
+		/**
+		 * Link
+		 * Classe
+		 * Classe ativa
+		 * Título
+		 * Ícone (Font-Awesome)
+		 * Before
+		 * Título
+		 * After
+		 */
 		'link' => '<a href="%s" class="%s %s" title="%s"><i class="fa fa-%s"> %s%s%s</a>',
 
+		/**
+		 * Classe
+		 * Classe Ativa
+		 * Attrs
+		 * Título
+		 * Ícone
+		 * Before
+		 * Título
+		 * After
+		 */
 		'link_with_dropdown' => '
 			<a href="javascript: void(0);" class="%s %s" %s title="%s">
 				<i class="fa fa-%s"> %s%s%s <i class="arrow fa fa-angle-down pull-right"></i>
 			</a>
 		',
 
+		/**
+		 * Classe dropdown
+		 * Conteúdo
+		 */
 		'dropdown' => '<ul class="%s">%s</ul>',
 
+		/**
+		 * Classe
+		 * Classe ativa
+		 * Conteúdo
+		 */
 		'dropdown_item' => '<li class="%s %s">%s</li>'
 	);
 
