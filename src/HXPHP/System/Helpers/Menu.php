@@ -3,11 +3,10 @@
 namespace HXPHP\System\Helpers;
 
 use HXPHP\System\Storage as Storage;
-use \HXPHP\System\Tools as Tools;
+use HXPHP\System\Tools as Tools;
 
 class Menu
 {
-
 	/**
 	 * Elementos HTML utilizados na renderização do menu
 	 * @var array
@@ -82,6 +81,12 @@ class Menu
 	);
 
 	/**
+	 * Dados do módulo de configuração
+	 * @var array
+	 */
+	private $configs = array();
+
+	/**
 	 * URL ATUAL
 	 * @var string
 	 */
@@ -94,18 +99,35 @@ class Menu
 	private $html;
 
 
+	/**
+	 * [__construct description]
+	 * @param \HXPHP\System\Http\Request   $request Objeto Request
+	 * @param \HXPHP\System\Configs\Config $configs Configurações do framework
+	 * @param [type]                       $role    Nível de acesso
+	 */
 	public function __construct(
 		\HXPHP\System\Http\Request $request,
 		\HXPHP\System\Configs\Config $configs,
 		$role = null
 	)
 	{
-		$this->setCurrentURL($request, $configs);
+		$this->setConfigs($configs->menu->configs)
+				->setCurrentURL($request, $configs);
 	}
 
 	/**
-	 * Define o CONTROLLER
-	 * @param string $controller Controller
+	 * Dados do módulo de configuração do MenuHelper
+	 * @param array $configs
+	 */
+	private function setConfigs(array $configs)
+	{
+		$this->configs = $configs;
+
+		return $this;
+	}
+
+	/**
+	 * Define a URL atual
 	 */
 	private function setCurrentURL($request, $configs)
 	{
