@@ -112,10 +112,15 @@ class Menu
 	private function setCurrentURL($request, $configs)
 	{
 		$site_url = $configs->site->url . $configs->baseURI;
+
+		$subfolder = Tools::decamelize(str_replace(DS, '/', $request->subfolder));
 		$controller = Tools::decamelize(str_replace('Controller', '', $request->controller));
 		$action = Tools::decamelize(str_replace('Action', '', ucfirst($request->action)));
 
-		$this->current_url = $site_url . $controller . '/' . $action;
+		$controller = $controller === 'index' ? '' : $controller . '/';
+		$action = $action === 'index' ? '' : $action;
+
+		$this->current_url = $site_url . $subfolder . $controller . $action;
 
 		return $this;
 	}
