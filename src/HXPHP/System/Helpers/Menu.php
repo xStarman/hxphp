@@ -7,6 +7,30 @@ use HXPHP\System\Storage as Storage;
 class Menu
 {
 
+	private $elements = array(
+		'container' => '
+			<%s>
+				%s
+			</%s>
+		',
+
+		'menu' => '<ul class="%s" id="%s">%s</ul>',
+
+		'menu_item' => '<li class="%s %s">%s</li>',
+
+		'link' => '<a href="%s" class="%s %s" title="%s"><i class="fa fa-%s"> %s%s%s</a>',
+
+		'link_with_dropdown' => '
+			<a href="javascript: void(0);" class="%s %s" %s title="%s">
+				<i class="fa fa-%s"> %s%s%s <i class="arrow fa fa-angle-down pull-right"></i>
+			</a>
+		',
+
+		'dropdown' => '<ul class="%s">%s</ul>',
+
+		'dropdown_item' => '<li class="%s %s">%s</li>'
+	);
+
 	/**
 	 * Menus e submenus
 	 * @var array
