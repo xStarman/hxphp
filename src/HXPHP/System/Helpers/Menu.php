@@ -166,6 +166,16 @@ class Menu
 	}
 
 	/**
+	 * Verifica se o link está ativo
+	 * @param  string $URL Link do menuy
+	 * @return bool        Status do link
+	 */
+	private function checkActive($URL)
+	{
+		return strpos($this->current_URL, $URL) !== false ? true : false;
+	}
+
+	/**
 	 * Renderiza o menu em HTML
 	 */
 	private function render($role = 'default')
