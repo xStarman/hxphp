@@ -258,10 +258,19 @@ class Menu
 			// Dropdown
 			if (is_array($value) && !empty($value)) {
 
+				$drodown = '';
+
 				foreach ($value as $dropdown_key => $dropdown_value) {
 					$submenu_data = $this->extractingMenuData($dropdown_key);
 					$real_link = $this->getRealLink($dropdown_value);
 				}
+
+				$active = $this->checkDropdownActive($value) === true ? $menu_configs['menu_item_active_class'] : '';
+				$itens.= $this->getElement('menu_item', array(
+					$menu_configs['menu_item_dropdown_class'],
+					$active,
+					$dropdown
+				));
 			}
 		}
 
