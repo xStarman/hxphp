@@ -321,11 +321,12 @@ class Menu
 				));
 
 				$attrs = $this->renderAttrs($menu_configs['link_dropdown_attrs']);
+				$active = $this->checkDropdownActive($value) === true ? $menu_configs['link_active_class'] : '';
 
 				$link = $this->getElement('link_with_dropdown', array(
 					$i,
 					$menu_configs['link_dropdown_class'],
-					'',
+					$active,
 					$attrs,
 					$menu_data->title,
 					$menu_data->icon,

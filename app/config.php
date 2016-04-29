@@ -5,10 +5,10 @@
 	$configs->env->add('development');
 
 	$configs->env->development->menu->setMenus(array(
-		'Home/home' => '%siteURL%home',
+		'Home/home' => '%siteURL%',
 		'Projetos/briefcase' => '%baseURI%projetos/listar/',
 		'Clientes/users' => array(
-			'Listar todos/users' => '%baseURI%clientes/show',
+			'Listar todos/users' => '%baseURI%',
 			'Tipos de clientes/users' => '%baseURI%clientes/tipos'
 		),
 		'Usuários/users' => '%baseURI%usuarios/listar/'
