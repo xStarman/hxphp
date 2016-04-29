@@ -26,8 +26,15 @@ class Menu
 		'dropdown_item_active_class' => 'active'
 	);
 
+	public $itens = array();
+
 	public function setConfigs(array $configs)
 	{
 		return $this->configs = array_merge($this->configs, $configs);
+	}
+
+	public function setMenus(array $itens, $role = 'default')
+	{
+		return $this->itens[$role] = $itens;
 	}
 }

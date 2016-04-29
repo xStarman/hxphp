@@ -2,6 +2,23 @@
 	//Constantes
 	$configs = new HXPHP\System\Configs\Config;
 
+	$configs->env->add('development');
+
+	$configs->env->development->menu->setMenus(array(
+		'Home/home' => '%siteURL%home',
+		'Projetos/briefcase' => '%baseURI%projetos/listar/',
+		'Clientes/users' => array(
+			'Listar todos' => '%baseURI%clientes/show',
+			'Tipos de clientes' => '%baseURI%clientes/tipos'
+		),
+		'Usuários/users' => '%baseURI%usuarios/listar/'
+	), 'administrator');
+
+	$configs->env->development->menu->setMenus(array(
+		'Home/home' => '%siteURL%home',
+		'Projetos/briefcase' => '%baseURI%projetos/listar/'
+	));
+
 	/*
 		//Globais
 		$configs->global->models->directory = APP_PATH . 'models' . DS;

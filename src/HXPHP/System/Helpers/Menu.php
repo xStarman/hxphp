@@ -100,10 +100,9 @@ class Menu
 
 
 	/**
-	 * [__construct description]
 	 * @param \HXPHP\System\Http\Request   $request Objeto Request
 	 * @param \HXPHP\System\Configs\Config $configs Configurações do framework
-	 * @param [type]                       $role    Nível de acesso
+	 * @param string                       $role    Nível de acesso
 	 */
 	public function __construct(
 		\HXPHP\System\Http\Request $request,
@@ -155,7 +154,7 @@ class Menu
 	{
 		if ( ! isset($this->elements[$name]))
 			return false;
-		
+
 		if ( ! empty($args)) {
 			$args = array_values($args);
 			array_unshift($args, $this->elements[$name]);
@@ -197,17 +196,28 @@ class Menu
 	}
 
 	/**
-	 * Modela o menu em HTML
-	 * @param  string $controller Controller
+	 * Renderiza o menu em HTML
 	 */
-	private function setHTML($controller)
+	private function render($role = 'default')
 	{
-		if (is_null($controller))
-			throw new \Exception("Informe o controller para gerar o menu.", 1);
-			
-		$controller = strtolower(str_replace('Controller', '', $controller));
+		$menus = $this->configs->menu->itens;
+		$menu_configs = $this->configs->menu->configs;
 
-		$this->html .= '<ul>';
+
+
+		$menu = $this->getElement('menu', array(
+			$menu_configs['menu_class'],
+			$menu_configs['menu_id'],
+			$itens
+		));
+
+		if ($menu_configs['container'] !== false) {
+			$this->html = $this->getElement('container', array(
+				$menu_configs['container'],
+				$menu,
+				$menu_configs['container']
+			));
+		}
 
 		foreach ($this->menu as $key => $value) {
 			$explode = explode('/', $key);
