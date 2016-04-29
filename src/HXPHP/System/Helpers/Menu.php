@@ -51,6 +51,7 @@ class Menu
 		'link' => '<a href="%s" class="%s %s" title="%s"><i class="fa fa-%s"> %s%s%s</a>',
 
 		/**
+		 * Link
 		 * Classe
 		 * Classe Ativa
 		 * Attrs
@@ -62,17 +63,18 @@ class Menu
 		 * Dropdown
 		 */
 		'link_with_dropdown' => '
-			<a href="javascript: void(0);" class="%s %s" %s title="%s">
+			<a href="#hxphp-submenu-%s" class="%s %s" %s title="%s">
 				<i class="fa fa-%s"> %s%s%s <i class="arrow fa fa-angle-down pull-right"></i>
 			</a>
 			%s
 		',
 
 		/**
+		 * ID dropdown
 		 * Classe dropdown
 		 * Conteúdo
 		 */
-		'dropdown' => '<ul class="%s">%s</ul>',
+		'dropdown' => '<ul id="hxphp-submenu-%s" class="%s">%s</ul>',
 
 		/**
 		 * Classe
@@ -273,7 +275,10 @@ class Menu
 
 		$itens = '';
 
+		$i = 0;
+
 		foreach ($menus as $key => $value) {
+			$i++;
 			$menu_data = $this->extractingMenuData($key);
 			$real_link = $this->getRealLink($value);
 
@@ -306,6 +311,7 @@ class Menu
 				));
 
 				$dropdown = $this->getElement('dropdown', array(
+					$i,
 					$menu_configs['dropdown_class'],
 					$dropdown_itens
 				));
@@ -313,6 +319,7 @@ class Menu
 				$attrs = $this->renderAttrs($menu_configs['link_dropdown_attrs']);
 
 				$link = $this->getElement('link_with_dropdown', array(
+					$i,
 					$menu_configs['link_dropdown_class'],
 					'',
 					$attrs,
