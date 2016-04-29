@@ -176,6 +176,27 @@ class Menu
 	}
 
 	/**
+	 * Verifica se algum link do dropdown está ativo
+	 * @param  array $values Links do dropdown
+	 * @return bool        	 Status do dropdown
+	 */
+	private function checkDropdownActive(array $values)
+	{
+		$values = array_values($values);
+		$status = false;
+
+		foreach ($values as $dropdown_link) {
+			$real_link = $this->getRealLink($dropdown_link);
+
+			if (strpos($this->current_URL, $real_link) !== false) {
+				$status = true;
+				break;
+			}
+		}
+		return $status;
+	}
+
+	/**
 	 * Extrair dados da key dos menus
 	 * @param  string $key Titulo/Icone
 	 * @return object      Objeto com dados extraídos
@@ -199,19 +220,23 @@ class Menu
 	 */
 	private function getRealLink($value)
 	{
-		return str_replace(array(
-			'%siteURL%',
-			'%site_URL',
-			'%site_url',
-			'%baseURI%',
-			'%base_uri%'
-		), array(
-			$this->configs->site->url . $this->configs->baseURI,
-			$this->configs->site->url . $this->configs->baseURI,
-			$this->configs->site->url . $this->configs->baseURI,
-			$this->configs->baseURI,
-			$this->configs->baseURI
-		), $value);
+		return str_replace(
+			array(
+				'%siteURL%',
+				'%site_URL',
+				'%site_url',
+				'%baseURI%',
+				'%base_uri%'
+			), 
+			array(
+				$this->configs->site->url . $this->configs->baseURI,
+				$this->configs->site->url . $this->configs->baseURI,
+				$this->configs->site->url . $this->configs->baseURI,
+				$this->configs->baseURI,
+				$this->configs->baseURI
+			),
+			$value
+		);
 	}
 
 	/**
@@ -235,6 +260,7 @@ class Menu
 
 				foreach ($value as $dropdown_key => $dropdown_value) {
 					$submenu_data = $this->extractingMenuData($dropdown_key);
+					$real_link = $this->getRealLink($dropdown_value);
 				}
 			}
 		}
