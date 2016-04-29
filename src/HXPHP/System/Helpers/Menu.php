@@ -242,6 +242,25 @@ class Menu
 	}
 
 	/**
+	 * Renderização dos atributos extras para links de ativação para dropdown
+	 * @param  array  $attrs Atributos
+	 * @return string        Atributos no formato HTML
+	 */
+	private function renderAttrs($attrs)
+	{
+		if (empty($attrs) || !is_array($attrs))
+			return null;
+
+		$html = '';
+
+		foreach ($attrs as $attr => $value) {
+			$html.= ' ' . $attr . '="' . $value . '" ';
+		}
+
+		return $html;
+	}
+
+	/**
 	 * Renderiza o menu em HTML
 	 */
 	private function render($role = 'default')
@@ -265,6 +284,14 @@ class Menu
 				foreach ($value as $dropdown_key => $dropdown_value) {
 					$submenu_data = $this->extractingMenuData($dropdown_key);
 					$real_link = $this->getRealLink($dropdown_value);
+
+					$active = $this->checkActive($real_link) === true ? $menu_configs['link_active_class'] : '';
+					$attrs = $this->renderAttrs($menu_configs['link_dropdown_attrs']);
+
+					/*$dropdown.= $this->getElement('link_with_dropdown', array(
+						$menu_configs['link_dropdown_class'],
+						$active
+					));*/
 				}
 
 				$active = $this->checkDropdownActive($value) === true ? $menu_configs['menu_item_active_class'] : '';
