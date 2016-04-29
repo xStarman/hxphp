@@ -164,36 +164,6 @@ class Menu
 
 		return $this->elements[$name];
 	}
-	
-	/**
-	 * Define o Array com menus e submenus
-	 * @param  string $role Role do usuário
-	 */
-	private function setMenu($role)
-	{	
-		switch ($role) {
-			case 'administrator':
-				$this->menu = array(
-					'Home/home' => 'home',
-					'Projetos/briefcase' => 'projetos/listar/',
-					'Clientes/users' => array(
-						'Listar todos' => 'clientes/show',
-						'Tipos de clientes' => 'clientes/tipos'
-					),
-					'Usuários/users' => 'usuarios/listar/'
-				);
-				break;
-
-			case 'user':
-				$this->menu = array(
-					'Home/home' => 'home',
-					'Projetos/briefcase' => 'projetos/listar/'
-				);
-				break;
-		}
-
-		return $this;
-	}
 
 	/**
 	 * Renderiza o menu em HTML
@@ -203,7 +173,28 @@ class Menu
 		$menus = $this->configs->menu->itens;
 		$menu_configs = $this->configs->menu->configs;
 
+		if (empty($menus) || !is_array($menus))
+			return false;
 
+		$itens = '';
+
+		foreach ($menus as $key => $value) {
+			$explode = explode('/', $key);
+
+			$title = $explode[0];
+			$icon =  isset($explode[1]) ? $explode[1] : '';
+
+			// Dropdown
+			if (is_array($value) && !empty($value)) {
+
+				foreach ($value as $dropdown_links) {
+					$explode = explode('/', $key);
+
+					$title = $explode[0];
+					$icon =  isset($explode[1]) ? $explode[1] : '';
+				}
+			}
+		}
 
 		$menu = $this->getElement('menu', array(
 			$menu_configs['menu_class'],
@@ -270,7 +261,6 @@ class Menu
 	 */
 	public function getMenu()
 	{
-		$this->setHTML($this->controller);
 		return $this->html;
 	}
 
