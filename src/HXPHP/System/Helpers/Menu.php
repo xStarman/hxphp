@@ -15,11 +15,13 @@ class Menu
 
 		/**
 		 * Tag inicio container
+		 * ID
+		 * Classe
 		 * Conteúdo do container
 		 * Tag final container
 		 */
 		'container' => '
-			<%s>
+			<%s id="%s" class="%s">
 				%s
 			</%s>
 		',
@@ -284,31 +286,33 @@ class Menu
 
 			// Dropdown
 			if (is_array($value) && !empty($value)) { 
-				$links = '';
+				$dropdown_itens = '';
 
 				foreach ($value as $dropdown_key => $dropdown_value) {
 					$submenu_data = $this->extractingMenuData($dropdown_key);
 					$submenu_real_link = $this->getRealLink($dropdown_value);
 
-					$submenu_active = $this->checkActive($submenu_real_link) === true ? $menu_configs['dropdown_item_active_class'] : '';
+					$submenu_link_active = $this->checkActive($submenu_real_link) === true ? $menu_configs['link_active_class'] : '';
 
-					$links.= $this->getElement('link', array(
+					$link = $this->getElement('link', array(
 						$submenu_real_link,
 						$menu_configs['link_class'],
-						$submenu_active,
+						$submenu_link_active,
 						$submenu_data->title,
 						$submenu_data->icon,
 						$menu_configs['link_before'],
 						$submenu_data->title,
 						$menu_configs['link_after']
 					));
-				}
 
-				$dropdown_itens = $this->getElement('dropdown_item', array(
-					$menu_configs['dropdown_item_class'],
-					'',
-					$links
-				));
+					$submenu_active = $this->checkActive($submenu_real_link) === true ? $menu_configs['dropdown_item_active_class'] : '';
+
+					$dropdown_itens.= $this->getElement('dropdown_item', array(
+						$menu_configs['dropdown_item_class'],
+						$submenu_active,
+						$link
+					));
+				}
 
 				$dropdown = $this->getElement('dropdown', array(
 					$i,
@@ -372,6 +376,8 @@ class Menu
 		if ($menu_configs['container'] !== false) {
 			$this->html = $this->getElement('container', array(
 				$menu_configs['container'],
+				$menu_configs['container_id'],
+				$menu_configs['container_class'],
 				$menu,
 				$menu_configs['container']
 			));
