@@ -5,6 +5,7 @@ class IndexController extends \HXPHP\System\Controller
 	public function indexAction()
 	{
 		$this->load('Helpers\Menu', $this->request, $this->configs);
+		$this->menu->getMenu('administrator');
 		/*
 		 	//Opções disponíveis
 			$this->view->setPath('index')

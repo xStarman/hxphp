@@ -8,8 +8,8 @@
 		'Home/home' => '%siteURL%home',
 		'Projetos/briefcase' => '%baseURI%projetos/listar/',
 		'Clientes/users' => array(
-			'Listar todos' => '%baseURI%clientes/show',
-			'Tipos de clientes' => '%baseURI%clientes/tipos'
+			'Listar todos/users' => '%baseURI%clientes/show',
+			'Tipos de clientes/users' => '%baseURI%clientes/tipos'
 		),
 		'Usuários/users' => '%baseURI%usuarios/listar/'
 	), 'administrator');

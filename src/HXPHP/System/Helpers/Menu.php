@@ -112,7 +112,7 @@ class Menu
 		$role = null
 	)
 	{
-		$this->setConfigs($configs->menu->configs)
+		$this->setConfigs($configs)
 				->setCurrentURL($request, $configs);
 	}
 
@@ -120,7 +120,7 @@ class Menu
 	 * Dados do módulo de configuração do MenuHelper
 	 * @param array $configs
 	 */
-	private function setConfigs(array $configs)
+	private function setConfigs($configs)
 	{
 		$this->configs = $configs;
 
@@ -265,7 +265,7 @@ class Menu
 	 */
 	private function render($role = 'default')
 	{
-		$menus = $this->configs->menu->itens;
+		$menus = $this->configs->menu->itens[$role];
 		$menu_configs = $this->configs->menu->configs;
 
 		if (empty($menus) || !is_array($menus))
@@ -275,32 +275,85 @@ class Menu
 
 		foreach ($menus as $key => $value) {
 			$menu_data = $this->extractingMenuData($key);
+			$real_link = $this->getRealLink($value);
 
 			// Dropdown
-			if (is_array($value) && !empty($value)) {
-
-				$drodown = '';
+			if (is_array($value) && !empty($value)) { 
+				$links = '';
 
 				foreach ($value as $dropdown_key => $dropdown_value) {
 					$submenu_data = $this->extractingMenuData($dropdown_key);
-					$real_link = $this->getRealLink($dropdown_value);
+					$submenu_real_link = $this->getRealLink($dropdown_value);
 
-					$active = $this->checkActive($real_link) === true ? $menu_configs['link_active_class'] : '';
-					$attrs = $this->renderAttrs($menu_configs['link_dropdown_attrs']);
+					$submenu_active = $this->checkActive($submenu_real_link) === true ? $menu_configs['dropdown_item_active_class'] : '';
 
-					/*$dropdown.= $this->getElement('link_with_dropdown', array(
-						$menu_configs['link_dropdown_class'],
-						$active
-					));*/
+					$links.= $this->getElement('link', array(
+						$submenu_real_link,
+						$menu_configs['link_class'],
+						$submenu_active,
+						$submenu_data->title,
+						$submenu_data->icon,
+						$menu_configs['link_before'],
+						$submenu_data->title,
+						$menu_configs['link_after']
+					));
 				}
 
+				$dropdown_itens = $this->getElement('dropdown_item', array(
+					$menu_configs['dropdown_item_class'],
+					'',
+					$links
+				));
+
+				$dropdown = $this->getElement('dropdown', array(
+					$menu_configs['dropdown_class'],
+					$dropdown_itens
+				));
+
+				$attrs = $this->renderAttrs($menu_configs['link_dropdown_attrs']);
+
+				$link = $this->getElement('link_with_dropdown', array(
+					$menu_configs['link_dropdown_class'],
+					'',
+					$attrs,
+					$menu_data->title,
+					$menu_data->icon,
+					$menu_configs['link_before'],
+					$menu_data->title,
+					$menu_configs['link_after'],
+					$dropdown
+				));
+
 				$active = $this->checkDropdownActive($value) === true ? $menu_configs['menu_item_active_class'] : '';
+
 				$itens.= $this->getElement('menu_item', array(
 					$menu_configs['menu_item_dropdown_class'],
 					$active,
-					$dropdown
-				));
+					$link
+				));		
 			}
+			else {
+				$link_active = $this->checkActive($real_link) === true ? $menu_configs['link_active_class'] : '';
+
+				$link = $this->getElement('link', array(
+					$real_link,
+					$menu_configs['link_class'],
+					$link_active,
+					$menu_data->title,
+					$menu_data->icon,
+					$menu_configs['link_before'],
+					$menu_data->title,
+					$menu_configs['link_after']
+				));
+
+				$active = $this->checkActive($real_link) === true ? $menu_configs['menu_item_active_class'] : '';
+
+				$itens.= $this->getElement('menu_item', array(
+					$menu_configs['menu_item_class'],
+					$active,
+					$link
+				));
+			}	
 		}
 
 		$menu = $this->getElement('menu', array(
@@ -316,48 +369,9 @@ class Menu
 				$menu_configs['container']
 			));
 		}
-
-		foreach ($this->menu as $key => $value) {
-			$explode = explode('/', $key);
-
-			$title = $explode[0];
-			$icon =  isset($explode[1]) ? $explode[1] : '';
-
-			/**
-			 * Menu com submenus
-			 */
-			if (is_array($value)) {
-				$values = array_values($value);
-				$check = explode('/', $values[0]);
-
-				$this->html .= '
-				    <li class="dropdown '.(($check[0] == $controller) ? 'active' : '').'">
-				      <a href="javascript:void(0);" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-'.$icon.'"></i> <span>'.$title.'</span> <i class="arrow fa fa-angle-down pull-right"></i></a>
-				      <ul class="dropdown-menu">
-				';
-
-				foreach($value as $titulo => $link){
-					$this->html .= '
-						<li><a href="'.$this->baseURI.$link.'">'.$titulo.'</a></li>';
-				}
-
-				$this->html .= '
-					  </ul>
-					</li>';
-			}
-			/**
-			 * Apenas Menu
-			 */
-			else {
-				$this->html .= '<li '.((strpos($value, $controller) !== false) ? 'class="active"' : '').'>
-									<a href="'.$this->baseURI.$value.'">
-										<i class="fa fa-'.$icon.'"></i> <span>'.$title.'</span>
-									</a>
-								</li>';
-			}
+		else {
+			$this->html = $menu;
 		}
-
-		$this->html .= '</ul>';
 
 		return $this;
 	}
@@ -366,17 +380,10 @@ class Menu
 	 * Exibe o HTML com o menu renderizado
 	 * @return string
 	 */
-	public function getMenu()
+	public function getMenu($role)
 	{
-		return $this->html;
-	}
+		$this->render($role);
 
-	/**
-	 * Exibe o HTML com o menu renderizado
-	 * @return string
-	 */
-	public function __toString()
-	{
-		return $this->getMenu();
+		echo $this->html;
 	}
 }
