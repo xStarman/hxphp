@@ -145,8 +145,17 @@ class Menu
 		return $this;
 	}
 
+	/**
+	 * Retorna um elemento
+	 * @param  string $name Nome do elemento
+	 * @param  array  $args Array para preencher os coringas presentes nos elementos
+	 * @return string       HTML do elemento
+	 */
 	private function getElement($name, array $args = array())
 	{
+		if ( ! isset($this->elements[$name]))
+			return false;
+		
 		if ( ! empty($args)) {
 			$args = array_values($args);
 			array_unshift($args, $this->elements[$name]);
