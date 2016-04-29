@@ -176,6 +176,23 @@ class Menu
 	}
 
 	/**
+	 * Extrair dados da key dos menus
+	 * @param  string $key Titulo/Icone
+	 * @return object      Objeto com dados extraídos
+	 */
+	private function extractingMenuData($key)
+	{
+		$obj = new \stdClass;
+
+		$explode = explode('/', $key);
+
+		$obj->title = $explode[0];
+		$obj->icon = isset($explode[1]) ? $explode[1] : '';
+
+		return $obj;
+	}
+
+	/**
 	 * Renderiza o menu em HTML
 	 */
 	private function render($role = 'default')
