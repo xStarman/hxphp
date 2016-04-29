@@ -59,11 +59,13 @@ class Menu
 		 * Before
 		 * Título
 		 * After
+		 * Dropdown
 		 */
 		'link_with_dropdown' => '
 			<a href="javascript: void(0);" class="%s %s" %s title="%s">
 				<i class="fa fa-%s"> %s%s%s <i class="arrow fa fa-angle-down pull-right"></i>
 			</a>
+			%s
 		',
 
 		/**
