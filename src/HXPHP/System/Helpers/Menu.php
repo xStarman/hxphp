@@ -193,6 +193,28 @@ class Menu
 	}
 
 	/**
+	 * Retorna o link com os coringas preenchidos
+	 * @param  string $value Link 
+	 * @return string        Link tratado
+	 */
+	private function getRealLink($value)
+	{
+		return str_replace(array(
+			'%siteURL%',
+			'%site_URL',
+			'%site_url',
+			'%baseURI%',
+			'%base_uri%'
+		), array(
+			$this->configs->site->url . $this->configs->baseURI,
+			$this->configs->site->url . $this->configs->baseURI,
+			$this->configs->site->url . $this->configs->baseURI,
+			$this->configs->baseURI,
+			$this->configs->baseURI
+		), $value);
+	}
+
+	/**
 	 * Renderiza o menu em HTML
 	 */
 	private function render($role = 'default')
@@ -206,19 +228,13 @@ class Menu
 		$itens = '';
 
 		foreach ($menus as $key => $value) {
-			$explode = explode('/', $key);
-
-			$title = $explode[0];
-			$icon =  isset($explode[1]) ? $explode[1] : '';
+			$menu_data = $this->extractingMenuData($key);
 
 			// Dropdown
 			if (is_array($value) && !empty($value)) {
 
-				foreach ($value as $dropdown_links) {
-					$explode = explode('/', $key);
-
-					$title = $explode[0];
-					$icon =  isset($explode[1]) ? $explode[1] : '';
+				foreach ($value as $dropdown_key => $dropdown_value) {
+					$submenu_data = $this->extractingMenuData($dropdown_key);
 				}
 			}
 		}
