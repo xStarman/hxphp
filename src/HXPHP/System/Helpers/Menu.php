@@ -144,6 +144,18 @@ class Menu
 
 		return $this;
 	}
+
+	private function getElement($name, array $args = array())
+	{
+		if ( ! empty($args)) {
+			$args = array_values($args);
+			array_unshift($args, $this->elements[$name]);
+
+			return call_user_func_array('sprintf', $args);
+		}
+
+		return $this->elements[$name];
+	}
 	
 	/**
 	 * Define o Array com menus e submenus
