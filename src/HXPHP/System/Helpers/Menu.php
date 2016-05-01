@@ -394,7 +394,7 @@ class Menu
 	 * Exibe o HTML com o menu renderizado
 	 * @return string
 	 */
-	public function getMenu($role)
+	public function getMenu($role = 'default')
 	{
 		$this->render($role);
 

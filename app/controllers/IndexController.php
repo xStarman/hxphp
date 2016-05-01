@@ -10,7 +10,7 @@ class IndexController extends \HXPHP\System\Controller
 			$this->configs
 		);
 
-		$this->view->setVar('menu', $this->menu->getMenu('administrator'));
+		$this->view->setVar('menu', $this->menu->getMenu());
 		/*
 		 	//Opções disponíveis
 			$this->view->setPath('index')

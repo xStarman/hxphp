@@ -21,8 +21,8 @@
 	), 'administrator');
 
 	$configs->env->development->menu->setMenus(array(
-		'Home/home' => '%siteURL%home',
-		'Projetos/briefcase' => '%baseURI%projetos/listar/'
+		'Home/home' => '%siteURL%',
+		'Subpasta/briefcase' => '%baseURI%/admin/have-fun/'
 	));
 
 	/*
