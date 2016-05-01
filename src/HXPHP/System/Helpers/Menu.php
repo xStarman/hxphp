@@ -50,7 +50,7 @@ class Menu
 		 * Título
 		 * After
 		 */
-		'link' => '<a href="%s" class="%s %s" title="%s"><i class="fa fa-%s"> %s%s%s</a>',
+		'link' => '<a href="%s" class="%s %s" title="%s"><i class="fa fa-%s"></i> %s%s%s</a>',
 
 		/**
 		 * Link
