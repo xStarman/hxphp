@@ -241,6 +241,7 @@ class View
 		//Atribuição das constantes
 		define('BASE',   $baseURI);
 		define('ASSETS', $baseURI . 'public/assets/');
+		define('BOWER', $baseURI . 'public/bower_components/');
 		define('IMG',    $baseURI . 'public/img/');
 		define('CSS',    $baseURI . 'public/css/');
 		define('JS',     $baseURI . 'public/js/');
