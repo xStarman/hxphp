@@ -226,6 +226,12 @@ class Menu
 	 */
 	private function getRealLink($value)
 	{
+		$value = str_replace(
+			array('% %', '%/'),
+			array('%%', '%'),
+			$value
+		);
+
 		return str_replace(
 			array(
 				'%siteURL%',
