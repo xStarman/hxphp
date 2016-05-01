@@ -136,16 +136,7 @@ class Menu
 	 */
 	private function setCurrentURL($request, $configs)
 	{
-		$site_url = $configs->site->url . $configs->baseURI;
-
-		$subfolder = Tools::decamelize(str_replace(DS, '/', $request->subfolder));
-		$controller = Tools::decamelize(str_replace('Controller', '', $request->controller));
-		$action = Tools::decamelize(str_replace('Action', '', ucfirst($request->action)));
-
-		$controller = $controller === 'index' ? '' : $controller . '/';
-		$action = $action === 'index' ? '' : $action;
-
-		$this->current_URL = $site_url . $subfolder . $controller . $action;
+		$this->current_URL = $configs->site->url . $request->server('REQUEST_URI');
 
 		return $this;
 	}
@@ -194,7 +185,7 @@ class Menu
 		foreach ($values as $dropdown_link) {
 			$real_link = $this->getRealLink($dropdown_link);
 
-			if (strpos($this->current_URL, $real_link) !== false) {
+			if ($this->checkActive($real_link) === true) {
 				$status = true;
 				break;
 			}

@@ -12,16 +12,6 @@
 
 	$configs->env->development->menu->setMenus(array(
 		'Home/home' => '%siteURL%',
-		'Projetos/briefcase' => '%baseURI%projetos/listar/',
-		'Clientes/users' => array(
-			'Listar todos/users' => '%baseURI%',
-			'Tipos de clientes/users' => '%baseURI%clientes/tipos'
-		),
-		'Usuários/users' => '%baseURI%usuarios/listar/'
-	), 'administrator');
-
-	$configs->env->development->menu->setMenus(array(
-		'Home/home' => '%siteURL%',
 		'Subpasta/briefcase' => '%baseURI%/admin/have-fun/'
 	));
 
