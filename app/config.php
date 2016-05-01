@@ -4,6 +4,12 @@
 
 	$configs->env->add('development');
 
+	$configs->env->development->menu->setConfigs(array(
+		'container' => 'nav',
+		'container_class' => 'navbar navbar-default',
+		'menu_class' => 'nav navbar-nav'
+	));
+
 	$configs->env->development->menu->setMenus(array(
 		'Home/home' => '%siteURL%',
 		'Projetos/briefcase' => '%baseURI%projetos/listar/',
