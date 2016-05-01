@@ -65,7 +65,7 @@ class Menu
 		 * Dropdown
 		 */
 		'link_with_dropdown' => '
-			<a href="#hxphp-submenu-%s" class="%s %s" %s title="%s">
+			<a href="#" data-href="#hxphp-submenu-%s" class="%s %s" %s title="%s">
 				<i class="fa fa-%s"></i> %s%s%s <i class="arrow fa fa-angle-down pull-right"></i>
 			</a>
 			%s
