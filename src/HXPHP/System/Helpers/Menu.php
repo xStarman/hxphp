@@ -398,6 +398,6 @@ class Menu
 	{
 		$this->render($role);
 
-		echo $this->html;
+		return $this->html;
 	}
 }
