@@ -136,7 +136,9 @@ class Menu
 	 */
 	private function setCurrentURL($request, $configs)
 	{
-		$this->current_URL = $configs->site->url . $request->server('REQUEST_URI');
+		$parseURL = parse_url($request->server('REQUEST_URI'));
+
+		$this->current_URL = $configs->site->url . $parseURL['path'];
 
 		return $this;
 	}
@@ -169,7 +171,8 @@ class Menu
 	 */
 	private function checkActive($URL)
 	{
-		return strpos($this->current_URL, $URL) !== false ? true : false;
+		$position = strpos($this->current_URL, $URL);
+		return $this->current_URL === $URL || ($position !== false && $position > 0) ? true : false;
 	}
 
 	/**
