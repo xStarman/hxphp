@@ -2,21 +2,6 @@
 	//Constantes
 	$configs = new HXPHP\System\Configs\Config;
 
-	$configs->env->add('development');
-
-	$configs->env->development->menu->setConfigs(array(
-		'container' => 'nav',
-		'container_class' => 'navbar navbar-default',
-		'menu_class' => 'nav navbar-nav'
-	));
-
-	$configs->env->development->menu->setMenus(array(
-		'Home/home' => '%siteURL%',
-		'Subpasta/folder-open' => array(
-			'Home/home' => '%baseURI%/admin/have-fun/'
-		)
-	));
-
 	/*
 		//Globais
 		$configs->global->models->directory = APP_PATH . 'models' . DS;
@@ -46,6 +31,20 @@
 		$configs->env->development->mail->setFrom(array(
 			'from' => 'Remetente',
 			'from_mail' => 'email@remetente.com.br'
+		));
+
+		$configs->env->development->menu->setConfigs(array(
+			'container' => 'nav',
+			'container_class' => 'navbar navbar-default',
+			'menu_class' => 'nav navbar-nav'
+		));
+
+		$configs->env->development->menu->setMenus(array(
+			'Home/home' => '%siteURL%',
+			'Subpasta/folder-open' => array(
+				'Home/home' => '%baseURI%/admin/have-fun/',
+				'Teste/home' => '%baseURI%/admin/index/',
+			)
 		));
 
 		//Configurações de Ambiente - Produção
