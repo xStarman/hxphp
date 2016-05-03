@@ -89,7 +89,7 @@ class Elements
 	 * @param  array  $args Array para preencher os coringas presentes nos elementos
 	 * @return string       HTML do elemento
 	 */
-	private function get($name, array $args = array())
+	public function get($name, array $args = array())
 	{
 		if ( ! isset($this->elements[$name]))
 			return false;
