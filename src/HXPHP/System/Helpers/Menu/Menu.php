@@ -7,84 +7,7 @@ use HXPHP\System\Tools as Tools;
 
 class Menu
 {
-	/**
-	 * Elementos HTML utilizados na renderização do menu
-	 * @var array
-	 */
-	private $elements = array(
-
-		/**
-		 * Tag inicio container
-		 * ID
-		 * Classe
-		 * Conteúdo do container
-		 * Tag final container
-		 */
-		'container' => '
-			<%s id="%s" class="%s">
-				%s
-			</%s>
-		',
-
-		/**
-		 * Classe do menu
-		 * ID do menu
-		 * Conteúdo do menu
-		 */
-		'menu' => '<ul class="%s" id="%s">%s</ul>',
-
-		/**
-		 * Classe
-		 * Classe ativa
-		 * Conteúdo
-		 */
-		'menu_item' => '<li class="%s %s">%s</li>',
-
-		/**
-		 * Link
-		 * Classe
-		 * Classe ativa
-		 * Título
-		 * Ícone (Font-Awesome)
-		 * Before
-		 * Título
-		 * After
-		 */
-		'link' => '<a href="%s" class="%s %s" title="%s"><i class="fa fa-%s"></i> %s%s%s</a>',
-
-		/**
-		 * Link
-		 * Classe
-		 * Classe Ativa
-		 * Attrs
-		 * Título
-		 * Ícone
-		 * Before
-		 * Título
-		 * After
-		 * Dropdown
-		 */
-		'link_with_dropdown' => '
-			<a href="#" data-href="#hxphp-submenu-%s" class="%s %s" %s title="%s">
-				<i class="fa fa-%s"></i> %s%s%s <i class="arrow fa fa-angle-down pull-right"></i>
-			</a>
-			%s
-		',
-
-		/**
-		 * ID dropdown
-		 * Classe dropdown
-		 * Conteúdo
-		 */
-		'dropdown' => '<ul id="hxphp-submenu-%s" class="%s">%s</ul>',
-
-		/**
-		 * Classe
-		 * Classe ativa
-		 * Conteúdo
-		 */
-		'dropdown_item' => '<li class="%s %s">%s</li>'
-	);
+	private $elements = null;
 
 	/**
 	 * Dados do módulo de configuração
@@ -116,6 +39,8 @@ class Menu
 		$role = null
 	)
 	{
+		$this->elements = new Elements;
+		
 		$this->setConfigs($configs)
 				->setCurrentURL($request, $configs);
 	}
@@ -141,27 +66,6 @@ class Menu
 		$this->current_URL = $configs->site->url . $parseURL['path'];
 
 		return $this;
-	}
-
-	/**
-	 * Retorna um elemento
-	 * @param  string $name Nome do elemento
-	 * @param  array  $args Array para preencher os coringas presentes nos elementos
-	 * @return string       HTML do elemento
-	 */
-	private function getElement($name, array $args = array())
-	{
-		if ( ! isset($this->elements[$name]))
-			return false;
-
-		if ( ! empty($args)) {
-			$args = array_values($args);
-			array_unshift($args, $this->elements[$name]);
-
-			return call_user_func_array('sprintf', $args);
-		}
-
-		return $this->elements[$name];
 	}
 
 	/**
@@ -294,7 +198,7 @@ class Menu
 
 					$submenu_link_active = $this->checkActive($submenu_real_link) === true ? $menu_configs['link_active_class'] : '';
 
-					$link = $this->getElement('link', array(
+					$link = $this->elements->get('link', array(
 						$submenu_real_link,
 						$menu_configs['link_class'],
 						$submenu_link_active,
@@ -307,14 +211,14 @@ class Menu
 
 					$submenu_active = $this->checkActive($submenu_real_link) === true ? $menu_configs['dropdown_item_active_class'] : '';
 
-					$dropdown_itens.= $this->getElement('dropdown_item', array(
+					$dropdown_itens.= $this->elements->get('dropdown_item', array(
 						$menu_configs['dropdown_item_class'],
 						$submenu_active,
 						$link
 					));
 				}
 
-				$dropdown = $this->getElement('dropdown', array(
+				$dropdown = $this->elements->get('dropdown', array(
 					$i,
 					$menu_configs['dropdown_class'],
 					$dropdown_itens
@@ -323,7 +227,7 @@ class Menu
 				$attrs = $this->renderAttrs($menu_configs['link_dropdown_attrs']);
 				$active = $this->checkDropdownActive($value) === true ? $menu_configs['link_active_class'] : '';
 
-				$link = $this->getElement('link_with_dropdown', array(
+				$link = $this->elements->get('link_with_dropdown', array(
 					$i,
 					$menu_configs['link_dropdown_class'],
 					$active,
@@ -338,7 +242,7 @@ class Menu
 
 				$active = $this->checkDropdownActive($value) === true ? $menu_configs['menu_item_active_class'] : '';
 
-				$itens.= $this->getElement('menu_item', array(
+				$itens.= $this->elements->get('menu_item', array(
 					$menu_configs['menu_item_dropdown_class'],
 					$active,
 					$link
@@ -347,7 +251,7 @@ class Menu
 			else {
 				$link_active = $this->checkActive($real_link) === true ? $menu_configs['link_active_class'] : '';
 
-				$link = $this->getElement('link', array(
+				$link = $this->elements->get('link', array(
 					$real_link,
 					$menu_configs['link_class'],
 					$link_active,
@@ -360,7 +264,7 @@ class Menu
 
 				$active = $this->checkActive($real_link) === true ? $menu_configs['menu_item_active_class'] : '';
 
-				$itens.= $this->getElement('menu_item', array(
+				$itens.= $this->elements->get('menu_item', array(
 					$menu_configs['menu_item_class'],
 					$active,
 					$link
@@ -368,14 +272,14 @@ class Menu
 			}	
 		}
 
-		$menu = $this->getElement('menu', array(
+		$menu = $this->elements->get('menu', array(
 			$menu_configs['menu_class'],
 			$menu_configs['menu_id'],
 			$itens
 		));
 
 		if ($menu_configs['container'] !== false) {
-			$this->html = $this->getElement('container', array(
+			$this->html = $this->elements->get('container', array(
 				$menu_configs['container'],
 				$menu_configs['container_id'],
 				$menu_configs['container_class'],
