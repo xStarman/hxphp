@@ -43,7 +43,7 @@ class Menu
 	)
 	{
 		$this->attrs = new Attrs;
-		$this->realLink = new RealLink;
+		$this->realLink = new RealLink($configs->site->url, $configs->baseURI);
 
 		$this->role = $role;
 

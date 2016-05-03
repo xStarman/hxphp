@@ -4,6 +4,14 @@ namespace HXPHP\System\Helpers\Menu;
 
 class RealLink
 {
+	private $siteURL;
+	private $baseURI;
+
+	public function __construct($siteURL, $baseURI)
+	{
+		$this->siteURL = $siteURL;
+		$this->baseURI = $baseURI;
+	}
 	/**
 	 * Retorna o link com os coringas preenchidos
 	 * @param  string $value Link 
@@ -26,11 +34,11 @@ class RealLink
 				'%base_uri%'
 			), 
 			array(
-				$this->configs->site->url . $this->configs->baseURI,
-				$this->configs->site->url . $this->configs->baseURI,
-				$this->configs->site->url . $this->configs->baseURI,
-				$this->configs->baseURI,
-				$this->configs->baseURI
+				$this->siteURL . $this->baseURI,
+				$this->siteURL . $this->baseURI,
+				$this->siteURL . $this->baseURI,
+				$this->baseURI,
+				$this->baseURI
 			),
 			$value
 		);
