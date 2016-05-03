@@ -23,7 +23,7 @@
 	require_once($composer_autoload);
 
 	//Start da sessão
-	HXPHP\System\Services\StartSession::sec_session_start();
+	HXPHP\System\Services\StartSession\StartSession::sec_session_start();
 
 	//Inicio da aplicação
 	$app = new HXPHP\System\App(require_once APP_PATH . 'config.php');

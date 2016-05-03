@@ -94,7 +94,7 @@ class Controller
 		 * Tratamento que adiciona a pasta do módulo
 		 */
 		$explode = explode('\\', $object);
-		$object = ($explode[0] === 'Modules' ? $object . '\\' . end($explode) : $object);
+		$object = $object . '\\' . end($explode);
 		$object = 'HXPHP\System\\' . $object;
 
 		if (class_exists($object)) {
