@@ -21,6 +21,8 @@ class Menu
 	 */
 	private $current_URL = null;
 
+	private $role;
+
 	/**
 	 * Conteúdo HTML do menu renderizado
 	 * @var string
@@ -36,11 +38,13 @@ class Menu
 	public function __construct(
 		\HXPHP\System\Http\Request $request,
 		\HXPHP\System\Configs\Config $configs,
-		$role = null
+		$role = 'default'
 	)
 	{
 		$this->elements = new Elements;
-		
+
+		$this->role = $role;
+
 		$this->setConfigs($configs)
 				->setCurrentURL($request, $configs);
 	}
@@ -298,10 +302,15 @@ class Menu
 	 * Exibe o HTML com o menu renderizado
 	 * @return string
 	 */
-	public function getMenu($role = 'default')
+	public function getMenu()
 	{
-		$this->render($role);
+		$this->render($this->role);
 
 		return $this->html;
+	}
+
+	public function __toString()
+	{
+		return $this->getMenu();
 	}
 }
