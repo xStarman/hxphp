@@ -1,6 +1,6 @@
 <?php
 
-namespace HXPHP\System\Helpers;
+namespace HXPHP\System\Helpers\Alert;
 
 use HXPHP\System\Storage as Storage;
 
@@ -66,7 +66,7 @@ class Alert
 	private function getTemplate()
 	{
 		$file = $this->list_messages ? '-list' : '';
-		$template = dirname(__FILE__) . DS . 'templates' . DS . 'Alert' . DS . 'alert' . $file . '.html';
+		$template = dirname(__FILE__) . DS . 'templates' . DS . 'alert' . $file . '.html';
 
 		if ( ! file_exists($template)) {
 			throw new \Exception("O template para a mensagem nao foi localizado: $template", 1);
