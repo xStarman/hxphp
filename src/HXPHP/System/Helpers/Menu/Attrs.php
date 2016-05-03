@@ -9,7 +9,7 @@ class Attrs
 	 * @param  array  $attrs Atributos
 	 * @return string        Atributos no formato HTML
 	 */
-	public function render($attrs)
+	public static function render($attrs)
 	{
 		if (empty($attrs) || !is_array($attrs))
 			return null;

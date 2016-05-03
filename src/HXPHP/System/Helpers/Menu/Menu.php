@@ -7,7 +7,6 @@ use HXPHP\System\Tools as Tools;
 
 class Menu
 {
-	private $attrs = null;
 	private $realLink = null;
 
 	/**
@@ -42,7 +41,6 @@ class Menu
 		$role = 'default'
 	)
 	{
-		$this->attrs = new Attrs;
 		$this->realLink = new RealLink($configs->site->url, $configs->baseURI);
 
 		$this->role = $role;
@@ -179,7 +177,7 @@ class Menu
 					$dropdown_itens
 				));
 
-				$attrs = $this->attrs->render($menu_configs['link_dropdown_attrs']);
+				$attrs = Attrs::render($menu_configs['link_dropdown_attrs']);
 				$active = $this->checkDropdownActive($value) === true ? $menu_configs['link_active_class'] : '';
 
 				$link = Elements::get('link_with_dropdown', array(
