@@ -8,7 +8,7 @@ class Elements
 	 * Elementos HTML utilizados na renderização do menu
 	 * @var array
 	 */
-	private $elements = array(
+	private static $elements = array(
 
 		/**
 		 * Tag inicio container
@@ -91,16 +91,16 @@ class Elements
 	 */
 	public static function get($name, array $args = array())
 	{
-		if ( ! isset($this->elements[$name]))
+		if ( ! isset(self::$elements[$name]))
 			return false;
 
 		if ( ! empty($args)) {
 			$args = array_values($args);
-			array_unshift($args, $this->elements[$name]);
+			array_unshift($args, self::$elements[$name]);
 
 			return call_user_func_array('sprintf', $args);
 		}
 
-		return $this->elements[$name];
+		return self::$elements[$name];
 	}
 }
