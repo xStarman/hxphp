@@ -7,6 +7,7 @@ use HXPHP\System\Tools as Tools;
 
 class Menu
 {
+	private $attrs = null;
 	private $elements = null;
 
 	/**
@@ -41,6 +42,7 @@ class Menu
 		$role = 'default'
 	)
 	{
+		$this->attrs = new Attrs;
 		$this->elements = new Elements;
 
 		$this->role = $role;
@@ -154,25 +156,6 @@ class Menu
 	}
 
 	/**
-	 * Renderização dos atributos extras para links de ativação para dropdown
-	 * @param  array  $attrs Atributos
-	 * @return string        Atributos no formato HTML
-	 */
-	private function renderAttrs($attrs)
-	{
-		if (empty($attrs) || !is_array($attrs))
-			return null;
-
-		$html = '';
-
-		foreach ($attrs as $attr => $value) {
-			$html.= ' ' . $attr . '="' . $value . '" ';
-		}
-
-		return $html;
-	}
-
-	/**
 	 * Renderiza o menu em HTML
 	 */
 	private function render($role = 'default')
@@ -228,7 +211,7 @@ class Menu
 					$dropdown_itens
 				));
 
-				$attrs = $this->renderAttrs($menu_configs['link_dropdown_attrs']);
+				$attrs = $this->attrs->render($menu_configs['link_dropdown_attrs']);
 				$active = $this->checkDropdownActive($value) === true ? $menu_configs['link_active_class'] : '';
 
 				$link = $this->elements->get('link_with_dropdown', array(
