@@ -9,6 +9,7 @@ class Menu
 {
 	private $attrs = null;
 	private $elements = null;
+	private $realLink = null;
 
 	/**
 	 * Dados do módulo de configuração
@@ -44,6 +45,7 @@ class Menu
 	{
 		$this->attrs = new Attrs;
 		$this->elements = new Elements;
+		$this->realLink = new RealLink;
 
 		$this->role = $role;
 
@@ -96,7 +98,7 @@ class Menu
 		$status = false;
 
 		foreach ($values as $dropdown_link) {
-			$real_link = $this->getRealLink($dropdown_link);
+			$real_link = $this->realLink->get($dropdown_link);
 
 			if ($this->checkActive($real_link) === true) {
 				$status = true;
@@ -124,38 +126,6 @@ class Menu
 	}
 
 	/**
-	 * Retorna o link com os coringas preenchidos
-	 * @param  string $value Link 
-	 * @return string        Link tratado
-	 */
-	private function getRealLink($value)
-	{
-		$value = str_replace(
-			array('% %', '%/'),
-			array('%%', '%'),
-			$value
-		);
-
-		return str_replace(
-			array(
-				'%siteURL%',
-				'%site_URL',
-				'%site_url',
-				'%baseURI%',
-				'%base_uri%'
-			), 
-			array(
-				$this->configs->site->url . $this->configs->baseURI,
-				$this->configs->site->url . $this->configs->baseURI,
-				$this->configs->site->url . $this->configs->baseURI,
-				$this->configs->baseURI,
-				$this->configs->baseURI
-			),
-			$value
-		);
-	}
-
-	/**
 	 * Renderiza o menu em HTML
 	 */
 	private function render($role = 'default')
@@ -173,7 +143,7 @@ class Menu
 		foreach ($menus as $key => $value) {
 			$i++;
 			$menu_data = $this->extractingMenuData($key);
-			$real_link = $this->getRealLink($value);
+			$real_link = $this->realLink->get($value);
 
 			// Dropdown
 			if (is_array($value) && !empty($value)) { 
@@ -181,7 +151,7 @@ class Menu
 
 				foreach ($value as $dropdown_key => $dropdown_value) {
 					$submenu_data = $this->extractingMenuData($dropdown_key);
-					$submenu_real_link = $this->getRealLink($dropdown_value);
+					$submenu_real_link = $this->realLink->get($dropdown_value);
 
 					$submenu_link_active = $this->checkActive($submenu_real_link) === true ? $menu_configs['link_active_class'] : '';
 
