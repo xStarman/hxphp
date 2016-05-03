@@ -1,6 +1,6 @@
 <?php
 
-namespace HXPHP\System\Services;
+namespace HXPHP\System\Services\Auth;
 
 use HXPHP\System\Storage as Storage;
 use HXPHP\System\Http as Http;
