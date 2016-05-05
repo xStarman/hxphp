@@ -14,12 +14,6 @@ class Alert
 	private $storage;
 
 	/**
-	 * Parâmetro alterado mediante o tipo da mensagem: string|array
-	 * @var boolean
-	 */
-	private $list_messages = false;
-
-	/**
 	 * Método construtor
 	 * @param array $alert ['Classe CSS', 'Título do alerta', 'Mensagem do alerta']
 	 */
@@ -42,7 +36,8 @@ class Alert
 		 * Rederiza a mensagem
 		 * @var string
 		 */
-		$render = $this->render($message);
+		$render = new Render();
+		$render = $render->get($message);
 
 		/**
 		 * Recupera o template html ara a mensagem
