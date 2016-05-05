@@ -7,6 +7,10 @@ use HXPHP\System\Tools as Tools;
 
 class Menu
 {
+	/**
+	 * Dependências
+	 * @var object
+	 */
 	private $render = null;
 
 	/**
@@ -21,6 +25,10 @@ class Menu
 	 */
 	private $current_URL = null;
 
+	/**
+	 * Nível de acesso
+	 * @var string
+	 */
 	private $role;
 
 

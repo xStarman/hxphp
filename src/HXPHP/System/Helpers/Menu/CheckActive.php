@@ -4,7 +4,16 @@ namespace HXPHP\System\Helpers\Menu;
 
 class CheckActive
 {
+	/**
+	 * Dependências
+	 * @var object
+	 */
 	private $realLink = null;
+
+	/**
+	 * URL atual
+	 * @var string
+	 */
 	private $current_URL = null;
 
 	public function __construct(RealLink $realLink, $current_URL)

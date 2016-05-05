@@ -4,9 +4,17 @@ namespace HXPHP\System\Helpers\Menu;
 
 class Render
 {
+	/**
+	 * Dependências
+	 * @var object
+	 */
 	private $realLink = null;
 	private $checkActive = null;
 
+	/**
+	 * Dados do módulo de configurações do MenuHelper
+	 * @var array
+	 */
 	private $menu_itens = array();
 	private $menu_configs = array();
 
