@@ -13,7 +13,7 @@
 	$configs->env->development->menu->setMenus(array(
 		'Home/home' => '%siteURL%',
 		'Subpasta/folder-open' => array(
-			'Home/home' => '%baseURI%/admin/have-fun/',
+			'Home/star' => '%baseURI%/admin/have-fun/',
 			'Teste/home' => '%baseURI%/admin/index/',
 		)
 	));
