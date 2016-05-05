@@ -7,12 +7,9 @@ class IndexController extends \HXPHP\System\Controller
 		$this->load('Helpers\Menu', $this->request, $this->configs);
 
 		$this->load('Helpers\Alert', array(
-			'danger',
+			'success',
 			'Título',
-			array(
-				'Mensagem 1',
-				'Mensagem 2'
-			)
+			'Mensagem'
 		));
 	}
 }
