@@ -23,12 +23,6 @@ class Menu
 
 	private $role;
 
-	/**
-	 * Conteúdo HTML do menu renderizado
-	 * @var string
-	 */
-	private $html;
-
 
 	/**
 	 * @param \HXPHP\System\Http\Request   $request Objeto Request
@@ -88,9 +82,7 @@ class Menu
 	 */
 	public function getMenu()
 	{
-		$this->render->getHTML($this->role);
-
-		return $this->html;
+		return $this->render->getHTML($this->role);
 	}
 
 	public function __toString()

@@ -10,6 +10,12 @@ class Render
 	private $menu_itens = array();
 	private $menu_configs = array();
 
+	/**
+	 * Conteúdo HTML do menu renderizado
+	 * @var string
+	 */
+	private $html;
+
 	public function __construct(
 		RealLink $realLink,
 		CheckActive $checkActive,
@@ -147,6 +153,6 @@ class Render
 			$this->html = $menu;
 		}
 
-		return $this;
+		return $this->html;
 	}
 }
