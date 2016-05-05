@@ -2,6 +2,22 @@
 	//Constantes
 	$configs = new HXPHP\System\Configs\Config;
 
+	$configs->env->add('development');
+
+	$configs->env->development->menu->setConfigs(array(
+		'container' => 'nav',
+		'container_class' => 'navbar navbar-default',
+		'menu_class' => 'nav navbar-nav'
+	));
+
+	$configs->env->development->menu->setMenus(array(
+		'Home/home' => '%siteURL%',
+		'Subpasta/folder-open' => array(
+			'Home/star' => '%baseURI%/admin/have-fun/',
+			'Teste/home' => '%baseURI%/admin/index/',
+		)
+	));
+
 	/*
 		//Globais
 		$configs->global->models->directory = APP_PATH . 'models' . DS;
