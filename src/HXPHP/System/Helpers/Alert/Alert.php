@@ -56,28 +56,6 @@ class Alert
 	}
 
 	/**
-	 * Renderiza as mensagens
-	 * @param  array|string $messages Mensagem pode ser um array com a seguinte estrutura ['Erro' => 'Justicativa' , 'Erro 2' => 'Justificativa 2'] ou uma string
-	 * @return mixed
-	 */
-	private function render($messages)
-	{
-		if ( ! is_array($messages)) {
-			return $messages;
-		}
-
-		$this->list_messages = true;
-
-		$html = '';
-
-		foreach ($messages as $key => $message) {
-			$html .= '<li>' . $message . '</li>';
-		}
-
-		return $html;
-	}
-
-	/**
 	 * Retorna os alertas da aplicação
 	 * @return html
 	 */
