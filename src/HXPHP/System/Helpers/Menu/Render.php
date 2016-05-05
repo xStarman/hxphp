@@ -43,11 +43,11 @@ class Render
 	 */
 	public function getHTML($role = 'default')
 	{
-		$menu_itens = $this->menu_itens[$role];
+		$menu_itens = isset($this->menu_itens[$role]) ? $this->menu_itens[$role] : array();
 		$menu_configs = $this->menu_configs;
 
 		if (empty($menu_itens) || !is_array($menu_itens))
-			return false;
+			return 'Nenhum menu foi definido para o seguinte nivel de acesso: <strong>' . $role . '</strong>';
 
 		$itens = '';
 
