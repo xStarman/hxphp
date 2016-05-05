@@ -8,6 +8,7 @@ use HXPHP\System\Tools as Tools;
 class Menu
 {
 	private $realLink = null;
+	private $checkActive = null;
 
 	/**
 	 * Dados do módulo de configuração
@@ -41,12 +42,14 @@ class Menu
 		$role = 'default'
 	)
 	{
-		$this->realLink = new RealLink($configs->site->url, $configs->baseURI);
 
 		$this->role = $role;
 
 		$this->setConfigs($configs)
 				->setCurrentURL($request, $configs);
+
+		$this->realLink = new RealLink($configs->site->url, $configs->baseURI);
+		$this->checkActive = new CheckActive($this->realLink, $this->current_URL);
 	}
 
 	/**
@@ -70,38 +73,6 @@ class Menu
 		$this->current_URL = $configs->site->url . $parseURL['path'];
 
 		return $this;
-	}
-
-	/**
-	 * Verifica se o link está ativo
-	 * @param  string $URL Link do menuy
-	 * @return bool        Status do link
-	 */
-	private function checkActive($URL)
-	{
-		$position = strpos($this->current_URL, $URL);
-		return $this->current_URL === $URL || ($position !== false && $position > 0) ? true : false;
-	}
-
-	/**
-	 * Verifica se algum link do dropdown está ativo
-	 * @param  array $values Links do dropdown
-	 * @return bool        	 Status do dropdown
-	 */
-	private function checkDropdownActive(array $values)
-	{
-		$values = array_values($values);
-		$status = false;
-
-		foreach ($values as $dropdown_link) {
-			$real_link = $this->realLink->get($dropdown_link);
-
-			if ($this->checkActive($real_link) === true) {
-				$status = true;
-				break;
-			}
-		}
-		return $status;
 	}
 
 	/**
@@ -149,7 +120,7 @@ class Menu
 					$submenu_data = $this->extractingMenuData($dropdown_key);
 					$submenu_real_link = $this->realLink->get($dropdown_value);
 
-					$submenu_link_active = $this->checkActive($submenu_real_link) === true ? $menu_configs['link_active_class'] : '';
+					$submenu_link_active = $this->checkActive->link($submenu_real_link) === true ? $menu_configs['link_active_class'] : '';
 
 					$link = Elements::get('link', array(
 						$submenu_real_link,
@@ -162,7 +133,7 @@ class Menu
 						$menu_configs['link_after']
 					));
 
-					$submenu_active = $this->checkActive($submenu_real_link) === true ? $menu_configs['dropdown_item_active_class'] : '';
+					$submenu_active = $this->checkActive->link($submenu_real_link) === true ? $menu_configs['dropdown_item_active_class'] : '';
 
 					$dropdown_itens.= Elements::get('dropdown_item', array(
 						$menu_configs['dropdown_item_class'],
@@ -178,7 +149,7 @@ class Menu
 				));
 
 				$attrs = Attrs::render($menu_configs['link_dropdown_attrs']);
-				$active = $this->checkDropdownActive($value) === true ? $menu_configs['link_active_class'] : '';
+				$active = $this->checkActive->dropdown($value) === true ? $menu_configs['link_active_class'] : '';
 
 				$link = Elements::get('link_with_dropdown', array(
 					$i,
@@ -193,7 +164,7 @@ class Menu
 					$dropdown
 				));
 
-				$active = $this->checkDropdownActive($value) === true ? $menu_configs['menu_item_active_class'] : '';
+				$active = $this->checkActive->dropdown($value) === true ? $menu_configs['menu_item_active_class'] : '';
 
 				$itens.= Elements::get('menu_item', array(
 					$menu_configs['menu_item_dropdown_class'],
@@ -202,7 +173,7 @@ class Menu
 				));		
 			}
 			else {
-				$link_active = $this->checkActive($real_link) === true ? $menu_configs['link_active_class'] : '';
+				$link_active = $this->checkActive->link($real_link) === true ? $menu_configs['link_active_class'] : '';
 
 				$link = Elements::get('link', array(
 					$real_link,
@@ -215,7 +186,7 @@ class Menu
 					$menu_configs['link_after']
 				));
 
-				$active = $this->checkActive($real_link) === true ? $menu_configs['menu_item_active_class'] : '';
+				$active = $this->checkActive->link($real_link) === true ? $menu_configs['menu_item_active_class'] : '';
 
 				$itens.= Elements::get('menu_item', array(
 					$menu_configs['menu_item_class'],

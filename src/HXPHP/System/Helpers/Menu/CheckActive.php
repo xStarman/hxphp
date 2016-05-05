@@ -37,7 +37,7 @@ class CheckActive
 		foreach ($values as $dropdown_link) {
 			$real_link = $this->realLink->get($dropdown_link);
 
-			if ($this->checkActive($real_link) === true) {
+			if ($this->link($real_link) === true) {
 				$status = true;
 				break;
 			}
