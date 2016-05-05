@@ -48,7 +48,8 @@ class Alert
 		 * Recupera o template html ara a mensagem
 		 * @var html
 		 */
-		$template = $this->getTemplate();
+		$template = new Template();
+		$template = $template->get(is_array($message));
 
 		/**
 		 * Aplica a mensagem no template
@@ -57,22 +58,6 @@ class Alert
 		$content = sprintf($template, $style, $title, $render);
 
 		$this->storage->set('message', $content);
-	}
-
-	/**
-	 * Método resposnável pela obtenção do conteúdo do template
-	 * @return html
-	 */
-	private function getTemplate()
-	{
-		$file = $this->list_messages ? '-list' : '';
-		$template = dirname(__FILE__) . DS . 'templates' . DS . 'alert' . $file . '.html';
-
-		if ( ! file_exists($template)) {
-			throw new \Exception("O template para a mensagem nao foi localizado: $template", 1);
-		}
-
-		return file_get_contents($template);
 	}
 
 	/**
