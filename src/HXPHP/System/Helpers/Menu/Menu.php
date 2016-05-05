@@ -92,7 +92,7 @@ class Menu
 
 		foreach ($menus as $key => $value) {
 			$i++;
-			$menu_data = $this->extractingMenuData($key);
+			$menu_data = MenuData::get($key);
 			$real_link = $this->realLink->get($value);
 
 			// Dropdown
@@ -100,7 +100,7 @@ class Menu
 				$dropdown_itens = '';
 
 				foreach ($value as $dropdown_key => $dropdown_value) {
-					$submenu_data = $this->extractingMenuData($dropdown_key);
+					$submenu_data = MenuData::get($dropdown_key);
 					$submenu_real_link = $this->realLink->get($dropdown_value);
 
 					$submenu_link_active = $this->checkActive->link($submenu_real_link) === true ? $menu_configs['link_active_class'] : '';
