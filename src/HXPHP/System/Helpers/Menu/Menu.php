@@ -81,8 +81,7 @@ class Menu
 		$this->current_URL = $configs->site->url . $parseURL['path'];
 
 		return $this;
-	}
-	
+	}	
 
 	/**
 	 * Exibe o HTML com o menu renderizado
@@ -93,6 +92,10 @@ class Menu
 		return $this->render->getHTML($this->role);
 	}
 
+	/**
+	 * Exibe o HTML com o menu renderizado
+	 * @return string
+	 */
 	public function __toString()
 	{
 		return $this->getMenu();
