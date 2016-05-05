@@ -27,7 +27,7 @@ class Render
 	/**
 	 * Renderiza o menu em HTML
 	 */
-	private function getHTML($role = 'default')
+	public function getHTML($role = 'default')
 	{
 		$menu_itens = $this->menu_itens[$role];
 		$menu_configs = $this->menu_configs;

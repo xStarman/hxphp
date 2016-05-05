@@ -7,8 +7,7 @@ use HXPHP\System\Tools as Tools;
 
 class Menu
 {
-	private $realLink = null;
-	private $checkActive = null;
+	private $render = null;
 
 	/**
 	 * Dados do módulo de configuração
@@ -48,8 +47,15 @@ class Menu
 		$this->setConfigs($configs)
 				->setCurrentURL($request, $configs);
 
-		$this->realLink = new RealLink($configs->site->url, $configs->baseURI);
-		$this->checkActive = new CheckActive($this->realLink, $this->current_URL);
+		$realLink = new RealLink($configs->site->url, $configs->baseURI);
+		$checkActive = new CheckActive($realLink, $this->current_URL);
+
+		$this->render = new Render(
+			$realLink,
+			$checkActive,
+			$this->configs->menu->itens,
+			$this->configs->menu->configs
+		);
 	}
 
 	/**
@@ -82,7 +88,7 @@ class Menu
 	 */
 	public function getMenu()
 	{
-		$this->render($this->role);
+		$this->render->getHTML($this->role);
 
 		return $this->html;
 	}
