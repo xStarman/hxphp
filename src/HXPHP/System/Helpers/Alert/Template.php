@@ -31,7 +31,7 @@ class Template
 	 * Método resposnável pela obtenção do conteúdo do template
 	 * @return html
 	 */
-	private function get($list = false)
+	public function get($list = false)
 	{
 		if ($list === true)
 			$this->setTemplateFile('alert-list');
