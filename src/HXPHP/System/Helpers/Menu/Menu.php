@@ -2,9 +2,6 @@
 
 namespace HXPHP\System\Helpers\Menu;
 
-use HXPHP\System\Storage as Storage;
-use HXPHP\System\Tools as Tools;
-
 class Menu
 {
 	/**
