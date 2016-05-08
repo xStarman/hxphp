@@ -12,7 +12,6 @@ class IndexController extends \HXPHP\System\Controller
 			$this->request->subfolder
 		);
 
-		$this->auth->login(2, 'teste');
 		var_dump($this->auth->login_check());
 
 		$this->view->setPath('admin/havefun');

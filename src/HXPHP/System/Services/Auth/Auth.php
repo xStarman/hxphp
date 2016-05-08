@@ -48,6 +48,7 @@ class Auth
 		$this->storage  = new Storage\Session;
 
 		$subfolder = str_replace('/', '', $subfolder);
+		$subfolder = empty($subfolder) ? 'default' : $subfolder;
 
 		if (!isset($after_login[$subfolder]) || !isset($after_logout[$subfolder]))
 			throw new \Exception("Verifique as configuracoes de autenticacao para a subpasta: < $subfolder >", 1);	

@@ -18,7 +18,8 @@
 		)
 	));
 
-	$configs->env->development->auth->setURLs('/hxphp/admin/home', '/hxphp/admin/login', 'admin');
+	$configs->env->development->auth->setURLs('/hxphp/home/', '/hxphp/login/');
+	$configs->env->development->auth->setURLs('/hxphp/admin/home/', '/hxphp/admin/login/', 'admin');
 
 	/*
 		//Globais
