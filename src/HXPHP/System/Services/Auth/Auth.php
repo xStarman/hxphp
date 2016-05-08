@@ -50,8 +50,7 @@ class Auth
 		$subfolder = str_replace('/', '', $subfolder);
 
 		if (!isset($after_login[$subfolder]) || !isset($after_logout[$subfolder]))
-			throw new \Exception("Verifique as configuracoes de autenticacao para a subpasta: < $subfolder >", 1);
-			
+			throw new \Exception("Verifique as configuracoes de autenticacao para a subpasta: < $subfolder >", 1);	
 
 		//Configuração
 		$this->url_redirect_after_login = $after_login[$subfolder];

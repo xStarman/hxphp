@@ -18,6 +18,8 @@
 		)
 	));
 
+	$configs->env->development->auth->setURLs('/hxphp/admin/home', '/hxphp/admin/login', 'admin');
+
 	/*
 		//Globais
 		$configs->global->models->directory = APP_PATH . 'models' . DS;
