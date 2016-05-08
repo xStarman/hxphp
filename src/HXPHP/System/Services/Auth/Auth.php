@@ -126,8 +126,11 @@ class Auth
 
 			$login_string = hash('sha512', $this->storage->get('username') . $this->request->server('REMOTE_ADDR') . $this->request->server('HTTP_USER_AGENT'));
 
-			return ($login_string == $this->storage->get($this->subfolder . '_login_string') ? true : false);
+			if ($login_string == $this->storage->get($this->subfolder . '_login_string'))
+				return true;
 		}
+
+		return false;
 	}
 
 	/**

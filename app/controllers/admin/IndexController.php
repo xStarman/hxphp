@@ -8,10 +8,10 @@ class IndexController extends \HXPHP\System\Controller
 			'Services\Auth',
 			$this->configs->auth->after_login,
 			$this->configs->auth->after_logout,
-			true,
+			false,
 			$this->request->subfolder
 		);
-
+		$this->auth->login(3, 'teste');
 		var_dump($this->auth->login_check());
 
 		$this->view->setPath('admin/havefun');
