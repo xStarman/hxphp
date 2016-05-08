@@ -30,10 +30,17 @@ class Auth
 	private $url_redirect_after_logout;
 	private $redirect;
 
+	private $subfolder;
+
 	/**
 	 * Método construtor
 	 */
-	public function __construct($url_redirect_after_login, $url_redirect_after_logout, $redirect = false)
+	public function __construct(
+		$url_redirect_after_login,
+		$url_redirect_after_logout,
+		$redirect = false,
+		$subfolder = null
+	)
 	{
 		//Instância dos objetos injetados
 		$this->request = new Http\Request;
@@ -44,6 +51,8 @@ class Auth
 		$this->url_redirect_after_login = $url_redirect_after_login;
 		$this->url_redirect_after_logout = $url_redirect_after_logout;
 		$this->redirect = $redirect;
+
+		$this->subfolder = $subfolder;
 
 		return $this;
 	}
