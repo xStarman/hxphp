@@ -4,8 +4,6 @@ namespace HXPHP\System\Services\Auth;
 
 use HXPHP\System\Storage as Storage;
 use HXPHP\System\Http as Http;
-use HXPHP\System\Modules\Messages\Messages;
-
 
 class Auth
 {
@@ -28,12 +26,6 @@ class Auth
 	 */
 	public $storage;
 
-	/**
-	 * Injeção do módulo de Mensagens
-	 * @var object
-	 */
-	public $messages;
-
 	private $url_redirect_after_login;
 	private $url_redirect_after_logout;
 	private $redirect;
@@ -47,8 +39,6 @@ class Auth
 		$this->request = new Http\Request;
 		$this->response = new Http\Response;
 		$this->storage  = new Storage\Session;
-		$this->messages = new Messages('auth');
-		$this->messages->setBlock('alerts');
 
 		//Configuração
 		$this->url_redirect_after_login = $url_redirect_after_login;
