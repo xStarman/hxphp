@@ -72,11 +72,11 @@ class Auth
 	{
 		$user_id = intval(preg_replace("/[^0-9]+/", "", $user_id));
 		$username = preg_replace("/[^a-zA-Z0-9_\-]+/", "", $username);
-		$login_string = hash('sha512', $username . $this->subfolder . $this->request->server('REMOTE_ADDR') . $this->request->server('HTTP_USER_AGENT'));
+		$login_string = hash('sha512', $username . $this->request->server('REMOTE_ADDR') . $this->request->server('HTTP_USER_AGENT'));
 
 		$this->storage->set('user_id', $user_id);
 		$this->storage->set('username', $username);
-		$this->storage->set('login_string', $login_string);
+		$this->storage->set($this->subfolder . '_login_string', $login_string);
 
 		if ($this->redirect === true)
 			return $this->response->redirectTo($this->url_redirect_after_login);
@@ -89,7 +89,7 @@ class Auth
 	{
 		$this->storage->clear('user_id');
 		$this->storage->clear('username');
-		$this->storage->clear('login_string');
+		$this->storage->clear($this->subfolder . '_login_string');
 
 		$params = session_get_cookie_params();
 		setcookie(session_name(), '', time() - 42000, $params["path"], $params["domain"], $params["secure"], $params["httponly"]);
@@ -121,11 +121,11 @@ class Auth
 	{
 		if ( $this->storage->exists('user_id') &&
 			 $this->storage->exists('username') &&
-			 $this->storage->exists('login_string') ) {
+			 $this->storage->exists($this->subfolder . '_login_string') ) {
 
-			$login_string = hash('sha512', $this->storage->get('username') . $this->subfolder . $this->request->server('REMOTE_ADDR') . $this->request->server('HTTP_USER_AGENT'));
+			$login_string = hash('sha512', $this->storage->get('username') . $this->request->server('REMOTE_ADDR') . $this->request->server('HTTP_USER_AGENT'));
 
-			return ($login_string == $this->storage->get('login_string') ? true : false);
+			return ($login_string == $this->storage->get($this->subfolder . '_login_string') ? true : false);
 		}
 	}
 
