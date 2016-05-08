@@ -18,19 +18,8 @@
 		)
 	));
 
-	$configs->env->development->auth->setURLs('/hxphp/home/', '/hxphp/login/');
-	$configs->env->development->auth->setURLs('/hxphp/admin/home/', '/hxphp/admin/login/', 'admin');
-
 	/*
 		//Globais
-		$configs->global->models->directory = APP_PATH . 'models' . DS;
-
-		$configs->global->views->directory = APP_PATH . 'views' . DS;
-		$configs->global->views->extension = '.phtml';
-
-		$configs->global->controllers->directory = APP_PATH . 'controllers' . DS;
-		$configs->global->controllers->notFound = 'Error404Controller';
-
 		$configs->title = 'Titulo customizado';
 
 		//Configurações de Ambiente - Desenvolvimento
@@ -65,6 +54,9 @@
 				'Teste/home' => '%baseURI%/admin/index/',
 			)
 		));
+
+		$configs->env->development->auth->setURLs('/hxphp/home/', '/hxphp/login/');
+		$configs->env->development->auth->setURLs('/hxphp/admin/home/', '/hxphp/admin/login/', 'admin');
 
 		//Configurações de Ambiente - Produção
 		$configs->env->add('production');
