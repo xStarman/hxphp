@@ -68,7 +68,7 @@ class Auth
 	{
 		$user_id = intval(preg_replace("/[^0-9]+/", "", $user_id));
 		$username = preg_replace("/[^a-zA-Z0-9_\-]+/", "", $username);
-		$login_string = hash('sha512', $username . $this->request->server('REMOTE_ADDR') . $this->request->server('HTTP_USER_AGENT'));
+		$login_string = hash('sha512', $username . $this->subfolder . $this->request->server('REMOTE_ADDR') . $this->request->server('HTTP_USER_AGENT'));
 
 		$this->storage->set('user_id', $user_id);
 		$this->storage->set('username', $username);
@@ -119,7 +119,7 @@ class Auth
 			 $this->storage->exists('username') &&
 			 $this->storage->exists('login_string') ) {
 
-			$login_string = hash('sha512', $this->storage->get('username') . $this->request->server('REMOTE_ADDR') . $this->request->server('HTTP_USER_AGENT'));
+			$login_string = hash('sha512', $this->storage->get('username') . $this->subfolder . $this->request->server('REMOTE_ADDR') . $this->request->server('HTTP_USER_AGENT'));
 
 			return ($login_string == $this->storage->get('login_string') ? true : false);
 		}
