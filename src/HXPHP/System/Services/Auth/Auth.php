@@ -95,7 +95,8 @@ class Auth
 		setcookie(session_name(), '', time() - 42000, $params["path"], $params["domain"], $params["secure"], $params["httponly"]);
 		session_destroy();
 
-		$this->response->redirectTo($this->url_redirect_after_logout);
+		if ($this->redirect === true)
+			return $this->response->redirectTo($this->url_redirect_after_logout);
 	}
 
 	/**

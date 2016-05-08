@@ -12,7 +12,7 @@ class IndexController extends \HXPHP\System\Controller
 			$this->request->subfolder
 		);
 
-		$this->auth->login(1, 'teste');
+		$this->auth->logout();
 
 		var_dump($this->auth->login_check());
 		$this->load('Helpers\Menu', $this->request, $this->configs);
