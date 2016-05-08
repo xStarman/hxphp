@@ -36,10 +36,10 @@ class Auth
 	 * Método construtor
 	 */
 	public function __construct(
-		$url_redirect_after_login,
-		$url_redirect_after_logout,
+		$after_login,
+		$after_logout,
 		$redirect = false,
-		$subfolder = null
+		$subfolder = 'default'
 	)
 	{
 		//Instância dos objetos injetados
@@ -47,9 +47,11 @@ class Auth
 		$this->response = new Http\Response;
 		$this->storage  = new Storage\Session;
 
+		$subfolder = str_replace('/', '', $subfolder);
+
 		//Configuração
-		$this->url_redirect_after_login = $url_redirect_after_login;
-		$this->url_redirect_after_logout = $url_redirect_after_logout;
+		$this->url_redirect_after_login = $after_login[$subfolder];
+		$this->url_redirect_after_logout = $after_logout[$subfolder];
 		$this->redirect = $redirect;
 
 		$this->subfolder = $subfolder;
