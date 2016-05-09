@@ -4,8 +4,6 @@ namespace HXPHP\System\Services\Auth;
 
 use HXPHP\System\Storage as Storage;
 use HXPHP\System\Http as Http;
-use HXPHP\System\Modules\Messages\Messages;
-
 
 class Auth
 {
@@ -28,32 +26,39 @@ class Auth
 	 */
 	public $storage;
 
-	/**
-	 * Injeção do módulo de Mensagens
-	 * @var object
-	 */
-	public $messages;
-
 	private $url_redirect_after_login;
 	private $url_redirect_after_logout;
 	private $redirect;
 
+	private $subfolder;
+
 	/**
 	 * Método construtor
 	 */
-	public function __construct($url_redirect_after_login, $url_redirect_after_logout, $redirect = false)
+	public function __construct(
+		$after_login,
+		$after_logout,
+		$redirect = false,
+		$subfolder = 'default'
+	)
 	{
 		//Instância dos objetos injetados
 		$this->request = new Http\Request;
 		$this->response = new Http\Response;
 		$this->storage  = new Storage\Session;
-		$this->messages = new Messages('auth');
-		$this->messages->setBlock('alerts');
+
+		$subfolder = str_replace('/', '', $subfolder);
+		$subfolder = empty($subfolder) ? 'default' : $subfolder;
+
+		if (!isset($after_login[$subfolder]) || !isset($after_logout[$subfolder]))
+			throw new \Exception("Verifique as configuracoes de autenticacao para a subpasta: < $subfolder >", 1);	
 
 		//Configuração
-		$this->url_redirect_after_login = $url_redirect_after_login;
-		$this->url_redirect_after_logout = $url_redirect_after_logout;
+		$this->url_redirect_after_login = $after_login[$subfolder];
+		$this->url_redirect_after_logout = $after_logout[$subfolder];
 		$this->redirect = $redirect;
+
+		$this->subfolder = $subfolder;
 
 		return $this;
 	}
@@ -71,7 +76,7 @@ class Auth
 
 		$this->storage->set('user_id', $user_id);
 		$this->storage->set('username', $username);
-		$this->storage->set('login_string', $login_string);
+		$this->storage->set($this->subfolder . '_login_string', $login_string);
 
 		if ($this->redirect === true)
 			return $this->response->redirectTo($this->url_redirect_after_login);
@@ -84,13 +89,14 @@ class Auth
 	{
 		$this->storage->clear('user_id');
 		$this->storage->clear('username');
-		$this->storage->clear('login_string');
+		$this->storage->clear($this->subfolder . '_login_string');
 
 		$params = session_get_cookie_params();
 		setcookie(session_name(), '', time() - 42000, $params["path"], $params["domain"], $params["secure"], $params["httponly"]);
 		session_destroy();
 
-		$this->response->redirectTo($this->url_redirect_after_logout);
+		if ($this->redirect === true)
+			return $this->response->redirectTo($this->url_redirect_after_logout);
 	}
 
 	/**
@@ -116,12 +122,17 @@ class Auth
 	{
 		if ( $this->storage->exists('user_id') &&
 			 $this->storage->exists('username') &&
-			 $this->storage->exists('login_string') ) {
+			 $this->storage->exists($this->subfolder . '_login_string') ) {
 
-			$login_string = hash('sha512', $this->storage->get('username') . $this->request->server('REMOTE_ADDR') . $this->request->server('HTTP_USER_AGENT'));
+			$login_string = hash('sha512', $this->storage->get('username')
+											 . $this->request->server('REMOTE_ADDR') 
+											 . $this->request->server('HTTP_USER_AGENT'));
 
-			return ($login_string == $this->storage->get('login_string') ? true : false);
+			if ($login_string == $this->storage->get($this->subfolder . '_login_string'))
+				return true;
 		}
+
+		return false;
 	}
 
 	/**

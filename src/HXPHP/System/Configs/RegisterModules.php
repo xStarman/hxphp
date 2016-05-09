@@ -11,7 +11,8 @@ class RegisterModules
 		$this->modules = array(
 			'database',
 			'mail',
-			'menu'
+			'menu',
+			'auth'
 		);
 		
 		return $this;
