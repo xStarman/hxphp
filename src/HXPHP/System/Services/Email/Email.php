@@ -37,15 +37,15 @@ class Email
 		$message = nl2br($message);
 
 		$from = !is_null($this->from) && empty($from) ? $this->from : $from;
-		
+
 		ksort($from);
 		$from = array_values($from);
 
-		list($from_mail, $from) = $from;
+		list($from_mail, $from_name) = $from;
 
 		$headers = "MIME-Version: 1.0\n";
 		$headers.= "Content-Type: text/html; charset=UTF-8\n";
-		$headers.= "From: \"{$from}\" <{$from_mail}>\n";
+		$headers.= "From: \"{$from_name}\" <{$from_mail}>\n";
 
 		return @mail ($to, $subject, $message, $headers);
 	}
