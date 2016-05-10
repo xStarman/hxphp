@@ -32,6 +32,8 @@ class Email
 		$subject = addslashes(trim($subject));
 		$message = nl2br($message);
 
+		$from = !is_null($this->from) && empty($from) ? $this->from : $from;
+		
 		ksort($from);
 		list($from_mail, $from) = $from;
 
