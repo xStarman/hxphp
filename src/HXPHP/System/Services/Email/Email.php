@@ -11,17 +11,17 @@ class Email
 	 * @param  string $assunto  Assunto da mensagem
 	 * @param  string $mensagem Mensagem
 	 * @param  array  $config   Array com Remetente e E-mail do remetente
-	 * @return array            Array com o status de envio e mensagem
+	 * @return bool             Status de envio e mensagem
 	 */
 	public function send($email, $assunto, $mensagem, array $config = array())
 	{
 		
-		$destinatario=strtolower($email);
-		$assunto=addslashes(trim($assunto));
-		$mensagem=nl2br($mensagem);
-		
-		$remetente       =	$config["remetente"];
-		$email_remetente =	$config["email"];
+		$destinatario = strtolower($email);
+		$assunto = addslashes(trim($assunto));
+		$mensagem = nl2br($mensagem);
+
+		ksort($config);
+		list($email_remetente, $remetente) = $config;
 
 		$cabecalho = "MIME-Version: 1.0\n";
 		$cabecalho .= 	"Content-Type: text/html; charset=UTF-8\n";
