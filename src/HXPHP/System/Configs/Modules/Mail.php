@@ -27,8 +27,8 @@ class Mail
 	public function getFrom()
 	{
 		return array(
-			'from' => $this->from,
-			'from_mail' => $this->from_mail
+			'from_mail' => $this->from_mail,
+			'from_name' => $this->from
 		);
 	}
 }
