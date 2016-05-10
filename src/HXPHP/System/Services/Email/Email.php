@@ -19,21 +19,25 @@ class Email
 	 * @param  string $assunto  Assunto da mensagem
 	 * @param  string $message Mensagem
 	 * @param  array  $from   Array com Remetente e E-mail do remetente
+	 * @param  bool   $accept_html Define se a mensagem será enviada em TXT ou HTML
 	 * @return bool             Status de envio e mensagem
 	 */
 	public function send(
 		$to,
 		$subject,
 		$message,
-		array $from = array()
+		array $from = array(),
+		$accept_html = true
 	)
 	{
 		$to = strtolower($to);
 		$subject = addslashes(trim($subject));
+		
+		$message = $accept_html === false ? strip_tags($message) : $message;
 		$message = nl2br($message);
 
 		$from = !is_null($this->from) && empty($from) ? $this->from : $from;
-		
+
 		ksort($from);
 		list($from_mail, $from) = $from;
 
