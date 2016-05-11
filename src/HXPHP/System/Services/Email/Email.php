@@ -4,29 +4,49 @@ namespace HXPHP\System\Services\Email;
 
 class Email
 {
+	private $from = null;
+
+	public function setFrom(array $from = array())
+	{
+		$this->from = $from;
+
+		return $this;
+	}
 	
 	/**
 	 * Envia e-mail
-	 * @param  string $email    E-mail para qual será enviada a mensagem
+	 * @param  string $to    E-mail para qual será enviada a mensagem
 	 * @param  string $assunto  Assunto da mensagem
-	 * @param  string $mensagem Mensagem
-	 * @param  array  $config   Array com Remetente e E-mail do remetente
-	 * @return array            Array com o status de envio e mensagem
+	 * @param  string $message Mensagem
+	 * @param  array  $from   Array com Remetente e E-mail do remetente
+	 * @param  bool   $accept_html Define se a mensagem será enviada em TXT ou HTML
+	 * @return bool             Status de envio e mensagem
 	 */
-	public function send($email, $assunto, $mensagem, array $config = array())
+	public function send(
+		$to,
+		$subject,
+		$message,
+		array $from = array(),
+		$accept_html = true
+	)
 	{
-		
-		$destinatario=strtolower($email);
-		$assunto=addslashes(trim($assunto));
-		$mensagem=nl2br($mensagem);
-		
-		$remetente       =	$config["remetente"];
-		$email_remetente =	$config["email"];
+		$to = strtolower($to);
+		$subject = addslashes(trim($subject));
 
-		$cabecalho = "MIME-Version: 1.0\n";
-		$cabecalho .= 	"Content-Type: text/html; charset=UTF-8\n";
-		$cabecalho .= 	"From: \"{$remetente}\" <{$email_remetente}>\n";
+		$message = $accept_html === false ? strip_tags($message) : $message;
+		$message = nl2br($message);
 
-		return @mail ($destinatario, $assunto, $mensagem, $cabecalho);
+		$from = !is_null($this->from) && empty($from) ? $this->from : $from;
+
+		ksort($from);
+		$from = array_values($from);
+
+		list($from_mail, $from_name) = $from;
+
+		$headers = "MIME-Version: 1.0\n";
+		$headers.= "Content-Type: text/html; charset=UTF-8\n";
+		$headers.= "From: \"{$from_name}\" <{$from_mail}>\n";
+
+		return @mail ($to, $subject, $message, $headers);
 	}
 }
