@@ -23,4 +23,12 @@ class Mail
 
 		return $this;
 	}
+
+	public function getFrom()
+	{
+		return array(
+			'from_mail' => $this->from_mail,
+			'from_name' => $this->from
+		);
+	}
 }

@@ -229,9 +229,6 @@ class Request
     {
         $method = $this->getMethod();
 
-        if(!array_search(FALSE, $this->$method()))
-            return TRUE;
-        else
-            return FALSE;
+        return array_search(false, $this->$method(), true) === false ? true : false;
     }
 }

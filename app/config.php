@@ -2,16 +2,24 @@
 	//Constantes
 	$configs = new HXPHP\System\Configs\Config;
 
+	$configs->env->add('development');
+
+	$configs->env->development->menu->setConfigs(array(
+		'container' => 'nav',
+		'container_class' => 'navbar navbar-default',
+		'menu_class' => 'nav navbar-nav'
+	));
+
+	$configs->env->development->menu->setMenus(array(
+		'Home/home' => '%siteURL%',
+		'Subpasta/folder-open' => array(
+			'Home/star' => '%baseURI%/admin/have-fun/',
+			'Teste/home' => '%baseURI%/admin/index/',
+		)
+	));
+
 	/*
 		//Globais
-		$configs->global->models->directory = APP_PATH . 'models' . DS;
-
-		$configs->global->views->directory = APP_PATH . 'views' . DS;
-		$configs->global->views->extension = '.phtml';
-
-		$configs->global->controllers->directory = APP_PATH . 'controllers' . DS;
-		$configs->global->controllers->notFound = 'Error404Controller';
-
 		$configs->title = 'Titulo customizado';
 
 		//Configurações de Ambiente - Desenvolvimento
@@ -32,6 +40,23 @@
 			'from' => 'Remetente',
 			'from_mail' => 'email@remetente.com.br'
 		));
+
+		$configs->env->development->menu->setConfigs(array(
+			'container' => 'nav',
+			'container_class' => 'navbar navbar-default',
+			'menu_class' => 'nav navbar-nav'
+		));
+
+		$configs->env->development->menu->setMenus(array(
+			'Home/home' => '%siteURL%',
+			'Subpasta/folder-open' => array(
+				'Home/home' => '%baseURI%/admin/have-fun/',
+				'Teste/home' => '%baseURI%/admin/index/',
+			)
+		));
+
+		$configs->env->development->auth->setURLs('/hxphp/home/', '/hxphp/login/');
+		$configs->env->development->auth->setURLs('/hxphp/admin/home/', '/hxphp/admin/login/', 'admin');
 
 		//Configurações de Ambiente - Produção
 		$configs->env->add('production');
