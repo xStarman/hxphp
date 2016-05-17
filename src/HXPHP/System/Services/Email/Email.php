@@ -6,13 +6,13 @@ class Email
 {
 	private $from = null;
 
-	public function setFrom(array $from = array())
+	public function setFrom(array $from = [])
 	{
 		$this->from = $from;
 
 		return $this;
 	}
-	
+
 	/**
 	 * Envia e-mail
 	 * @param  string $to    E-mail para qual será enviada a mensagem
@@ -26,7 +26,7 @@ class Email
 		$to,
 		$subject,
 		$message,
-		array $from = array(),
+		array $from = [],
 		$accept_html = true
 	)
 	{

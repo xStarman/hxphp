@@ -14,32 +14,32 @@ class RealLink
 	}
 	/**
 	 * Retorna o link com os coringas preenchidos
-	 * @param  string $value Link 
+	 * @param  string $value Link
 	 * @return string        Link tratado
 	 */
 	public function get($value)
 	{
 		$value = str_replace(
-			array('% %', '%/'),
-			array('%%', '%'),
+			['% %', '%/'],
+			['%%', '%'],
 			$value
 		);
 
 		return str_replace(
-			array(
+			[
 				'%siteURL%',
 				'%site_URL',
 				'%site_url',
 				'%baseURI%',
 				'%base_uri%'
-			), 
-			array(
+			],
+			[
 				$this->siteURL . $this->baseURI,
 				$this->siteURL . $this->baseURI,
 				$this->siteURL . $this->baseURI,
 				$this->baseURI,
 				$this->baseURI
-			),
+			],
 			$value
 		);
 	}

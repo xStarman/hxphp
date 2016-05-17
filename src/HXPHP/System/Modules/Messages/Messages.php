@@ -21,7 +21,7 @@ class Messages
 	 * @var string
 	 */
 	private $block = null;
-	
+
 	/**
 	 * Método construtor
 	 * @param string $template Nome do arquivo que encontra-se na sub-pasta 'templates'
@@ -47,7 +47,7 @@ class Messages
 
 	/**
 	 * Altera o bloco padrão
-	 * @param string $block 
+	 * @param string $block
 	 */
 	public function setBlock($block)
 	{
@@ -66,7 +66,7 @@ class Messages
 		$block = $this->block;
 
 		if ( ! is_null($block))
-			return call_user_func_array(array(&$this->$block, $method), $args);
+			return call_user_func_array([&$this->$block, $method], $args);
 
 		throw new \Exception("O metodo <$method> nao existe.", 1);
 	}

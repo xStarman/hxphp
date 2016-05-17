@@ -15,7 +15,7 @@ class View
 	 * @var object
 	 */
 	private $configs;
-	
+
 	/**
 	 * Injeção do Http Request
 	 * @var object
@@ -31,11 +31,11 @@ class View
 	protected $header = null;
 	protected $file = null;
 	protected $footer = null;
-	protected $vars = array();
-	protected $assets = array(
-		'css' => array(),
-		'js' => array()
-	);
+	protected $vars = [];
+	protected $assets = [
+		'css' => [],
+		'js' => []
+	];
 
 	public function setConfigs(Configs\Config $configs, $subfolder, $controller, $action)
 	{
@@ -59,14 +59,14 @@ class View
 		 */
 		$view_settings = new \stdClass;
 
-		$default_values = array(
+		$default_values = [
 			'path' => $subfolder . $controller,
 			'template' => true,
 			'header' => $subfolder . 'header',
 			'file' => $action,
 			'footer' => $subfolder . 'footer',
 			'title' => $this->configs->title
-		);
+		];
 
 		foreach ($default_values as $setting => $value) {
 			if(is_null($this->$setting)) {
@@ -82,7 +82,7 @@ class View
 				->setHeader($view_settings->header)
 				->setFile($view_settings->file)
 				->setFooter($view_settings->footer)
-				->setTitle($view_settings->title);	
+				->setTitle($view_settings->title);
 	}
 
 	/**
@@ -176,11 +176,11 @@ class View
 	{
 		if (is_array($assets)) {
 			$this->assets[$type] = array_merge($this->assets[$type], $assets);
-		} 
+		}
 		else {
 			array_push($this->assets[$type], $assets);
 		}
-		 
+
 		return $this;
 	}
 
@@ -191,7 +191,7 @@ class View
 	 * @return string                HTML formatado de acordo com o tipo de arquivo
 	 */
 
-	private function assets($type, array $custom_assets = array())
+	private function assets($type, array $custom_assets = [])
 	{
 		$add_assets = '';
 
@@ -204,7 +204,7 @@ class View
 				$tag = '<script type="text/javascript" src="%s"></script>'."\n\r";
 				break;
 		}
-		
+
 		if (count($custom_assets) > 0)
 			foreach ($custom_assets as $file)
 				$add_assets .= sprintf($tag,$file);
@@ -219,12 +219,12 @@ class View
 	public function flush()
 	{
 
-		$default_data = array(
+		$default_data = [
 			'title' => $this->title
-		);
+		];
 
 		$data = array_merge($default_data, $this->vars);
-		
+
 		//Extract que transforma os parâmetros em variáveis disponíveis para a VIEW
 		extract($data, EXTR_PREFIX_ALL, 'view');
 

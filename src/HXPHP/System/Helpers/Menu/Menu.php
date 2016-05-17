@@ -14,7 +14,7 @@ class Menu
 	 * Dados do módulo de configuração
 	 * @var array
 	 */
-	private $configs = array();
+	private $configs = [];
 
 	/**
 	 * URL ATUAL
@@ -78,7 +78,7 @@ class Menu
 		$this->current_URL = $configs->site->url . $parseURL['path'];
 
 		return $this;
-	}	
+	}
 
 	/**
 	 * Exibe o HTML com o menu renderizado

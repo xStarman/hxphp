@@ -11,10 +11,10 @@ class EnvironmentDevelopment extends Configs\AbstractEnvironment
 	public function __construct()
 	{
 		parent::__construct();
-		$this->servers = array(
+		$this->servers = [
 			'localhost',
 			'127.0.0.1'
-		);
+		];
 
 		return $this;
 	}
