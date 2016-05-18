@@ -174,13 +174,10 @@ class View
 	 */
 	public function setAssets($type, $assets)
 	{
-		if (is_array($assets)) {
-			$this->assets[$type] = array_merge($this->assets[$type], $assets);
-		}
-		else {
-			array_push($this->assets[$type], $assets);
-		}
-
+		(is_array($assets)) ?
+                    $this->assets[$type] = array_merge($this->assets[$type], $assets) :
+                    array_push($this->assets[$type], $assets);
+		
 		return $this;
 	}
 
