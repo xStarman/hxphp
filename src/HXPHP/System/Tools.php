@@ -16,7 +16,7 @@ class Tools
 			var_dump($data);
 		else
 			print_r($data);
-		
+
 		echo '</pre>';
 	}
 
@@ -28,16 +28,16 @@ class Tools
 	 */
 	static function hashHX($password, $salt = null)
 	{
-		
+
 		if (is_null($salt))
 			$salt = hash('sha512', uniqid(mt_rand(1, mt_getrandmax()), true));
 
 		$password = hash('sha512', $password.$salt);
-		
-		return array(
+
+		return [
 			'salt' => $salt,
 			'password' => $password
-		);
+		];
 	}
 
 	/**
@@ -49,15 +49,15 @@ class Tools
 	{
 		$input = explode('?', $input);
 		$input = $input[0];
-		
-		$find    = array(
+
+		$find    = [
 			'-',
 			'_'
-		);
-		$replace = array(
+		];
+		$replace = [
 			' ',
 			' '
-		);
+		];
 		return str_replace(' ', '', ucwords(str_replace($find, $replace, $input)));
 	}
 

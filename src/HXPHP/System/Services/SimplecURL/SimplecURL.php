@@ -4,12 +4,12 @@ namespace HXPHP\System\Services\SimplecURL;
 
 class SimplecURL
 {
-	public static function connect($url, array $post = array(), array $get = array())
+	public static function connect($url, array $post = [], array $get = [])
 	{
 		$url = explode('?', $url, 2);
 
 		if (count($url) === 2) {
-			$temp_get = array();
+			$temp_get = [];
 			parse_str($url[1], $temp_get);
 
 			$get = array_merge($get, $temp_get);

@@ -9,10 +9,10 @@ class Mail
 
 	public function __construct()
 	{
-		$this->setFrom(array(
+		$this->setFrom([
 			'from' => 'HXPHP Framework',
 			'from_mail' => 'no-reply@hxphp.com.br'
-		));
+		]);
 		return $this;
 	}
 
@@ -26,9 +26,9 @@ class Mail
 
 	public function getFrom()
 	{
-		return array(
+		return [
 			'from_mail' => $this->from_mail,
 			'from_name' => $this->from
-		);
+		];
 	}
 }

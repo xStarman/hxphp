@@ -4,19 +4,19 @@
 
 	$configs->env->add('development');
 
-	$configs->env->development->menu->setConfigs(array(
+	$configs->env->development->menu->setConfigs([
 		'container' => 'nav',
 		'container_class' => 'navbar navbar-default',
 		'menu_class' => 'nav navbar-nav'
-	));
+	]);
 
-	$configs->env->development->menu->setMenus(array(
+	$configs->env->development->menu->setMenus([
 		'Home/home' => '%siteURL%',
-		'Subpasta/folder-open' => array(
+		'Subpasta/folder-open' => [
 			'Home/star' => '%baseURI%/admin/have-fun/',
 			'Teste/home' => '%baseURI%/admin/index/',
-		)
-	));
+		]
+	]);
 
 	/*
 		//Globais
@@ -27,33 +27,33 @@
 
 		$configs->env->development->baseURI = '/hxphp/';
 
-		$configs->env->development->database->setConnectionData(array(
+		$configs->env->development->database->setConnectionData([
 			'driver' => 'mysql',
 			'host' => 'localhost',
 			'user' => 'root',
 			'password' => '',
 			'dbname' => 'hxphp',
 			'charset' => 'utf8'
-		));
+		]);
 
-		$configs->env->development->mail->setFrom(array(
+		$configs->env->development->mail->setFrom([
 			'from' => 'Remetente',
 			'from_mail' => 'email@remetente.com.br'
-		));
+		]);
 
-		$configs->env->development->menu->setConfigs(array(
+		$configs->env->development->menu->setConfigs([
 			'container' => 'nav',
 			'container_class' => 'navbar navbar-default',
 			'menu_class' => 'nav navbar-nav'
-		));
+		]);
 
-		$configs->env->development->menu->setMenus(array(
+		$configs->env->development->menu->setMenus([
 			'Home/home' => '%siteURL%',
-			'Subpasta/folder-open' => array(
+			'Subpasta/folder-open' => [
 				'Home/home' => '%baseURI%/admin/have-fun/',
 				'Teste/home' => '%baseURI%/admin/index/',
-			)
-		));
+			]
+		]);
 
 		$configs->env->development->auth->setURLs('/hxphp/home/', '/hxphp/login/');
 		$configs->env->development->auth->setURLs('/hxphp/admin/home/', '/hxphp/admin/login/', 'admin');
@@ -63,20 +63,20 @@
 
 		$configs->env->production->baseURI = '/';
 
-		$configs->env->production->database->setConnectionData(array(
+		$configs->env->production->database->setConnectionData([
 			'driver' => 'mysql',
 			'host' => 'localhost',
 			'user' => 'usuariodobanco',
 			'password' => 'senhadobanco',
 			'dbname' => 'hxphp',
 			'charset' => 'utf8'
-		));
+		]);
 
-		$configs->env->production->mail->setFrom(array(
+		$configs->env->production->mail->setFrom([
 			'from' => 'Remetente',
 			'from_mail' => 'email@remetente.com.br'
-		));
+		]);
 	*/
-	 
+
 
 	return $configs;

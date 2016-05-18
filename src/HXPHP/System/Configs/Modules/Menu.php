@@ -4,7 +4,7 @@ namespace HXPHP\System\Configs\Modules;
 
 class Menu
 {
-	public $configs = array(
+	public $configs = [
 		'container' => false,
 		'container_id' => '',
 		'container_class' => '',
@@ -18,15 +18,15 @@ class Menu
 		'link_class' => 'menu-link',
 		'link_active_class' => 'menu-active-link',
 		'link_dropdown_class' => 'dropdown-toggle',
-		'link_dropdown_attrs' => array(
+		'link_dropdown_attrs' => [
 			'data-toggle' => 'dropdown'
-		),
+		],
 		'dropdown_class' => 'dropdown-menu',
 		'dropdown_item_class' => 'dropdown-item',
 		'dropdown_item_active_class' => 'active'
-	);
+	];
 
-	public $itens = array();
+	public $itens = [];
 
 	public function setConfigs(array $configs)
 	{

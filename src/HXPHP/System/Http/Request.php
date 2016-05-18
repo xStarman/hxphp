@@ -14,13 +14,13 @@ class Request
 	public  $subfolder = '';
 	public  $controller = 'IndexController';
 	public  $action = 'indexAction';
-	public  $params = array();
+	public  $params = [];
 
 	/**
 	 * Filtros customizados de tratamento
 	 * @var array
 	 */
-	public $custom_filters = array();
+	public $custom_filters = [];
 
 	/**
 	 * Método construtor
@@ -48,10 +48,10 @@ class Request
 			if (count($explode) == 0)
 				return $this;
 
-			
+
 			if (file_exists($controller_directory . $explode[0])) {
 				$this->subfolder = $explode[0] . DS;
-				
+
 				if (isset($explode[1]))
 					$this->controller = Tools::filteredName($explode[1]).'Controller';
 
@@ -81,7 +81,7 @@ class Request
 	 * Define filtros/flags customizados (http://php.net/manual/en/filter.filters.sanitize.php)
 	 * @param array $custom_filters Array com nome do campo e seu respectivo filtro
 	 */
-	public function setCustomFilters(array $custom_filters = array())
+	public function setCustomFilters(array $custom_filters = [])
 	{
 		return $this->custom_filters = $custom_filters;
 	}
@@ -93,9 +93,9 @@ class Request
 	 * @param  array $custom_filters  Filtros customizados para determinados campos
 	 * @return array                  Constate tratada
 	 */
-	public function filter(array $request, $data, array $custom_filters = array())
+	public function filter(array $request, $data, array $custom_filters = [])
 	{
-		$filters = array();
+		$filters = [];
 
 		foreach ($request as $key => $value) {
 			if ( ! array_key_exists($key, $custom_filters)) {

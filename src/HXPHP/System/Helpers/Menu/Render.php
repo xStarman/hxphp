@@ -15,8 +15,8 @@ class Render
 	 * Dados do módulo de configurações do MenuHelper
 	 * @var array
 	 */
-	private $menu_itens = array();
-	private $menu_configs = array();
+	private $menu_itens = [];
+	private $menu_configs = [];
 
 	/**
 	 * Conteúdo HTML do menu renderizado
@@ -43,7 +43,7 @@ class Render
 	 */
 	public function getHTML($role = 'default')
 	{
-		$menu_itens = isset($this->menu_itens[$role]) ? $this->menu_itens[$role] : array();
+		$menu_itens = isset($this->menu_itens[$role]) ? $this->menu_itens[$role] : [];
 		$menu_configs = $this->menu_configs;
 
 		if (empty($menu_itens) || !is_array($menu_itens))
@@ -59,7 +59,7 @@ class Render
 			$real_link = $this->realLink->get($value);
 
 			// Dropdown
-			if (is_array($value) && !empty($value)) { 
+			if (is_array($value) && !empty($value)) {
 				$dropdown_itens = '';
 
 				foreach ($value as $dropdown_key => $dropdown_value) {
@@ -68,7 +68,7 @@ class Render
 
 					$submenu_link_active = $this->checkActive->link($submenu_real_link) === true ? $menu_configs['link_active_class'] : '';
 
-					$link = Elements::get('link', array(
+					$link = Elements::get('link', [
 						$submenu_real_link,
 						$menu_configs['link_class'],
 						$submenu_link_active,
@@ -77,27 +77,27 @@ class Render
 						$menu_configs['link_before'],
 						$submenu_data->title,
 						$menu_configs['link_after']
-					));
+					]);
 
 					$submenu_active = $this->checkActive->link($submenu_real_link) === true ? $menu_configs['dropdown_item_active_class'] : '';
 
-					$dropdown_itens.= Elements::get('dropdown_item', array(
+					$dropdown_itens.= Elements::get('dropdown_item', [
 						$menu_configs['dropdown_item_class'],
 						$submenu_active,
 						$link
-					));
+					]);
 				}
 
-				$dropdown = Elements::get('dropdown', array(
+				$dropdown = Elements::get('dropdown', [
 					$i,
 					$menu_configs['dropdown_class'],
 					$dropdown_itens
-				));
+				]);
 
 				$attrs = Attrs::render($menu_configs['link_dropdown_attrs']);
 				$active = $this->checkActive->dropdown($value) === true ? $menu_configs['link_active_class'] : '';
 
-				$link = Elements::get('link_with_dropdown', array(
+				$link = Elements::get('link_with_dropdown', [
 					$i,
 					$menu_configs['link_dropdown_class'],
 					$active,
@@ -108,20 +108,20 @@ class Render
 					$menu_data->title,
 					$menu_configs['link_after'],
 					$dropdown
-				));
+				]);
 
 				$active = $this->checkActive->dropdown($value) === true ? $menu_configs['menu_item_active_class'] : '';
 
-				$itens.= Elements::get('menu_item', array(
+				$itens.= Elements::get('menu_item', [
 					$menu_configs['menu_item_dropdown_class'],
 					$active,
 					$link
-				));		
+				]);
 			}
 			else {
 				$link_active = $this->checkActive->link($real_link) === true ? $menu_configs['link_active_class'] : '';
 
-				$link = Elements::get('link', array(
+				$link = Elements::get('link', [
 					$real_link,
 					$menu_configs['link_class'],
 					$link_active,
@@ -130,32 +130,32 @@ class Render
 					$menu_configs['link_before'],
 					$menu_data->title,
 					$menu_configs['link_after']
-				));
+				]);
 
 				$active = $this->checkActive->link($real_link) === true ? $menu_configs['menu_item_active_class'] : '';
 
-				$itens.= Elements::get('menu_item', array(
+				$itens.= Elements::get('menu_item', [
 					$menu_configs['menu_item_class'],
 					$active,
 					$link
-				));
-			}	
+				]);
+			}
 		}
 
-		$menu = Elements::get('menu', array(
+		$menu = Elements::get('menu', [
 			$menu_configs['menu_class'],
 			$menu_configs['menu_id'],
 			$itens
-		));
+		]);
 
 		if ($menu_configs['container'] !== false) {
-			$this->html = Elements::get('container', array(
+			$this->html = Elements::get('container', [
 				$menu_configs['container'],
 				$menu_configs['container_id'],
 				$menu_configs['container_class'],
 				$menu,
 				$menu_configs['container']
-			));
+			]);
 		}
 		else {
 			$this->html = $menu;

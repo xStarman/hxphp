@@ -1,4 +1,4 @@
-<?php 
+<?php
 
 namespace HXPHP\System;
 use HXPHP\System\Http as Http;
@@ -34,7 +34,7 @@ class Controller
 		//Injeção da VIEW
 		$this->view = new View;
 		$this->response = new Http\Response;
-		
+
 		if (!is_null($configs) && $configs instanceof Configs\Config)
 			$this->setConfigs($configs);
 	}
@@ -58,7 +58,7 @@ class Controller
 	 */
 	public function indexAction()
     {
-    	
+
     }
 
 	/**
@@ -73,7 +73,7 @@ class Controller
 
 		if ($total_args == 0)
 			throw new \Exception("Nenhum objeto foi definido para ser carregado.", 1);
-			
+
 
 		/**
 		 * Retorna todos os argumentos e define o primeiro como
@@ -88,7 +88,7 @@ class Controller
 		 * parâmetros para o construtor do objeto injetado
 		 */
 		unset($args[0]);
-		$params = empty($args) ? array() : array_values($args);
+		$params = empty($args) ? [] : array_values($args);
 
 		/**
 		 * Tratamento que adiciona a pasta do módulo
@@ -131,7 +131,7 @@ class Controller
 		}
 
 	}
-	
+
 	/**
 	 * Redirecionamento
 	 * @param  string $url Link de redirecionamento

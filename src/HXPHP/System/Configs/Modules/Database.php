@@ -13,14 +13,14 @@ class Database
 
 	public function __construct()
 	{
-		$this->setConnectionData(array(
+		$this->setConnectionData([
 			'driver' => 'mysql',
 			'host' => 'localhost',
 			'user' => 'root',
 			'password' => '',
 			'dbname' => 'hxphp',
 			'charset' => 'utf8'
-		));
+		]);
 		return $this;
 	}
 	public function setConnectionData(array $data)
