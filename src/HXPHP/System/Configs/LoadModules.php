@@ -21,12 +21,12 @@ class LoadModules
 			$module_class = Tools::filteredName(ucwords($module));
 			$object = 'HXPHP\System\Configs\Modules\\'.$module_class;
 
-			if ( ! class_exists($object))
+			if (!class_exists($object))
 				throw new \Exception("O modulo <'$object'> informado nao existe.", 1);
 
 			else
 				$obj->$module = new $object();
-			
+
 		}
 		return $obj;
 	}

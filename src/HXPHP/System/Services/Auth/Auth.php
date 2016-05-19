@@ -50,7 +50,7 @@ class Auth
 		$subfolder = str_replace('/', '', $subfolder);
 		$subfolder = empty($subfolder) ? 'default' : $subfolder;
 
-		if (!isset($after_login[$subfolder]) || !isset($after_logout[$subfolder]))
+		if (!($after_login[$subfolder]) || !($after_logout[$subfolder]))
 			throw new \Exception("Verifique as configuracoes de autenticacao para a subpasta: < $subfolder >", 1);
 
 		//Configuração
@@ -78,7 +78,7 @@ class Auth
 		$this->storage->set('username', $username);
 		$this->storage->set($this->subfolder . '_login_string', $login_string);
 
-		if ($this->redirect === true)
+		if ($this->redirect)
 			return $this->response->redirectTo($this->url_redirect_after_login);
 	}
 
@@ -95,7 +95,7 @@ class Auth
 		setcookie(session_name(), '', time() - 42000, $params["path"], $params["domain"], $params["secure"], $params["httponly"]);
 		session_destroy();
 
-		if ($this->redirect === true)
+		if ($this->redirect)
 			return $this->response->redirectTo($this->url_redirect_after_logout);
 	}
 

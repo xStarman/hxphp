@@ -28,7 +28,7 @@ class LoadTemplate
 		 */
 		$template = dirname(__FILE__) . DS . 'templates' . DS . $template . '.json';
 
-		if ( ! file_exists($template))
+		if (!file_exists($template))
 			throw new \Exception("O template nao foi localizado: <'$template'>", 1);
 
 		$this->file  = $template;

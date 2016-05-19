@@ -76,21 +76,21 @@ class App
 		 */
 		$controllerFile = $controllersDir . $subfolder . $controller . '.php';
 
-		if ( ! file_exists($controllerFile))
+		if (!file_exists($controllerFile))
 			$controllerFile = $controllersDir . $subfolder . $notFoundController . '.php';
 
 		//Inclusão do Controller
 		require_once($controllerFile);
 
 		//Verifica se a classe correspondente ao Controller existe
-		if ( ! class_exists($controller))
+		if (!class_exists($controller))
 			$controller = $notFoundController;
 
 
 		$app = new $controller($this->configs);
 
 		//Verifica se a Action requisitada não existe
-		if ( ! method_exists($app, $action))
+		if (!method_exists($app, $action))
 			$action = 'indexAction';
 
 		//Injeção das configurações

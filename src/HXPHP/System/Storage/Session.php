@@ -31,7 +31,6 @@ class Session implements StorageInterface
 		if ($this->exists($name))
 			return $_SESSION[self::PREFIX][$name];
 
-
 		return null;
 	}
 
@@ -51,8 +50,7 @@ class Session implements StorageInterface
 	 */
 	public function clear($name)
 	{
-		if ($this->exists($name)) 
+		if ($this->exists($name))
 			unset($_SESSION[self::PREFIX][$name]);
-
 	}
 }

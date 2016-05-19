@@ -16,7 +16,7 @@ class MenuData
 		$explode = explode('/', $key);
 
 		$obj->title = $explode[0];
-		$obj->icon = isset($explode[1]) ? $explode[1] : '';
+		$obj->icon = ($explode[1]) ? $explode[1] : '';
 
 		return $obj;
 	}

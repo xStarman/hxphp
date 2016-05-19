@@ -6,7 +6,7 @@ use HXPHP\System\Storage as Storage;
 
 class Alert
 {
-	
+
 	/**
 	 * Injeção do controle de sessão
 	 * @var object
@@ -25,10 +25,10 @@ class Alert
 		//Injeção da Sessão
 		$this->storage = new Storage\Session;
 
-		if (count($alert) == 1)
+		if (count($alert))
 			return null;
 
-		$alert[2] = ! isset($alert[2]) ? '' : $alert[2];
+		$alert[2] = !($alert[2]) ? '' : $alert[2];
 
 		list($style, $title, $message) = $alert;
 
@@ -64,7 +64,7 @@ class Alert
 		$message = $this->storage->get('message');
 		$this->storage->clear('message');
 
-		return $message; 
+		return $message;
 	}
 
 	/**

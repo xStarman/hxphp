@@ -11,7 +11,7 @@ class Attrs
 	 */
 	public static function render($attrs)
 	{
-		if (empty($attrs) || !is_array($attrs))
+		if (!$attrs || !is_array($attrs))
 			return null;
 
 		$html = '';

@@ -30,7 +30,7 @@ class CheckActive
 	public function link($URL)
 	{
 		$position = strpos($this->current_URL, $URL);
-		return $this->current_URL === $URL || ($position !== false && $position > 0) ? true : false;
+		return $this->current_URL === $URL || ($position && $position > 0) ? true : false;
 	}
 
 	/**
@@ -46,7 +46,7 @@ class CheckActive
 		foreach ($values as $dropdown_link) {
 			$real_link = $this->realLink->get($dropdown_link);
 
-			if ($this->link($real_link) === true) {
+			if ($this->link($real_link)) {
 				$status = true;
 				break;
 			}

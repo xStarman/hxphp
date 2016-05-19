@@ -91,10 +91,10 @@ class Elements
 	 */
 	public static function get($name, array $args = [])
 	{
-		if ( ! isset(self::$elements[$name]))
+		if (!self::$elements[$name])
 			return false;
 
-		if ( ! empty($args)) {
+		if ($args) {
 			$args = array_values($args);
 			array_unshift($args, self::$elements[$name]);
 
