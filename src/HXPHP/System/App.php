@@ -83,9 +83,9 @@ class App
 		require_once($controllerFile);
 
 		//Verifica se a classe correspondente ao Controller existe
-		if ( ! class_exists($controller)) {
+		if ( ! class_exists($controller))
 			$controller = $notFoundController;
-		}
+
 
 		$app = new $controller($this->configs);
 

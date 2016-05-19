@@ -157,9 +157,8 @@ class Render
 				$menu_configs['container']
 			]);
 		}
-		else {
+		else
 			$this->html = $menu;
-		}
 
 		return $this->html;
 	}

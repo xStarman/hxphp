@@ -18,13 +18,13 @@ class Environment
 	{
 		if ($environment == null)
 			$environment = $this->defaultEnvironment;
-		
+
 		$name = strtolower(Tools::filteredName($environment));
 		$object = 'HXPHP\System\Configs\Environments\Environment' . ucfirst(Tools::filteredName($environment));
-		
-		if ( ! class_exists($object)) {
+
+		if ( ! class_exists($object))
 			throw new \Exception('O ambiente informado nao esta definido nas configuracoes do sistema.');
-		}
+
 		else {
 			$this->$name = new $object();
 

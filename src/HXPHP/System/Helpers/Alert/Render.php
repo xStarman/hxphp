@@ -16,9 +16,9 @@ class Render
 
 		$html = '';
 
-		foreach ($messages as $key => $message) {
+		foreach ($messages as $key => $message)
 			$html .= '<li>' . $message . '</li>';
-		}
+
 
 		return $html;
 	}

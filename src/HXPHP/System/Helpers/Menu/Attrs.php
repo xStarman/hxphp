@@ -16,9 +16,9 @@ class Attrs
 
 		$html = '';
 
-		foreach ($attrs as $attr => $value) {
+		foreach ($attrs as $attr => $value)
 			$html.= ' ' . $attr . '="' . $value . '" ';
-		}
+
 
 		return $html;
 	}

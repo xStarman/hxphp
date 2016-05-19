@@ -97,11 +97,11 @@ class Request
 	{
 		$filters = [];
 
-		foreach ($request as $key => $value) {
-			if ( ! array_key_exists($key, $custom_filters)) {
+		foreach ($request as $key => $value)
+			if ( ! array_key_exists($key, $custom_filters))
 				$filters[$key] = constant('FILTER_SANITIZE_STRING');
-			}
-		}
+
+
 
 		if (is_array($custom_filters) && is_array($custom_filters))
 			$filters = array_merge($filters,$custom_filters);
@@ -118,13 +118,13 @@ class Request
 	{
 		$get = $this->filter($_GET, INPUT_GET, $this->custom_filters);
 
-		if ( ! $name) {
+		if ( ! $name)
 			return $get;
-		}
 
-		if ( ! isset($get[$name])) {
+
+		if ( ! isset($get[$name]))
 			return null;
-		}
+
 
 		return $get[$name];
 	}
@@ -138,13 +138,12 @@ class Request
 	{
 		$post = $this->filter($_POST, INPUT_POST, $this->custom_filters);
 
-		if ( ! $name) {
+		if ( ! $name)
 			return $post;
-		}
 
-		if ( ! isset($post[$name])) {
+		if ( ! isset($post[$name]))
 			return null;
-		}
+
 
 		return $post[$name];
 	}
@@ -176,9 +175,9 @@ class Request
 	{
 		$method = $_SERVER['REQUEST_METHOD'];
 
-		if ($value) {
+		if ($value)
 			return $method == $value;
-		}
+
 
 		return $method;
 	}

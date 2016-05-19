@@ -105,9 +105,9 @@ class Controller
 				$ref = new \ReflectionClass($object);
   				$this->view->$name = $ref->newInstanceArgs($params);
 			}
-			else{
+			else
 				$this->view->$name = new $object();
-			}
+
 
 			return $this->view->$name;
 		}
@@ -120,16 +120,14 @@ class Controller
 	 */
 	public function __get($param)
 	{
-		if (isset($this->view->$param)) {
+		if (isset($this->view->$param))
 			return $this->view->$param;
-		}
-		elseif (isset($this->$param)) {
-			return $this->$param;
-		}
-		else {
-			throw new \Exception("Parametro <$param> nao encontrado.", 1);
-		}
 
+		elseif (isset($this->$param))
+			return $this->$param;
+
+		else
+			throw new \Exception("Parametro <$param> nao encontrado.", 1);		
 	}
 
 	/**

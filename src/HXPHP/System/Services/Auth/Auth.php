@@ -51,7 +51,7 @@ class Auth
 		$subfolder = empty($subfolder) ? 'default' : $subfolder;
 
 		if (!isset($after_login[$subfolder]) || !isset($after_logout[$subfolder]))
-			throw new \Exception("Verifique as configuracoes de autenticacao para a subpasta: < $subfolder >", 1);	
+			throw new \Exception("Verifique as configuracoes de autenticacao para a subpasta: < $subfolder >", 1);
 
 		//Configuração
 		$this->url_redirect_after_login = $after_login[$subfolder];
@@ -105,13 +105,11 @@ class Auth
 	 */
 	public function redirectCheck($redirect = false)
 	{
-		if ($redirect && $this->login_check()) {
+		if ($redirect && $this->login_check())
 			$this->response->redirectTo($this->url_redirect_after_login);
-		}
-		elseif (!$this->login_check()) {
+		elseif (!$this->login_check())
 			if (!$redirect)
 				$this->logout();
-		}
 	}
 
 	/**
@@ -125,7 +123,7 @@ class Auth
 			 $this->storage->exists($this->subfolder . '_login_string') ) {
 
 			$login_string = hash('sha512', $this->storage->get('username')
-											 . $this->request->server('REMOTE_ADDR') 
+											 . $this->request->server('REMOTE_ADDR')
 											 . $this->request->server('HTTP_USER_AGENT'));
 
 			if ($login_string == $this->storage->get($this->subfolder . '_login_string'))
