@@ -69,7 +69,7 @@ class View
 		];
 
 		foreach ($default_values as $setting => $value) {
-			if(is_null($this->$setting)) {
+			if(!$this->$setting) {
 				$view_settings->$setting = $value;
 				continue;
 			}
@@ -177,7 +177,7 @@ class View
 		(is_array($assets)) ?
                     $this->assets[$type] = array_merge($this->assets[$type], $assets) :
                     array_push($this->assets[$type], $assets);
-		
+
 		return $this;
 	}
 
@@ -202,7 +202,7 @@ class View
 				break;
 		}
 
-		if (count($custom_assets) > 0)
+		if (count($custom_assets))
 			foreach ($custom_assets as $file)
 				$add_assets .= sprintf($tag,$file);
 
@@ -246,11 +246,11 @@ class View
 		//Verifica a existência da VIEW
 		$view = $viewsDir . $this->path . DS . $this->file . $viewsExt;
 
-		if ( ! file_exists($view))
+		if (!file_exists($view))
 			throw new \Exception("Erro fatal: A view <'$view'> não foi encontrada. Por favor, crie a view e tente novamente.", 1);
 
 		//Mecanismo de template
-		if ($this->template === false) {
+		if (!$this->template) {
 			//Inclusão da view
 			require_once($view);
 			exit();
@@ -260,7 +260,7 @@ class View
 		$header = $viewsDir . $this->header . $viewsExt;
 		$footer = $viewsDir . $this->footer . $viewsExt;
 
-		if ( ! file_exists($header) || ! file_exists($footer))
+		if (!file_exists($header) || !file_exists($footer))
 			throw new \Exception("Erro fatal: O header <$header> ou o footer <$footer> não existe. Por favor, verifique e tente novamente.");
 
 		//Inclusão dos arquivos

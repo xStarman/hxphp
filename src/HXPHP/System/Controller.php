@@ -35,7 +35,7 @@ class Controller
 		$this->view = new View;
 		$this->response = new Http\Response;
 
-		if (!is_null($configs) && $configs instanceof Configs\Config)
+		if ($configs && $configs instanceof Configs\Config)
 			$this->setConfigs($configs);
 	}
 
@@ -71,7 +71,7 @@ class Controller
 	{
 		$total_args = func_num_args();
 
-		if ($total_args == 0)
+		if (!$total_args)
 			throw new \Exception("Nenhum objeto foi definido para ser carregado.", 1);
 
 
@@ -88,7 +88,7 @@ class Controller
 		 * parâmetros para o construtor do objeto injetado
 		 */
 		unset($args[0]);
-		$params = empty($args) ? [] : array_values($args);
+		$params = !($args) ? [] : array_values($args);
 
 		/**
 		 * Tratamento que adiciona a pasta do módulo
@@ -101,7 +101,7 @@ class Controller
 			$name = end($explode);
 			$name = strtolower(Tools::filteredName($name));
 
-			if ( ! empty($params)) {
+			if ($params) {
 				$ref = new \ReflectionClass($object);
   				$this->view->$name = $ref->newInstanceArgs($params);
 			}
@@ -120,14 +120,14 @@ class Controller
 	 */
 	public function __get($param)
 	{
-		if (isset($this->view->$param))
+		if ($this->view->$param)
 			return $this->view->$param;
 
-		elseif (isset($this->$param))
+		elseif ($this->$param)
 			return $this->$param;
 
 		else
-			throw new \Exception("Parametro <$param> nao encontrado.", 1);		
+			throw new \Exception("Parametro <$param> nao encontrado.", 1);
 	}
 
 	/**

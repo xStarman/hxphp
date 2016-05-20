@@ -43,10 +43,10 @@ class Render
 	 */
 	public function getHTML($role = 'default')
 	{
-		$menu_itens = isset($this->menu_itens[$role]) ? $this->menu_itens[$role] : [];
+		$menu_itens = ($this->menu_itens[$role]) ? $this->menu_itens[$role] : [];
 		$menu_configs = $this->menu_configs;
 
-		if (empty($menu_itens) || !is_array($menu_itens))
+		if (!($menu_itens) || !is_array($menu_itens))
 			return 'Nenhum menu foi definido para o seguinte nivel de acesso: <strong>' . $role . '</strong>';
 
 		$itens = '';
@@ -59,14 +59,14 @@ class Render
 			$real_link = $this->realLink->get($value);
 
 			// Dropdown
-			if (is_array($value) && !empty($value)) {
+			if (is_array($value) && ($value)) {
 				$dropdown_itens = '';
 
 				foreach ($value as $dropdown_key => $dropdown_value) {
 					$submenu_data = MenuData::get($dropdown_key);
 					$submenu_real_link = $this->realLink->get($dropdown_value);
 
-					$submenu_link_active = $this->checkActive->link($submenu_real_link) === true ? $menu_configs['link_active_class'] : '';
+					$submenu_link_active = ($this->checkActive->link($submenu_real_link)) ? $menu_configs['link_active_class'] : '';
 
 					$link = Elements::get('link', [
 						$submenu_real_link,
@@ -79,7 +79,7 @@ class Render
 						$menu_configs['link_after']
 					]);
 
-					$submenu_active = $this->checkActive->link($submenu_real_link) === true ? $menu_configs['dropdown_item_active_class'] : '';
+					$submenu_active = ($this->checkActive->link($submenu_real_link)) ? $menu_configs['dropdown_item_active_class'] : '';
 
 					$dropdown_itens.= Elements::get('dropdown_item', [
 						$menu_configs['dropdown_item_class'],
@@ -95,7 +95,7 @@ class Render
 				]);
 
 				$attrs = Attrs::render($menu_configs['link_dropdown_attrs']);
-				$active = $this->checkActive->dropdown($value) === true ? $menu_configs['link_active_class'] : '';
+				$active = ($this->checkActive->dropdown($value)) ? $menu_configs['link_active_class'] : '';
 
 				$link = Elements::get('link_with_dropdown', [
 					$i,
@@ -110,7 +110,7 @@ class Render
 					$dropdown
 				]);
 
-				$active = $this->checkActive->dropdown($value) === true ? $menu_configs['menu_item_active_class'] : '';
+				$active = ($this->checkActive->dropdown($value)) ? $menu_configs['menu_item_active_class'] : '';
 
 				$itens.= Elements::get('menu_item', [
 					$menu_configs['menu_item_dropdown_class'],
@@ -119,7 +119,7 @@ class Render
 				]);
 			}
 			else {
-				$link_active = $this->checkActive->link($real_link) === true ? $menu_configs['link_active_class'] : '';
+				$link_active = ($this->checkActive->link($real_link)) ? $menu_configs['link_active_class'] : '';
 
 				$link = Elements::get('link', [
 					$real_link,
@@ -132,7 +132,7 @@ class Render
 					$menu_configs['link_after']
 				]);
 
-				$active = $this->checkActive->link($real_link) === true ? $menu_configs['menu_item_active_class'] : '';
+				$active = ($this->checkActive->link($real_link)) ? $menu_configs['menu_item_active_class'] : '';
 
 				$itens.= Elements::get('menu_item', [
 					$menu_configs['menu_item_class'],
@@ -148,7 +148,7 @@ class Render
 			$itens
 		]);
 
-		if ($menu_configs['container'] !== false) {
+		if ($menu_configs['container']) {
 			$this->html = Elements::get('container', [
 				$menu_configs['container'],
 				$menu_configs['container_id'],

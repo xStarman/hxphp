@@ -23,12 +23,12 @@ class Template
 	 */
 	public function getByCode($code, array $fields = [])
 	{
-		if (isset($this->content[$code])){
+		if ($this->content[$code]){
 			$output = $this->content[$code];
 
-			if ( ! empty($fields) ) {
+			if ($fields) {
 				foreach ($fields as $field => $params) {
-					if ( ! isset($output[$field]) || empty($params))
+					if (!($output[$field]) || !($params))
 						continue;
 
 					$output[$field] = vsprintf($output[$field], $params);

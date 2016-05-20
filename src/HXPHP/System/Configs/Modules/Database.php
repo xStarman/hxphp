@@ -27,7 +27,7 @@ class Database
 	{
 		foreach ($data as $param => $value) {
 
-			if ( ! property_exists($this, $param))
+			if (!property_exists($this, $param))
 				throw new \Exception("O parametro <$param> nao existe. Verifique a sintaxe e tente novamente", true);
 
 			$this->$param = $value;

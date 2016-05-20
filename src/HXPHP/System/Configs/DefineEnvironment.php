@@ -22,7 +22,7 @@ class DefineEnvironment
 	public function setDefaultEnv($environment)
 	{
 		$env = new Environment;
-		if ( is_object($env->add($environment)) )
+		if (is_object($env->add($environment)))
 			$this->currentEnviroment = $environment;
 	}
 

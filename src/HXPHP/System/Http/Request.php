@@ -37,31 +37,31 @@ class Request
 	 */
 	public function initialize($baseURI, $controller_directory)
 	{
-		if ( ! empty($baseURI) && ! empty($controller_directory)) {
+		if ($baseURI && $controller_directory) {
 			$explode = array_values(array_filter(explode('/', $_SERVER['REQUEST_URI'])));
 
-			if (isset($explode[0]) && $explode[0] == str_replace('/', '', $baseURI)) {
+			if (($explode[0]) && $explode[0] == str_replace('/', '', $baseURI)) {
 				unset($explode[0]);
 				$explode = array_values($explode);
 			}
 
-			if (count($explode) == 0)
+			if (!count($explode))
 				return $this;
 
 
 			if (file_exists($controller_directory . $explode[0])) {
 				$this->subfolder = $explode[0] . DS;
 
-				if (isset($explode[1]))
+				if (($explode[1]))
 					$this->controller = Tools::filteredName($explode[1]).'Controller';
 
-				if (isset($explode[2])) {
+				if ($explode[2]) {
 					$this->action = lcfirst(Tools::filteredName($explode[2])).'Action';
 
 					unset($explode[2]);
 				}
 			}
-			elseif (count($explode) == 1) {
+			elseif (count($explode)) {
 				$this->controller = Tools::filteredName($explode[0]).'Controller';
 
 				return $this;
@@ -98,7 +98,7 @@ class Request
 		$filters = [];
 
 		foreach ($request as $key => $value)
-			if ( ! array_key_exists($key, $custom_filters))
+			if (!array_key_exists($key, $custom_filters))
 				$filters[$key] = constant('FILTER_SANITIZE_STRING');
 
 
@@ -118,11 +118,11 @@ class Request
 	{
 		$get = $this->filter($_GET, INPUT_GET, $this->custom_filters);
 
-		if ( ! $name)
+		if (!$name)
 			return $get;
 
 
-		if ( ! isset($get[$name]))
+		if (!($get[$name]))
 			return null;
 
 
@@ -138,10 +138,10 @@ class Request
 	{
 		$post = $this->filter($_POST, INPUT_POST, $this->custom_filters);
 
-		if ( ! $name)
+		if (!$name)
 			return $post;
 
-		if ( ! isset($post[$name]))
+		if (!($post[$name]))
 			return null;
 
 
@@ -160,7 +160,7 @@ class Request
         if(!$name)
             return $server;
 
-        if(!isset($server[$name]))
+        if(!($server[$name]))
             return NULL;
 
         return $server[$name];

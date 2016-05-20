@@ -12,10 +12,7 @@ class Tools
 	{
 		echo '<pre>';
 
-		if ($dump)
-			var_dump($data);
-		else
-			print_r($data);
+		($dump) ? var_dump($data) : print_r($data);
 
 		echo '</pre>';
 	}
@@ -29,7 +26,7 @@ class Tools
 	static function hashHX($password, $salt = null)
 	{
 
-		if (is_null($salt))
+		if (!$salt)
 			$salt = hash('sha512', uniqid(mt_rand(1, mt_getrandmax()), true));
 
 		$password = hash('sha512', $password.$salt);

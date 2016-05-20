@@ -33,10 +33,10 @@ class Email
 		$to = strtolower($to);
 		$subject = addslashes(trim($subject));
 
-		$message = $accept_html === false ? strip_tags($message) : $message;
+		$message = !($accept_html) ? strip_tags($message) : $message;
 		$message = nl2br($message);
 
-		$from = !is_null($this->from) && empty($from) ? $this->from : $from;
+		$from = ($this->from) && !($from) ? $this->from : $from;
 
 		ksort($from);
 		$from = array_values($from);

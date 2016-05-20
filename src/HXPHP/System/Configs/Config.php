@@ -19,10 +19,10 @@ class Config
 	public function __get($param) {
 		$current = $this->define->getDefault();
 
-		if (isset($this->env->$current->$param))
+		if ($this->env->$current->$param)
 			return $this->env->$current->$param;
 
-		else if(isset($this->global->$param)) 
+		else if($this->global->$param)
 			return $this->global->$param;
 
 
