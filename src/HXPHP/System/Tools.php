@@ -60,7 +60,6 @@ class Tools
 
         static function filteredFileName($input)
         {
-            //$new = preg_replace('/[^\w]/', '', $input);
             $input = trim($input);
 
             //Remove " caso exista
