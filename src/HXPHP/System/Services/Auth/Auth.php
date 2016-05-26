@@ -77,7 +77,7 @@ class Auth
 
 		$this->storage->set('user_id', $user_id);
 		$this->storage->set('username', $username);
-                $this->storage->set('user_role', $user_role);
+        $this->storage->set('user_role', $user_role);
 		$this->storage->set($this->subfolder . '_login_string', $login_string);
 
 		if ($this->redirect)
@@ -118,7 +118,7 @@ class Auth
      * Valida a autenticação e redireciona mediante o estado do usuário
      * @param array $roles Array com roles são permitidas o acesso a esta página
      */
-    public function roleCheck($roles = [])
+    public function roleCheck(array $roles = [])
     {
         if($this->loginCheck())
         {
