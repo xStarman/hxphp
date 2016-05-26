@@ -159,12 +159,12 @@ class Auth
 		return $this->storage->get('user_id');
 	}
 
-        /**
-         * Retorna o role do usuário autenticado
-         * @return string Role do usuário
-         */
-        public function getUserRole()
-        {
-            return $this->storage->get('user_role');
-        }
+    /**
+     * Retorna o role do usuário autenticado
+     * @return string Role do usuário
+     */
+    public function getUserRole()
+    {
+        return $this->storage->get('user_role');
+    }
 }
