@@ -114,20 +114,20 @@ class Auth
 				$this->logout();
 	}
 
-        /**
-         * Valida a autenticação e redireciona mediante o estado do usuário
-         * @param array $roles Array com roles são permitidas o acesso a esta página
-         */
-        public function roleCheck($roles = [])
+    /**
+     * Valida a autenticação e redireciona mediante o estado do usuário
+     * @param array $roles Array com roles são permitidas o acesso a esta página
+     */
+    public function roleCheck($roles = [])
+    {
+        if($this->loginCheck())
         {
-            if($this->loginCheck())
-            {
-                if(!in_array($this->getUserRole(), $roles))
-                    $this->redirectCheck(true);
-            }
-            else
-                $this->response->redirectTo($this->url_redirect_after_logout);
+            if(!in_array($this->getUserRole(), $roles))
+                $this->redirectCheck(true);
         }
+        else
+            $this->response->redirectTo($this->url_redirect_after_logout);
+    }
 
 	/**
 	 * Verifica se o usuário está logado
