@@ -4,20 +4,6 @@
 
 	$configs->env->add('development');
 
-	$configs->env->development->menu->setConfigs([
-		'container' => 'nav',
-		'container_class' => 'navbar navbar-default',
-		'menu_class' => 'nav navbar-nav'
-	]);
-
-	$configs->env->development->menu->setMenus([
-		'Home/home' => '%siteURL%',
-		'Subpasta/folder-open' => [
-			'Home/star' => '%baseURI%/admin/have-fun/',
-			'Teste/home' => '%baseURI%/admin/index/',
-		]
-	]);
-
 	/*
 		//Globais
 		$configs->title = 'Titulo customizado';
