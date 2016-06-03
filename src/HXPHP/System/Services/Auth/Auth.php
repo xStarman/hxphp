@@ -120,7 +120,7 @@ class Auth
      */
     public function roleCheck(array $roles = [])
     {
-        if($this->loginCheck())
+        if($this->login_check())
         {
             if(!in_array($this->getUserRole(), $roles))
                 $this->redirectCheck(true);
