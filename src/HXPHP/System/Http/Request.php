@@ -37,42 +37,34 @@ class Request
 	 */
 	public function initialize($baseURI, $controller_directory)
 	{
-		if ($baseURI && $controller_directory) {
+		if ( ! empty($baseURI) && ! empty($controller_directory)) {
 			$explode = array_values(array_filter(explode('/', $_SERVER['REQUEST_URI'])));
-
 			if (isset($explode[0]) && $explode[0] == str_replace('/', '', $baseURI)) {
 				unset($explode[0]);
 				$explode = array_values($explode);
 			}
-
-			if (!count($explode))
+			if (count($explode) == 0)
 				return $this;
-
-
+			
 			if (file_exists($controller_directory . $explode[0])) {
 				$this->subfolder = $explode[0] . DS;
-
+				
 				if (isset($explode[1]))
 					$this->controller = Tools::filteredName($explode[1]).'Controller';
-
 				if (isset($explode[2])) {
 					$this->action = lcfirst(Tools::filteredName($explode[2])).'Action';
-
 					unset($explode[2]);
 				}
 			}
-			elseif (count($explode)) {
+			elseif (count($explode) == 1) {
 				$this->controller = Tools::filteredName($explode[0]).'Controller';
-
 				return $this;
 			}
 			else {
 				$this->controller = Tools::filteredName($explode[0]).'Controller';
 				$this->action = lcfirst(Tools::filteredName($explode[1])).'Action';
 			}
-
 			unset($explode[0], $explode[1]);
-
 			$this->params = array_values($explode);
 		}
 	}
