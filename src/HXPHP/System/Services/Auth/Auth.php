@@ -129,6 +129,11 @@ class Auth
             $this->response->redirectTo($this->url_redirect_after_logout);
     }
 
+    public function loginCheck()
+    {
+    	return $this->login_check();
+    }
+
 	/**
 	 * Verifica se o usuário está logado
 	 * @return boolean Status da autenticação
