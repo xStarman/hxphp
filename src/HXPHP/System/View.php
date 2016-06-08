@@ -26,6 +26,7 @@ class View
 	 * Parâmetros de configuração da VIEW
 	 * @var string
 	 */
+	protected $partialsDir = null;
 	protected $path = null;
 	protected $template = null;
 	protected $header = null;
@@ -78,7 +79,8 @@ class View
 			$view_settings->$setting = $this->$setting;
 		}
 
-		$this->setPath($view_settings->path)
+		$this->setPartialsDir($view_settings->partialsDir)
+				->setPath($view_settings->path)
 				->setTemplate($view_settings->template)
 				->setHeader($view_settings->header)
 				->setFile($view_settings->file)
