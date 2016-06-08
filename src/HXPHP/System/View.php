@@ -60,6 +60,7 @@ class View
 		$view_settings = new \stdClass;
 
 		$default_values = [
+			'partialsDir' => 'partials',
 			'path' => $subfolder . $controller,
 			'template' => true,
 			'header' => $subfolder . 'header',
