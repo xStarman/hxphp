@@ -86,6 +86,18 @@ class View
 	}
 
 	/**
+	 * Define o diretório das views parciais
+	 * @param string  $partialsDir  Diretório
+	 */
+	public function setPartialsDir($partialsDir)
+	{
+		$viewsDir = $this->configs->views->directory;
+
+		$this->partialsDir = $viewsDir . DS . $partialsDir;
+		return $this;
+	}
+
+	/**
 	 * Define o título da página
 	 * @param string  $title  Título da página
 	 */
