@@ -167,6 +167,24 @@ class Request
 
         return $server[$name];
     }
+    
+    /**
+     * Obtém os dados da superglobal $_COOKIE
+     * @param string $name Nome do parâmetro
+     * @return null Retorna o array $_COOKIE geral ou em um índice específico
+     */
+    public function cookie($name = null)
+    {
+        $cookie = $this->filter($_COOKIE, INPUT_COOKIE, $this->custom_filters);
+    
+        if(!$name)
+             return $cookie;
+    
+        if(!isset($cookie[$name]))
+             return NULL;
+    
+        return $cookie[$name];
+    }
 
 	/**
 	 * Retorna o método da requisição
