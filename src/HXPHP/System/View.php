@@ -96,7 +96,7 @@ class View
 	{
 		$viewsDir = $this->configs->views->directory;
 
-		$this->partialsDir = $viewsDir . DS . $partialsDir;
+		$this->partialsDir = $viewsDir . DS . $partialsDir . DS;
 		return $this;
 	}
 
@@ -284,5 +284,20 @@ class View
 		require_once($footer);
 
 		exit();
+	}
+
+	public function partial($view, array $params = [])
+	{
+		if (!empty($params))
+			extract($data, EXTR_PREFIX_ALL, 'view');
+
+		$viewsExt = $this->configs->views->extension;
+
+		$viewFile = $this->partialsDir . $view . $viewsExt;
+
+		if (!file_exists($viewFile))
+			throw new \Exception("Erro fatal: A view <'$viewFile'> não foi encontrada. Por favor, crie a view e tente novamente.", 1);
+
+		require_once($viewFile);
 	}
 }
