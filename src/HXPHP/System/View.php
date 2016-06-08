@@ -26,6 +26,7 @@ class View
 	 * Parâmetros de configuração da VIEW
 	 * @var string
 	 */
+	protected $partialsDir = null;
 	protected $path = null;
 	protected $template = null;
 	protected $header = null;
@@ -60,6 +61,7 @@ class View
 		$view_settings = new \stdClass;
 
 		$default_values = [
+			'partialsDir' => 'partials',
 			'path' => $subfolder . $controller,
 			'template' => true,
 			'header' => $subfolder . 'header',
@@ -77,12 +79,25 @@ class View
 			$view_settings->$setting = $this->$setting;
 		}
 
-		$this->setPath($view_settings->path)
+		$this->setPartialsDir($view_settings->partialsDir)
+				->setPath($view_settings->path)
 				->setTemplate($view_settings->template)
 				->setHeader($view_settings->header)
 				->setFile($view_settings->file)
 				->setFooter($view_settings->footer)
 				->setTitle($view_settings->title);
+	}
+
+	/**
+	 * Define o diretório das views parciais
+	 * @param string  $partialsDir  Diretório
+	 */
+	public function setPartialsDir($partialsDir)
+	{
+		$viewsDir = $this->configs->views->directory;
+
+		$this->partialsDir = $viewsDir . DS . $partialsDir . DS;
+		return $this;
 	}
 
 	/**
@@ -269,5 +284,20 @@ class View
 		require_once($footer);
 
 		exit();
+	}
+
+	public function partial($view, array $params = [])
+	{
+		if (!empty($params))
+			extract($params, EXTR_PREFIX_ALL, 'view');
+
+		$viewsExt = $this->configs->views->extension;
+
+		$viewFile = $this->partialsDir . '_' . $view . $viewsExt;
+
+		if (!file_exists($viewFile))
+			throw new \Exception("Erro fatal: A view <'$viewFile'> não foi encontrada. Por favor, crie a view e tente novamente.", 1);
+
+		require_once($viewFile);
 	}
 }
