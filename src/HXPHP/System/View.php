@@ -289,11 +289,11 @@ class View
 	public function partial($view, array $params = [])
 	{
 		if (!empty($params))
-			extract($data, EXTR_PREFIX_ALL, 'view');
+			extract($params, EXTR_PREFIX_ALL, 'view');
 
 		$viewsExt = $this->configs->views->extension;
 
-		$viewFile = $this->partialsDir . $view . $viewsExt;
+		$viewFile = $this->partialsDir . '_' . $view . $viewsExt;
 
 		if (!file_exists($viewFile))
 			throw new \Exception("Erro fatal: A view <'$viewFile'> não foi encontrada. Por favor, crie a view e tente novamente.", 1);
