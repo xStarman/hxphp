@@ -121,7 +121,7 @@ class Request
 			return $get;
 
 
-		if (!($get[$name]))
+		if (!isset($get[$name]))
 			return null;
 
 
@@ -140,7 +140,7 @@ class Request
 		if (!$name)
 			return $post;
 
-		if (!($post[$name]))
+		if (!isset($post[$name]))
 			return null;
 
 
