@@ -10,6 +10,7 @@
 	define('DS', DIRECTORY_SEPARATOR);
 	define('ROOT_PATH', dirname(__FILE__) . DS);
 	define('APP_PATH', 'app' . DS);
+	define('TEMPLATES_PATH', ROOT_PATH . 'templates' . DS);
 
 	define('HXPHP_VERSION', '2.5.8');
 
