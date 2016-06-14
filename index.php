@@ -11,6 +11,8 @@
 	define('ROOT_PATH', dirname(__FILE__) . DS);
 	define('APP_PATH', 'app' . DS);
 
+	define('HXPHP_VERSION', '2.5.8');
+
 	/**
 	 * Verifica se o autoload do Composer está configurado
 	 */
