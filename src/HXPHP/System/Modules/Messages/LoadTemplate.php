@@ -26,7 +26,7 @@ class LoadTemplate
 		 * Caminho completo do template
 		 * @var string
 		 */
-		$template = dirname(__FILE__) . DS . 'templates' . DS . $template . '.json';
+		$template = TEMPLATES_PATH . 'Modules' . DS . 'Messages' . DS . $template . '.json';
 
 		if (!file_exists($template))
 			throw new \Exception("O template nao foi localizado: <'$template'>", 1);
