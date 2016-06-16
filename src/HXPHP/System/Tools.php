@@ -17,11 +17,11 @@ class Tools
 		echo '</pre>';
 	}
 
-      public static function getTemplatePath($component, $name) {
-            $templatePath = TEMPLATES_PATH . $component . DS . $name;
+      public static function getTemplatePath($component, $name, $templateFile) {
+            $templatePath = TEMPLATES_PATH . $component . DS . $name . DS . $templateFile;
 
-            if ( ! is_dir($templatePath))
-                  throw new \Exception("Diretorio $templatePath nao encontrado.", 1);
+            if (!file_exists($templatePath))
+                  throw new \Exception("O template nao foi localizado: <'$templatePath'>", 1);
 
             return $templatePath;           
       }

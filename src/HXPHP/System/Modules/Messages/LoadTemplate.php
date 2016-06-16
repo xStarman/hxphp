@@ -2,6 +2,8 @@
 
 namespace HXPHP\System\Modules\Messages;
 
+use HXPHP\System\Tools as Tools;
+
 class LoadTemplate
 {
 	/**
@@ -26,10 +28,7 @@ class LoadTemplate
 		 * Caminho completo do template
 		 * @var string
 		 */
-		$template = TEMPLATES_PATH . 'Modules' . DS . 'Messages' . DS . $template . $extension;
-
-		if (!file_exists($template))
-			throw new \Exception("O template nao foi localizado: <'$template'>", 1);
+		$template = Tools::getTemplatePath('Modules', 'Messages', $template . $extension);
 
 		$this->file  = $template;
 		$this->json  = file_get_contents($template);
