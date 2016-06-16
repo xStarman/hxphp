@@ -8,7 +8,7 @@ class Tools
 	 * Exibe os dados
 	 * @param  mist $data Variável que será "debugada"
 	 */
-	static function dd($data, $dump = false)
+	public static function dd($data, $dump = false)
 	{
 		echo '<pre>';
 
@@ -17,13 +17,22 @@ class Tools
 		echo '</pre>';
 	}
 
+      public static function getTemplatePath($component, $name, $templateFile) {
+            $templatePath = TEMPLATES_PATH . $component . DS . $name . DS . $templateFile;
+
+            if (!file_exists($templatePath))
+                  throw new \Exception("O template nao foi localizado: <'$templatePath'>", 1);
+
+            return $templatePath;           
+      }
+
 	/**
 	 * Criptografa a senha do usuário no padrão HXPHP
 	 * @param  string $password Senha do usuário
 	 * @param  string $salt     Código alfanumérico
 	 * @return array            Array com o SALT e a SENHA
 	 */
-	static function hashHX($password, $salt = null)
+	public static function hashHX($password, $salt = null)
 	{
 
 		if (!$salt)
@@ -42,7 +51,7 @@ class Tools
 	 * @param string $input     String que será convertida
 	 * @return string           String convertida
 	 */
-	static function filteredName($input)
+	public static function filteredName($input)
 	{
 		$input = explode('?', $input);
 		$input = $input[0];
@@ -58,8 +67,8 @@ class Tools
 		return str_replace(' ', '', ucwords(str_replace($find, $replace, $input)));
 	}
 
-    static function filteredFileName($input)
-    {
+      public static function filteredFileName($input)
+      {
         $input = trim($input);
 
         //Remove " caso exista
@@ -174,9 +183,9 @@ class Tools
         ];
 
         return strtolower(str_replace(' ', '_', str_replace($find, $replace, $new)));
-    }
+      }
 
-	static function decamelize($cameled, $sep = '-') {
+	public static function decamelize($cameled, $sep = '-') {
 	    return implode(
 			$sep,
 			array_map(
