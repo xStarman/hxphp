@@ -17,6 +17,15 @@ class Tools
 		echo '</pre>';
 	}
 
+      public static function getTemplatePath($component, $name) {
+            $templatePath = TEMPLATES_PATH . $component . DS . $name;
+
+            if ( ! is_dir($templatePath))
+                  throw new \Exception("Diretorio $templatePath nao encontrado.", 1);
+
+            return $templatePath;           
+      }
+
 	/**
 	 * Criptografa a senha do usuário no padrão HXPHP
 	 * @param  string $password Senha do usuário
