@@ -9,7 +9,7 @@ class Template
 
 	public function __construct()
 	{
-		$this->setTemplatePath(TEMPLATES_PATH . 'Helpers' . DS . 'Alert')
+		$this->setTemplatePath(TEMPLATES_PATH . 'Helpers' . DS . 'Alert' . DS)
 				->setTemplateFile('alert');
 	}
 
