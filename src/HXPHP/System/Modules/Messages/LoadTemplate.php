@@ -20,13 +20,13 @@ class LoadTemplate
 	 * Método responsável pela leitura do arquivo JSON
 	 * @param string $template Nome do template
 	 */
-	public function __construct($template)
+	public function __construct($template, $extension = '.json')
 	{
 		/**
 		 * Caminho completo do template
 		 * @var string
 		 */
-		$template = TEMPLATES_PATH . 'Modules' . DS . 'Messages' . DS . $template . '.json';
+		$template = TEMPLATES_PATH . 'Modules' . DS . 'Messages' . DS . $template . $extension;
 
 		if (!file_exists($template))
 			throw new \Exception("O template nao foi localizado: <'$template'>", 1);
