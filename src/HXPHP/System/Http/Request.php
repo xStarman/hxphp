@@ -40,13 +40,20 @@ class Request
 		if ( ! empty($baseURI) && ! empty($controller_directory)) {
 			$explode = array_values(array_filter(explode('/', $_SERVER['REQUEST_URI'])));
 
-			if (isset($explode[0]) && $explode[0] == str_replace('/', '', $baseURI)) {
-				unset($explode[0]);
-				$explode = array_values($explode);
-			}
+			$baseURICount = count(array_filter(explode('/', $baseURI)));
 
-			if (count($explode) == 0)
+			if (count($explode) == $baseURICount)
 				return $this;
+
+			if (count($explode) != $baseURICount){
+
+				for($i=0; $i < $baseURICount; $i++) { 
+					unset($explode[$i]);
+				}
+
+				$explode = array_values($explode);
+
+			}
 			
 			if (file_exists($controller_directory . $explode[0])) {
 				$this->subfolder = $explode[0] . DS;
