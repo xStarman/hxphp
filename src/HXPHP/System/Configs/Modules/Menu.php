@@ -5,11 +5,11 @@ namespace HXPHP\System\Configs\Modules;
 class Menu
 {
 	public $configs = [
-		'container' => false,
+		'container' => 'nav',
 		'container_id' => '',
-		'container_class' => '',
+		'container_class' => 'navbar navbar-default',
 		'menu_id' => 'menu',
-		'menu_class' => 'menu',
+		'menu_class' => 'navbar-nav nav',
 		'menu_item_class' => 'menu-item',
 		'menu_item_active_class' => 'active',
 		'menu_item_dropdown_class' => 'dropdown',
