@@ -1,8 +1,8 @@
 <?php
 
-namespace HXPHP\System\Storage;
+namespace HXPHP\System\Storage\Cookie;
 
-class Cookie implements StorageInterface
+class Cookie implements \HXPHP\System\Storage\StorageInterface
 {
 
     /**

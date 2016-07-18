@@ -1,8 +1,8 @@
 <?php
 
-namespace HXPHP\System\Storage;
+namespace HXPHP\System\Storage\Session;
 
-class Session implements StorageInterface
+class Session implements \HXPHP\System\Storage\StorageInterface
 {
 	/**
 	 * Prefixo das sessões
