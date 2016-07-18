@@ -23,7 +23,7 @@ class Alert
 		$alert = array_values($alert);
 
 		//Injeção da Sessão
-		$this->storage = new Storage\Session;
+		$this->storage = new Storage\Session\Session;
 
 		if (count($alert) === 0)
 			return null;

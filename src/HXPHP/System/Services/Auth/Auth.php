@@ -45,7 +45,7 @@ class Auth
 		//Instância dos objetos injetados
 		$this->request = new Http\Request;
 		$this->response = new Http\Response;
-		$this->storage  = new Storage\Session;
+		$this->storage  = new Storage\Session\Session;
 
 		$subfolder = str_replace('/', '', $subfolder);
 		$subfolder = !$subfolder ? 'default' : $subfolder;
