@@ -310,7 +310,9 @@ class View
 		require_once($viewFile);
 	}
 
-	public function printRelativeURL($URL) {
-		echo $this->configs->baseURI . $this->subfolder . $URL;
+	public function printRelativeURL($URL, $controller = true) {
+		$path = $controller === true ? $this->path . DS : $this->subfolder;
+
+		echo $this->configs->baseURI . $path . $URL;
 	}
 }
