@@ -27,6 +27,7 @@ class Request
 	 */
 	public function __construct($baseURI = '', $controller_directory = '')
 	{
+		$this->subfolder = 'default';
 		$this->initialize($baseURI, $controller_directory);
 		return $this;
 	}
@@ -56,7 +57,7 @@ class Request
 			}
 			
 			if (file_exists($controller_directory . $explode[0])) {
-				$this->subfolder = $explode[0] . DS;
+				$this->subfolder = $explode[0];
 				
 				if (isset($explode[1]))
 					$this->controller = Tools::filteredName($explode[1]).'Controller';
