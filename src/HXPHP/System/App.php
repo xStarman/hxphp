@@ -64,7 +64,8 @@ class App
 		/**
 		 * Variáveis
 		 */
-		$subfolder = $this->request->subfolder;
+		$subfolder = $this->request->subfolder === 'default' ? '' : 
+						$this->request->subfolder . DS;
 		$controller = $this->request->controller;
 		$action = $this->request->action;
 		$controllersDir = $this->configs->controllers->directory;
@@ -74,18 +75,22 @@ class App
 		 * Caminho do controller
 		 * @var string
 		 */
-		$controllerFile = $controllersDir . $subfolder . $controller . '.php';
+		$controller_directory = $controllersDir . $subfolder;
+		$controllerFile = $controller_directory . $controller . '.php';
+		$notFoundControllerFile = $controller_directory . $notFoundController . '.php';
 
 		if (!file_exists($controllerFile))
-			$controllerFile = $controllersDir . $subfolder . $notFoundController . '.php';
+			$controllerFile = $notFoundControllerFile;
 
 		//Inclusão do Controller
 		require_once($controllerFile);
 
 		//Verifica se a classe correspondente ao Controller existe
-		if (!class_exists($controller))
-			$controller = $notFoundController;
+		if (!class_exists($controller)) {
+			require_once($notFoundControllerFile);
 
+			$controller = $notFoundController;
+		}
 
 		$app = new $controller($this->configs);
 
