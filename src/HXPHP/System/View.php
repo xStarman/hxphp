@@ -27,6 +27,7 @@ class View
 	 * @var string
 	 */
 	protected $partialsDir = null;
+	protected $subfolder = null;
 	protected $path = null;
 	protected $template = null;
 	protected $header = null;
@@ -48,6 +49,12 @@ class View
 		$this->request  = new Http\Request($configs->baseURI);
 
 		/**
+		 * Subfolder
+		 * @var mixed
+		 */
+		$this->subfolder = $subfolder;
+
+		/**
 		 * Tratamento das variáveis
 		 */
 		$controller = strtolower(str_replace('Controller', '', $controller));
@@ -62,11 +69,11 @@ class View
 
 		$default_values = [
 			'partialsDir' => 'partials',
-			'path' => $subfolder . $controller,
+			'path' => $controller,
 			'template' => true,
-			'header' => $subfolder . 'header',
+			'header' => 'header',
 			'file' => $action,
-			'footer' => $subfolder . 'footer',
+			'footer' => 'footer',
 			'title' => $this->configs->title
 		];
 
@@ -92,9 +99,11 @@ class View
 	 * Define o diretório das views parciais
 	 * @param string  $partialsDir  Diretório
 	 */
-	public function setPartialsDir($partialsDir)
+	public function setPartialsDir($partialsDir, $overwrite = false)
 	{
 		$viewsDir = $this->configs->views->directory;
+
+		$partialsDir = $overwrite === false ? $this->subfolder . $partialsDir : $partialsDir;
 
 		$this->partialsDir = $viewsDir . DS . $partialsDir . DS;
 		return $this;
@@ -114,9 +123,9 @@ class View
 	 * Define a pasta da view
 	 * @param string  $path  Caminho da View
 	 */
-	public function setPath($path)
+	public function setPath($path, $overwrite = false)
 	{
-		$this->path = $path;
+		$this->path = $overwrite === false ? $this->subfolder . $path : $path;
 		return $this;
 	}
 
@@ -135,9 +144,9 @@ class View
 	 * Define o cabeçalho da view
 	 * @param string  $header  Cabeçalho da View
 	 */
-	public function setHeader($header)
+	public function setHeader($header, $overwrite = false)
 	{
-		$this->header = $header;
+		$this->header = $overwrite === false ? $this->subfolder . $header : $header;
 		return $this;
 	}
 
@@ -155,9 +164,9 @@ class View
 	 * Define o rodapé da view
 	 * @param string  $footer  Rodapé da View
 	 */
-	public function setFooter($footer)
+	public function setFooter($footer, $overwrite = false)
 	{
-		$this->footer = $footer;
+		$this->footer = $overwrite === false ? $this->subfolder . $footer : $footer;
 		return $this;
 	}
 

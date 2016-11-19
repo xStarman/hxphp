@@ -4,6 +4,6 @@ class IndexController extends \HXPHP\System\Controller
 {
 	public function indexAction()
 	{
-		$this->view->setPath('admin/havefun');
+		$this->view->setPath('havefun');
 	}
 }
