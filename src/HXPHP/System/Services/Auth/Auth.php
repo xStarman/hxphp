@@ -47,10 +47,7 @@ class Auth
 		$this->response = new Http\Response;
 		$this->storage  = new Storage\Session\Session;
 
-		$subfolder = str_replace('/', '', $subfolder);
-		$subfolder = is_null($subfolder) ? 'default' : $subfolder;
-
-		if (!isset($after_login[$subfolder]) || !isset($after_logout[$subfolder]))
+		if (!($after_login[$subfolder]) || !($after_logout[$subfolder]))
 			throw new \Exception("Verifique as configuracoes de autenticacao para a subpasta: < $subfolder >", 1);
 
 		//Configuração
