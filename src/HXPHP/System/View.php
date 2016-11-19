@@ -105,7 +105,7 @@ class View
 
 		$partialsDir = $overwrite === false ? $this->subfolder . $partialsDir : $partialsDir;
 
-		$this->partialsDir = $viewsDir . DS . $partialsDir . DS;
+		$this->partialsDir = $viewsDir . $partialsDir . DS;
 		return $this;
 	}
 
