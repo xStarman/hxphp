@@ -144,10 +144,13 @@ class Controller
 
 	/**
 	 * Redirecionamento
-	 * @param  string $url Link de redirecionamento
+	 * @param  string $URL Link de redirecionamento
+	 * @param  boolean $external Define se o redirecionamento será relativo ou absoluto
+	 * @param  boolean $controller Define se o controller também será retornado
 	 */
-	public function redirectTo($url)
+	public function redirectTo($URL, $external = true, $controller = true)
 	{
-		return $this->response->redirectTo($url);
+		$URL = $external === false ? $this->getRelativeURL($URL, $controller) : $URL;
+		return $this->response->redirectTo($URL);
 	}
 }
