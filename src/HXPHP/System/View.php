@@ -309,4 +309,8 @@ class View
 
 		require_once($viewFile);
 	}
+
+	public function printRelativeURL($URL) {
+		echo $this->configs->baseURI . $this->subfolder . $URL;
+	}
 }
