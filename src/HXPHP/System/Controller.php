@@ -131,6 +131,18 @@ class Controller
 	}
 
 	/**
+	 * Método que retorna o caminho relativo
+	 * @param  string  $URL        Geralmente a action e parâmetros
+	 * @param  boolean $controller Define se o controller também será retornado
+	 * @return string              Link relativo
+	 */
+	public function getRelativeURL($URL, $controller = true) {
+		$path = $controller === true ? $this->view->path : $this->view->subfolder;
+
+		return $this->configs->baseURI . $path . $URL;
+	}
+
+	/**
 	 * Redirecionamento
 	 * @param  string $url Link de redirecionamento
 	 */

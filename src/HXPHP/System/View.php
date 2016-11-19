@@ -27,8 +27,8 @@ class View
 	 * @var string
 	 */
 	protected $partialsDir = null;
-	protected $subfolder = null;
-	protected $path = null;
+	public $subfolder = null;
+	public $path = null;
 	protected $template = null;
 	protected $header = null;
 	protected $file = null;
