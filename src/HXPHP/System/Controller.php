@@ -137,7 +137,7 @@ class Controller
 	 * @return string              Link relativo
 	 */
 	public function getRelativeURL($URL, $controller = true) {
-		$path = $controller === true ? $this->view->path : $this->view->subfolder;
+		$path = $controller === true ? $this->view->path . DS : $this->view->subfolder;
 
 		return $this->configs->baseURI . $path . $URL;
 	}
