@@ -310,6 +310,12 @@ class View
 		require_once($viewFile);
 	}
 
+	public function getRelativeURL($URL, $controller = true) {
+		$path = $controller === true ? $this->path . DS : $this->subfolder;
+
+		return $this->configs->baseURI . $path . $URL;
+	}
+
 	public function printRelativeURL($URL, $controller = true) {
 		$path = $controller === true ? $this->path . DS : $this->subfolder;
 
