@@ -72,9 +72,9 @@ class Auth
 		$username = preg_replace("/[^a-zA-Z0-9_\-]+/", "", $username);
 		$login_string = hash('sha512', $username . $this->request->server('REMOTE_ADDR') . $this->request->server('HTTP_USER_AGENT'));
 
-		$this->storage->set('user_id', $user_id);
-		$this->storage->set('username', $username);
-        $this->storage->set('user_role', $user_role);
+		$this->storage->set($this->subfolder . '_user_id', $user_id);
+		$this->storage->set($this->subfolder . '_username', $username);
+        $this->storage->set($this->subfolder . '_user_role', $user_role);
 		$this->storage->set($this->subfolder . '_login_string', $login_string);
 
 		if ($this->redirect)
@@ -86,8 +86,8 @@ class Auth
 	 */
 	public function logout()
 	{
-		$this->storage->clear('user_id');
-		$this->storage->clear('username');
+		$this->storage->clear($this->subfolder . '_user_id');
+		$this->storage->clear($this->subfolder . '_username');
 		$this->storage->clear($this->subfolder . '_login_string');
 
 		$params = session_get_cookie_params();
@@ -137,11 +137,11 @@ class Auth
 	 */
 	public function login_check()
 	{
-		if ( $this->storage->exists('user_id') &&
-			 $this->storage->exists('username') &&
+		if ( $this->storage->exists($this->subfolder . '_user_id') &&
+			 $this->storage->exists($this->subfolder . '_username') &&
 			 $this->storage->exists($this->subfolder . '_login_string') ) {
 
-			$login_string = hash('sha512', $this->storage->get('username')
+			$login_string = hash('sha512', $this->storage->get($this->subfolder . '_username')
 											 . $this->request->server('REMOTE_ADDR')
 											 . $this->request->server('HTTP_USER_AGENT'));
 
@@ -158,7 +158,7 @@ class Auth
 	 */
 	public function getUserId()
 	{
-		return $this->storage->get('user_id');
+		return $this->storage->get($this->subfolder . '_user_id');
 	}
 
     /**
@@ -167,6 +167,6 @@ class Auth
      */
     public function getUserRole()
     {
-        return $this->storage->get('user_role');
+        return $this->storage->get($this->subfolder . '_user_role');
     }
 }
