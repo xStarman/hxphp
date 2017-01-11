@@ -57,7 +57,7 @@ class Request
 			}
 			
 			if (file_exists($controller_directory . $explode[0])) {
-				//ADICIONADA POSSIBILIDADE DE ADICIONAR MAIS DE UM SUBFOLDER
+
 				if(file_exists($controller_directory . $explode[0] ."\\". $explode[1])){
 					$this->subfolder = $explode[0] ."\\". $explode[1];
 					$this->subfolder;
