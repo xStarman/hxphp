@@ -58,9 +58,9 @@ class Request
 			
 			if (file_exists($controller_directory . $explode[0])) {
 
-				if(file_exists($controller_directory . $explode[0] ."\\". $explode[1])){
+				//ADICIONADA POSSIBILIDADE DE ADICIONAR MAIS DE UM SUBFOLDER
+				if(isset($explode[1]) && file_exists($controller_directory . $explode[0] ."\\". $explode[1])){
 					$this->subfolder = $explode[0] ."\\". $explode[1];
-					$this->subfolder;
 
 					if (isset($explode[2]))
 					$this->controller = Tools::filteredName($explode[2]).'Controller';
@@ -95,8 +95,12 @@ class Request
 				$this->controller = Tools::filteredName($explode[0]).'Controller';
 				$this->action = lcfirst(Tools::filteredName($explode[1])).'Action';
 			}
-
-			unset($explode[0], $explode[1]);
+			if(isset($explode[1]) && file_exists($controller_directory . $explode[0] ."\\". $explode[1])){
+				unset($explode[0], $explode[1], $explode[2] );
+			}else{
+				unset($explode[0], $explode[1]);
+			}
+			
 			
 			$this->params = array_values($explode);
 		}
